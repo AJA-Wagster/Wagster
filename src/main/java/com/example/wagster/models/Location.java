@@ -1,18 +1,18 @@
-package com.example.wagster.models;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Entity
-@Table(name = "locations")
-public class Location {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-}
+//package com.example.wagster.models;
+//
+//import jakarta.persistence.*;
+//import lombok.AllArgsConstructor;
+//import lombok.Getter;
+//import lombok.NoArgsConstructor;
+//import lombok.Setter;
+//
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Getter
+//@Setter
+//@Entity
+//@Table(name = "locations")
+//public class Location {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//}

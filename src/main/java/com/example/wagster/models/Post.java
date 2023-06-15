@@ -1,4 +1,4 @@
-package com.example.wagster.models;
-
-public class Post {
-}
+//package com.example.wagster.models;
+//
+//public class Post {
+//}
