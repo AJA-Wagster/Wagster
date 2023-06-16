@@ -8,6 +8,6 @@ public class FeedController {
 
     @GetMapping("/feed")
     public String profile() {
-        return "post/feed";
+        return "posts/feed";
     }
 }
