@@ -77,6 +77,15 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.audienceproject</groupId>
+            <artifactId>userreport</artifactId>
+            <version>1.0.0.10</version>
+        </dependency>
     </dependencies>
 
     <build>
