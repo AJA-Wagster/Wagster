@@ -1,0 +1,16 @@
+body {
+    background-color: #242423;
+    color: #ffffff;
+}
+
+#profileNav:hover {
+    color: #ffe66d
+}
+
+#feedNav:hover {
+    color: #ffe66d
+}
+
+#mapNav:hover {
+    color: #ffe66d
+}
