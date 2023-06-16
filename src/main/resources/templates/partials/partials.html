@@ -8,28 +8,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+
 </head>
 <body>
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light" style="background-color: #aebdca; font-family: 'League Spartan', sans-serif">
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light"
+     style="background-color: #7fc8f8; font-family: 'League Spartan', sans-serif">
     <div class="container-fluid">
         <a class="navbar-brand" href="/"><img th:src="@{/img/logo.png}" alt="logo" style="height: 60px; width:50px"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="font-size: larger; font-weight: bold; color: black">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="font-size: larger; font-weight: bold">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/map" >Map</a>
+                    <a class="nav-link" aria-current="page" id="mapNav" href="/map">Map</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profile</a>
+                    <a class="nav-link" id="profileNav" href="/profile">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/feed">Feed</a>
+                    <a class="nav-link" id="feedNav" href="/feed">Feed</a>
                 </li>
             </ul>
-                <img th:src="@{/img/login.png}" style="height: 60px">
+            <a class="nav-link" id="contactNav" href="/login"><img th:src="@{/img/login.png}" style="height: 60px">
+            </a>
+            <!--                <img th:src="@{/img/login.png}" style="height: 60px">-->
             <!--            <form th:action="@{/logout}" th:method="post">-->
             <!--                <button class="btn btn-outline-danger">Logout</button>-->
             <!--            </form>-->
