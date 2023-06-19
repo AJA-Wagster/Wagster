@@ -35,7 +35,7 @@ public class UserController  {
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "register";
+        return "registration";
     }
 
     @PostMapping("/register")
@@ -50,10 +50,23 @@ public class UserController  {
         userDao.save(user);
 
 
-        return "redirect:/login";
+        return "redirect:/";
     }
 
 
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
