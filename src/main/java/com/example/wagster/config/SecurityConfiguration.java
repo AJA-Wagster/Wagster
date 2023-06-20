@@ -27,7 +27,7 @@ public class SecurityConfiguration {
 
     //    the @BEAN annotation means that the class is managed by spring
     @Bean
-//    a class that is managed by spring, specifially to hash and unhash our user password
+//    a class that is managed by spring, specifically to hash and unhash our user password
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -46,7 +46,7 @@ public class SecurityConfiguration {
                         requests
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
-                        .requestMatchers("/posts/create", "/posts/*/edit", "/posts/*/update", "/posts/*/delete").authenticated()
+                        .requestMatchers("/posts/create", "/posts/*/edit", "/posts/*/update", "/posts/*/delete", "/feed").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
                         .requestMatchers("/", "/parks", "/posts/*", "/register", "/login", "/posts").permitAll()
@@ -57,15 +57,14 @@ public class SecurityConfiguration {
                 .formLogin((login) ->
                         login
                                 .loginPage("/login")
-                                .defaultSuccessUrl("/posts")
+                                .defaultSuccessUrl("/feed")
                 )
                 /* Logout configuration */
                 .logout((logout) ->
                         logout
                                 .logoutSuccessUrl("/login?logout"))
-                .httpBasic(withDefaults())
-                .userDetailsService(usersLoader)
-                .csrf().disable();
+                .httpBasic(withDefaults());
+
         return http.build();
     }
 
