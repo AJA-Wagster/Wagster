@@ -46,10 +46,10 @@ public class SecurityConfiguration {
                         requests
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
-                        .requestMatchers("/posts/create", "/posts/*/edit", "/posts/*/update", "/posts/*/delete", "/feed").authenticated()
+                        .requestMatchers("/posts/create", "/posts/*/edit", "/posts/*/update", "/posts/*/delete", "/feed",  "/profile").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
-                        .requestMatchers("/", "/parks", "/posts/*", "/register", "/login", "/posts").permitAll()
+                        .requestMatchers("/", "/parks", "/posts/*", "/register", "/login", "/posts","/map").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
