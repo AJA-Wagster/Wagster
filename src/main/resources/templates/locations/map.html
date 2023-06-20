@@ -14,15 +14,58 @@
 
 <h1 style="text-align: center">Map page</h1>
 
-<div id='map' style='width: 100%; height: 300px;'></div>
+<div id='map' style='width: 100%; height: 600px; color: black' ></div>
 <script th:src="@{/js/keys.js}"></script>
 <script th:src="@{/js/mapbox-geocoder.js}"></script>
 <script>
     mapboxgl.accessToken = MAPBOX_TOKEN;
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11'
+        style: 'mapbox://styles/mapbox/streets-v11',
+        zoom: 10, // starting zoom
+        center: [-96.80421034388885, 32.818180319333365] // [lng, lat]
     });
+    let locations = [
+        {
+            name: "White Rock Lake Dog Park",
+            address: "8000 E Mockingbird Ln, Dallas, TX 75218",
+            coordinates: [-96.72531899221305,32.855239666696974],
+            description: "Lakeside 3-acre dog park with sections for big & small breeds, fountains, shelter & washing areas."
+            // image:  "https://img.particlenews.com/img/id/43XH1Z_0lXgwU7z00?type=thumbnail_1600x1200"
+        }
+        // ,
+        // {
+        //     name: "Havana Grill",
+        //     address: "5450 Clairemont Mesa Blvd Suite G, San Diego, CA 92117",
+        //     coordinates: [-117.1735882313614, 32.83477737657745],
+        //     description: "Best Cuban food in San Diego, Ca. Owner is Cuban and uses authentic Cuban recipes."
+        // //     image: "images/havanagrill.png"
+        // }
+        // ,
+        // {
+        //     name: "Olivia's Prime Steakhouse",
+        //     address: "Indochina Mall, 74 Bach Dang, Lot G1-G4, The Ground Floor, Hải Châu, Đà Nẵng 550000, Vietnam",
+        //     coordinates: [108.2242232, 16.071177637213957],
+        //     description: "This Vietnamese steak house has the best view of the famous Dragon Bridge",
+        //     image: "images/oliviasteakhouse.jpeg"
+        // }
+    ];
+
+    locations.forEach(function (location) {
+        let marker = new mapboxgl.Marker({ color: "red" })
+            .setLngLat(location.coordinates)
+            .addTo(map);
+
+        let popup = new mapboxgl.Popup()
+            .setHTML("<h3>" + location.name + "</h3>" +
+                "<p>" + location.address + "</p>" +
+                "<p>" + location.description + "</p>");
+                // "<img src='" + location.image + "' alt='" + location.name + "' width='200' height='150'>");
+        marker.setPopup(popup)
+    });
+
+    let nav = new mapboxgl.NavigationControl();
+    map.addControl(nav, 'top-right');
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
