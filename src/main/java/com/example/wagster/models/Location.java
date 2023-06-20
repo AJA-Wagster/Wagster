@@ -21,6 +21,9 @@ public class Location {
     private  String name;
 
     @Column(nullable = false)
+    private  String address;
+
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -29,4 +32,12 @@ public class Location {
     @ManyToOne
     @JoinColumn( name = "user_id")
     private User user;
+
+    @Column(nullable = false)
+    private double latitude;
+
+    @Column(nullable = false)
+    private double longitude;
+
+
 }

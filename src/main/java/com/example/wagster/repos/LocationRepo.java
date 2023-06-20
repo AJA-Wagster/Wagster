@@ -2,6 +2,8 @@ package com.example.wagster.repos;
 
 import com.example.wagster.models.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface LocationRepos extends JpaRepository<Location, Long> {
+@Repository
+public interface LocationRepo extends JpaRepository<Location, Long> {
 }
