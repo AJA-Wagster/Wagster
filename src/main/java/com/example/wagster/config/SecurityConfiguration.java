@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.core.userdetails.UserDetailsService;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -41,7 +41,9 @@ public class SecurityConfiguration {
     @Bean
 //    this class will provide filters for our spring security for different URL mappings
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests
+        http
+                .authorizeHttpRequests((requests) ->
+                        requests
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
                         .requestMatchers("/posts/create", "/posts/*/edit", "/posts/*/update", "/posts/*/delete").authenticated()
@@ -52,10 +54,18 @@ public class SecurityConfiguration {
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
                 /* Login configuration */
-                .formLogin((login) -> login.loginPage("/login").defaultSuccessUrl("/posts"))
+                .formLogin((login) ->
+                        login
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/posts")
+                )
                 /* Logout configuration */
-                .logout((logout) -> logout.logoutSuccessUrl("/login?logout"))
-                .httpBasic(withDefaults());
+                .logout((logout) ->
+                        logout
+                                .logoutSuccessUrl("/login?logout"))
+                .httpBasic(withDefaults())
+                .userDetailsService(usersLoader)
+                .csrf().disable();
         return http.build();
     }
 
