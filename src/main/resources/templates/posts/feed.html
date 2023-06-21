@@ -10,6 +10,16 @@
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
 
+<th:block th:each="post: ${posts}">
+  <li id="postTitle" th:text="${post.title}"></li>
+  <li id="postBody" th:text="${post.body}"></li>
+</th:block>
+
+<th:block th:each="event: ${events}">
+  <li id="eventTitle" th:text="${event.title}"></li>
+  <li id="eventBody" th:text="${event.description}"></li>
+</th:block>
+
 <h1 style="text-align: center">Feed page</h1>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
