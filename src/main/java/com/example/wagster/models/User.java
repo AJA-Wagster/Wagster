@@ -43,6 +43,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Event> events;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private UserImage userImage;
+
     public User(User copy){
         this.id =copy.id;
         this.email = copy.email;
@@ -54,40 +57,6 @@ public class User {
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        this.password = password;
-    }
-
-    // Getters and Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
     }
 }
