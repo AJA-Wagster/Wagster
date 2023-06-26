@@ -27,7 +27,4 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private PostImage postImage;
 }

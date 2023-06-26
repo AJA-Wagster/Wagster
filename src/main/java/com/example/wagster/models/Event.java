@@ -26,9 +26,6 @@ public class Event {
     @OneToOne(cascade = CascadeType.ALL)
     private Location location;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private EventImage eventImage;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

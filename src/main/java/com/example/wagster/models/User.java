@@ -43,9 +43,6 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Event> events;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private UserImage userImage;
-
     public User(User copy){
         this.id =copy.id;
         this.email = copy.email;
