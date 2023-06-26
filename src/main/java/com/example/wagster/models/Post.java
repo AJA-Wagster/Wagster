@@ -24,11 +24,6 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
-    @Column(nullable = false, columnDefinition = "LONGBLOB")
-    @Basic(fetch = FetchType.LAZY)
-    @Lob
-    private Blob file;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

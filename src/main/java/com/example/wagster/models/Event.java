@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Blob;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -22,24 +20,18 @@ public class Event {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, columnDefinition = "LONGBLOB")
-    @Basic(fetch = FetchType.LAZY)
-    @Lob
-    private Blob file;
-
     @Column(nullable = false)
     private String description;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Location location;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Event(String title, Blob file, String description) {
+    public Event(String title, String description) {
         this.title = title;
-        this.file = file;
         this.description = description;
     }
 }
