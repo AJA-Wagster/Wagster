@@ -52,14 +52,14 @@ public class FeedController {
         return "posts/create";
     }
 
-    @PostMapping("/posts/create")
-    public String moveToDB(@ModelAttribute Post post, @RequestParam("file")MultipartFile file) throws IOException {
-        byte[] imageData = file.getBytes();
-        post.setPostImage(imageData);
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        post.setUser(user);
-        postDao.save(post);
-        return "redirect:/feed";
-    }
+//    @PostMapping("/posts/create")
+//    public String moveToDB(@ModelAttribute Post post, @RequestParam("file")MultipartFile file) throws IOException {
+//        byte[] imageData = file.getBytes();
+//        post.setPostImage(imageData);
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        post.setUser(user);
+//        postDao.save(post);
+//        return "redirect:/feed";
+//    }
 }
 
