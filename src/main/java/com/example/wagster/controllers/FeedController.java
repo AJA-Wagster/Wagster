@@ -11,10 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 import java.util.List;
 
@@ -49,17 +45,57 @@ public class FeedController {
     @GetMapping("/posts/create")
     public String showPostCreateForm(Model model){
         model.addAttribute("post" ,new Post());
-        return "posts/create";
+        return "posts/postCreate";
     }
 
-//    @PostMapping("/posts/create")
-//    public String moveToDB(@ModelAttribute Post post, @RequestParam("file")MultipartFile file) throws IOException {
-//        byte[] imageData = file.getBytes();
-//        post.setPostImage(imageData);
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        post.setUser(user);
-//        postDao.save(post);
-//        return "redirect:/feed";
-//    }
+
+
+    @PostMapping("/posts/create")
+    public String moveToDB(@ModelAttribute Post post){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        post.setUser(user);
+        postDao.save(post);
+        return "redirect:/feed";
+    }
+
+    @GetMapping("/posts/{id}/edit")
+    public String showPostEditForm(){
+        return "posts/postEdit";
+    }
+    @PostMapping("/posts/{id}/edit")
+    public String updatePostDB(){
+        return "redirect:/feed";
+    }
+
+    @PostMapping("/post/{id}/delete")
+    public String removePostFromDB(){
+        return "redirect:/feed";
+    }
+
+    @GetMapping("/events/create")
+    public String showCreateEventForm(){
+        return "posts/eventCreate";
+    }
+
+    @PostMapping("/events/create")
+    public String moveEventToDB(){
+        return "redirect:/feed";
+    }
+
+    @GetMapping("/events/{id}/edit")
+    public String showEventEditForm(){
+        return "posts/eventEdit";
+    }
+
+    @PostMapping("/events/{id}/edit")
+    public String updateEventDB(){
+        return "redirect:/feed";
+    }
+
+    @PostMapping("/events/{id}/delete")
+    public String removeEventFromDB(){
+        return "redirect:/feed";
+    }
+
 }
 
