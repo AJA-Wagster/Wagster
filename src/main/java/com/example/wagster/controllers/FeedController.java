@@ -48,6 +48,8 @@ public class FeedController {
         return "posts/postCreate";
     }
 
+
+
     @PostMapping("/posts/create")
     public String moveToDB(@ModelAttribute Post post){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -97,5 +99,6 @@ public class FeedController {
     public String removeEventFromDB(){
         return "redirect:/feed";
     }
+
 }
 

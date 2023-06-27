@@ -1,4 +1,4 @@
-git<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,6 @@ git<!DOCTYPE html>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap" rel="stylesheet">
     <link th:href="@{/css/main.css}" rel="stylesheet">
-
 </head>
 <body>
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light"
@@ -38,6 +37,7 @@ git<!DOCTYPE html>
                         <form th:action="@{/logout}" th:method="post">
                             <button class="btn btn-outline-danger">Logout</button>
                         </form>
+
         </div>
     </div>
 </nav>
