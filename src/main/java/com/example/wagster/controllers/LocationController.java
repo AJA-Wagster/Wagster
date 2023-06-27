@@ -27,8 +27,8 @@ public class LocationController {
 
     @PostMapping("/location/create")
     public String locationToDB(@ModelAttribute Location location){
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        location.setUser(user);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        location.setUser(user);
         locationDao.save(location);
         return "redirect:/feed";
     }
