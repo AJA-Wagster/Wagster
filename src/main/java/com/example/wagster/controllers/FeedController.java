@@ -73,12 +73,15 @@ public class FeedController {
     }
 
     @GetMapping("/events/create")
-    public String showCreateEventForm(){
+    public String showCreateEventForm(Model model){
+        model.addAttribute("event", new Event());
         return "posts/eventCreate";
     }
 
     @PostMapping("/events/create")
-    public String moveEventToDB(){
+    public String moveEventToDB(@ModelAttribute Event event){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        event.setUser(user);
         return "redirect:/feed";
     }
 
