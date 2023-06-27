@@ -7,5 +7,12 @@
 </head>
 <body>
 
+<form th:action="@{/events/create}" th:method="post" th:object="${event}">
+    Title:
+    <input th:field="*{title}">
+    Description:
+    <textarea th:field="*{description}"></textarea>
+    <button></button>
+</form>
 </body>
 </html>
