@@ -2,6 +2,8 @@ package com.example.wagster.controllers;
 
 import com.example.wagster.models.User;
 import com.example.wagster.repos.UserRepo;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,23 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
-//        import com.example.wagster.models.User;
-//        import com.example.wagster.repos.UserRepo;
-//        import org.springframework.security.crypto.password.PasswordEncoder;
-//        import org.springframework.stereotype.Controller;
-//        import org.springframework.ui.Model;
-//        import org.springframework.web.bind.annotation.GetMapping;
-//        import org.springframework.web.bind.annotation.ModelAttribute;
-//        import org.springframework.web.bind.annotation.PostMapping;
-
 // RegistrationController.java
 @Controller
 public class UserController  {
 
     private UserRepo userDao;
     private PasswordEncoder passwordEncoder;
-
 
     public UserController(UserRepo userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
@@ -45,12 +36,10 @@ public class UserController  {
         // Perform registration logic here using userRepo
         // e.g., save the user to the database using userRepo.save(user)
 
-
         String hash = passwordEncoder.encode(user.getPassword());
 //        set the hashed password BEFORE saving to the database
         user.setPassword(hash);
         userDao.save(user);
-
 
         return "redirect:/";
     }
@@ -83,12 +72,15 @@ public class UserController  {
     }
 
 //    POST MAPPING to finish delete function
-    @PostMapping("/profile/delete")
+@PostMapping("/profile/delete")
+public String deleteProfile(@ModelAttribute("user") User userToDelete, HttpServletRequest request) {
+    userDao.deleteById(userToDelete.getId());
 
-    public String deleteProfile(@ModelAttribute("user") User userToDelete) {
-
-        userDao.deleteById(userToDelete.getId());
-//        I am thinking I don't need to use orElse because the user is already pulled in the get request/map
-        return "redirect:/";
+    // Invalidate the current session
+    HttpSession session = request.getSession(false);
+    if (session != null) {
+        session.invalidate();
+    }
+    return "redirect:/";
     }
 }
