@@ -62,16 +62,27 @@ public class FeedController {
     }
 
     @GetMapping("/posts/{id}/edit")
-    public String showPostEditForm(){
+    public String showPostEditForm(@PathVariable("id") Long id, Model model){
+        Post post = postDao.findById(id).orElse(null);
+        model.addAttribute("post", post);
         return "posts/postEdit";
     }
+
     @PostMapping("/posts/{id}/edit")
-    public String updatePostDB(){
+    public String updatePostDB(@PathVariable("id") Long id, @ModelAttribute Post updatedPost){
+        Post post = postDao.findById(id).orElse(null);
+        if (post != null) {
+            post.setTitle(updatedPost.getTitle());
+            post.setBody(updatedPost.getBody());
+            // Update other properties as needed
+            postDao.save(post);
+        }
         return "redirect:/feed";
     }
 
-    @PostMapping("/post/{id}/delete")
-    public String removePostFromDB(){
+    @PostMapping("/posts/{id}/delete")
+    public String removePostFromDB(@PathVariable("id") Long id){
+        postDao.deleteById(id);
         return "redirect:/feed";
     }
 
