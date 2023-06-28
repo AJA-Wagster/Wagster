@@ -114,25 +114,25 @@ public class FeedController {
         return "redirect:/feed";
     }
 
-    @PostMapping("/posts/{id}/delete")
-    public String deletePost(@PathVariable long id, HttpServletRequest request) {
-        // Retrieve the post to be deleted from the postsDao
-        Post postToDelete = postDao.findById(id).orElse(null);
-
-        // Perform authorization check here to ensure admin rights
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isAdmin = authentication.getAuthorities().stream()
-                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
-        if (!isAdmin) {
-            // Redirect or show an error message indicating insufficient privileges
-            return "redirect:/posts/" + id; // Redirect to post details page
-        }
-
-        // Delete the post from the postsDao
-        postDao.deleteById(id);
-
-        return "redirect:/posts";
-    }
+//    @PostMapping("/posts/{id}/delete")
+//    public String deletePost(@PathVariable long id, HttpServletRequest request) {
+//        // Retrieve the post to be deleted from the postsDao
+//        Post postToDelete = postDao.findById(id).orElse(null);
+//
+//        // Perform authorization check here to ensure admin rights
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        boolean isAdmin = authentication.getAuthorities().stream()
+//                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+//        if (!isAdmin) {
+//            // Redirect or show an error message indicating insufficient privileges
+//            return "redirect:/posts/" + id; // Redirect to post details page
+//        }
+//
+//        // Delete the post from the postsDao
+//        postDao.deleteById(id);
+//
+//        return "redirect:/posts";
+//    }
 
 }
 
