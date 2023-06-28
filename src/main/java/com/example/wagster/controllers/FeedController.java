@@ -3,6 +3,8 @@ package com.example.wagster.controllers;
 import com.example.wagster.models.Post;
 import com.example.wagster.models.User;
 import com.example.wagster.repos.PostRepo;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.wagster.models.Event;
 import com.example.wagster.repos.EventRepo;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -98,6 +101,26 @@ public class FeedController {
     @PostMapping("/events/{id}/delete")
     public String removeEventFromDB(){
         return "redirect:/feed";
+    }
+
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable long id, HttpServletRequest request) {
+        // Retrieve the post to be deleted from the postsDao
+        Post postToDelete = postDao.findById(id).orElse(null);
+
+        // Perform authorization check here to ensure admin rights
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+        if (!isAdmin) {
+            // Redirect or show an error message indicating insufficient privileges
+            return "redirect:/posts/" + id; // Redirect to post details page
+        }
+
+        // Delete the post from the postsDao
+        postDao.deleteById(id);
+
+        return "redirect:/posts";
     }
 
 }
