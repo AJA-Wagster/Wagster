@@ -10,8 +10,11 @@
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
 <h1 style="text-align: center">Feed page</h1>
-<button onclick="window.location.href='/posts/create'">Create Post</button>
 
+<button onclick="window.location.href='/posts/create'">Create Post</button>
+<button onclick="window.location.href='/events/create'">Create Event</button>
+<br>
+<br>
 <div th:each="post: ${posts}">
   <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
     <li id="postTitle" th:text="${post.title}"></li>
@@ -22,7 +25,7 @@
     <button type="submit">Delete</button>
   </form>
 </div>
-
+<hr>
 <div th:each="event: ${events}">
   <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
     <li id="eventTitle" th:text="${event.title}"></li>

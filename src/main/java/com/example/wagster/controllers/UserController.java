@@ -45,6 +45,13 @@ public class UserController  {
         return "redirect:/";
     }
 
+    @GetMapping("/user/profile")
+    public String showProfile(Model model) {
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findById(currentUser.getId()).orElse(null);
+        model.addAttribute("user", user);
+        return "users/profile";
+    }
 
     @GetMapping("/profile/edit")
     public String showEditProfileForm(Model model){
