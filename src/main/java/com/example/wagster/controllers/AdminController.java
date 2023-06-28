@@ -59,7 +59,7 @@ public class AdminController {
             session.invalidate();
         }
 
-        return "redirect:/admin/users";
+        return "redirect:/";
     }
 
     @PostMapping("/admin/posts/{id}/delete")
@@ -79,6 +79,7 @@ public class AdminController {
         // Delete the post from the postDao
         postDao.deleteById(id);
 
-        return "redirect:/posts";
+        return "redirect:/";
     }
+
 }
