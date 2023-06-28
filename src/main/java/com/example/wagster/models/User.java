@@ -34,7 +34,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Location> locations;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy =  "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -43,8 +43,11 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Event> events;
 
-    public User(User copy){
-        this.id =copy.id;
+    @Column(nullable = false)
+    private boolean admin;
+
+    public User(User copy) {
+        this.id = copy.id;
         this.email = copy.email;
         this.username = copy.username;
         this.password = copy.password;
@@ -56,9 +59,27 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    private String role;
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
+//boolean to check if a user is an administrator or not//
+
+    // Getter and setter for the 'admin' property
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
 }
-
-
 
 
 
