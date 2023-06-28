@@ -17,7 +17,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 //will allow us to edit the MVC security for our application
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration{
+
     //depenency that we inject, so that we can retrieve details about the user who is trying to log in
     private UserDetailsLoader usersLoader;
 
