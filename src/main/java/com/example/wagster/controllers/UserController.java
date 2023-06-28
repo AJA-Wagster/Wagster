@@ -38,7 +38,7 @@ public class UserController  {
         user.setPassword(hash);
 
         // Assign the "ROLE_ADMIN" authority to the user
-        user.setRole("ROLE_ADMIN");
+        user.setAdmin(false);
 
         userDao.save(user);
 

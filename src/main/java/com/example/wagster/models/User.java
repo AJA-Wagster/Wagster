@@ -60,11 +60,11 @@ public class User {
         this.password = password;
     }
 
-    private String role;
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+//    private String role;
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
 
 
 //boolean to check if a user is an administrator or not//
