@@ -11,8 +11,10 @@
         #map {
             margin-top: 2%;
             height: 85vh;
-            width: 70%;
+            width: 66%;
             float: right;
+            margin-right: 2%;
+            border-radius: 2%;
         }
 
         #cards-container {
@@ -21,6 +23,7 @@
             overflow-y: scroll;
             overflow-x: hidden;
             float: left;
+            padding: 10px;
         }
 
         .card {
@@ -46,6 +49,9 @@
             background-color: white;
             padding: 20px;
             border-radius: 5px;
+            width: 60%;
+            max-width: 600px;
+            margin: 20vh auto;
         }
 
         .close-button {
@@ -55,8 +61,6 @@
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
-
-<!--<h1 style="text-align: center">Map page</h1>-->
 
 <div id="cards-container">
     <div class="card">
@@ -125,7 +129,7 @@
             description: "Fenced 1.2-acre canine park shaded by highway bridges with shower & drinking bowls provided."
         }
     ];
-        
+
 
     locations.forEach(function (location) {
         let marker = new mapboxgl.Marker({ color: "red" })
