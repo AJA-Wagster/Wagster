@@ -11,10 +11,6 @@
     <input type="text" name="title" id="title" th:field="*{title}">
     <label for="body">Body: </label>
     <textarea name="body" id="body" th:field="*{body}"></textarea>
-    <th:block th:each="category : ${post.categories}">
-        <label th:text="${category.name}"></label>
-        <input type="checkbox" name="category" th:field="*{categories}" th:value="${category.id}">
-    </th:block>
     <button type="submit">Update Post</button>
 </form>
 </body>

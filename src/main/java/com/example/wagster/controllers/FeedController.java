@@ -113,8 +113,5 @@ public class FeedController {
     public String removeEventFromDB(){
         return "redirect:/feed";
     }
-
-
-
 }
 

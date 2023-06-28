@@ -26,9 +26,9 @@ public class ReviewController {
     public String reviewEditForm(){
         return "redirect:/map";
     }
-    @PostMapping("/review/{id}/delete")
-    public String deleteReview(Long id){
-        reviewDao.delete(reviewDao.findById(id));
-        return "redirect:/map";
-    }
+//    @PostMapping("/review/{id}/delete")
+//    public String deleteReview(Long id){
+//        reviewDao.delete(reviewDao.findById(id));
+//        return "redirect:/map";
+//    }
 }
