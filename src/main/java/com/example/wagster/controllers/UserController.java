@@ -89,24 +89,6 @@ public class UserController  {
 
         userDao.deleteById(userToDelete.getId());
 //        I am thinking I don't need to use orElse because the user is already pulled in the get request/map
-        return "redirect:/feed";
+        return "redirect:/";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
