@@ -17,8 +17,31 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" placeholder="Enter Password" th:field="*{password}" required>
     <br>
+    <button id="file">FILE</button>
+    <input  id="url" name="url" type="radio" value="" checked="checked">
     <input type="submit" value="Register">
 </form>
 </body>
+<script th:src="@{/js/keys.js}"></script>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script>
+    const client = filestack.init(FILESTACK_TOKEN);
+    const urlInput = document.querySelector("#url")
+    console.log(urlInput)
+
+    const fileButton = document.getElementById("file")
+    fileButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const pickerOptions = {
+            onFileUploadFinished: (file) => {
+                console.log(file.url)
+                urlInput.setAttribute("value", file.url)
+            }
+        }
+        client.picker(pickerOptions).open();
+
+    });
+</script>
 </html>
 

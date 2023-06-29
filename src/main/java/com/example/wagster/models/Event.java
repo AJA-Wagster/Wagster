@@ -23,8 +23,8 @@ public class Event {
     @Column(nullable = false)
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Location location;
+    @Column
+    private String imageURL;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,5 +33,11 @@ public class Event {
     public Event(String title, String description) {
         this.title = title;
         this.description = description;
+    }
+
+    public Event(String title, String description, String imageURL) {
+        this.title = title;
+        this.description = description;
+        this.imageURL = imageURL;
     }
 }

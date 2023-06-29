@@ -6,6 +6,7 @@
 </head>
 <body>
 <h2>Edit Profile</h2>
+<img th:src="${user.getImageURL()}" alt="userImg">
 <form th:action="@{/profile/edit}" th:method="post" th:object="${user}">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" placeholder="Enter Username" th:field="*{username}" required>
