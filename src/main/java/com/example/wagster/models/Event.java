@@ -23,8 +23,8 @@ public class Event {
     @Column(nullable = false)
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Location location;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private Location location;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

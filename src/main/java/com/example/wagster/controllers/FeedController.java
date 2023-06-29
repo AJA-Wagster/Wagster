@@ -96,43 +96,35 @@ public class FeedController {
     public String moveEventToDB(@ModelAttribute Event event){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         event.setUser(user);
+        eventsDao.save(event);
         return "redirect:/feed";
     }
 
     @GetMapping("/events/{id}/edit")
-    public String showEventEditForm(){
+    public String showEventEditForm(@PathVariable Long id, Model model){
+//        Event event = eventsDao.findById(id).get();
+        model.addAttribute("event", eventsDao.findById(id).get());
         return "posts/eventEdit";
     }
 
     @PostMapping("/events/{id}/edit")
-    public String updateEventDB(){
+    public String updateEventDB(@ModelAttribute Event updatedEvent){
+//        Event event = eventsDao.findById(id).get();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        updatedEvent.setUser(user);
+//        if (event != null) {
+//            event.setTitle(updatedEvent.getTitle());
+//            event.setDescription(updatedEvent.getBody());
+            // Update other properties as needed
+            eventsDao.save(updatedEvent);
+//        }
         return "redirect:/feed";
     }
 
     @PostMapping("/events/{id}/delete")
-    public String removeEventFromDB(){
+    public String removeEventFromDB(@PathVariable("id") Long id){
+        eventsDao.deleteById(id);
         return "redirect:/feed";
     }
-
-//    @PostMapping("/posts/{id}/delete")
-//    public String deletePost(@PathVariable long id, HttpServletRequest request) {
-//        // Retrieve the post to be deleted from the postsDao
-//        Post postToDelete = postDao.findById(id).orElse(null);
-//
-//        // Perform authorization check here to ensure admin rights
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        boolean isAdmin = authentication.getAuthorities().stream()
-//                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
-//        if (!isAdmin) {
-//            // Redirect or show an error message indicating insufficient privileges
-//            return "redirect:/posts/" + id; // Redirect to post details page
-//        }
-//
-//        // Delete the post from the postsDao
-//        postDao.deleteById(id);
-//
-//        return "redirect:/posts";
-//    }
-
 }
 

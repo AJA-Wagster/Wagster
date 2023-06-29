@@ -17,7 +17,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 //will allow us to edit the MVC security for our application
 @EnableWebSecurity
-public class SecurityConfiguration {
+public class SecurityConfiguration{
+
     //depenency that we inject, so that we can retrieve details about the user who is trying to log in
     private UserDetailsLoader usersLoader;
 
@@ -62,14 +63,14 @@ public class SecurityConfiguration {
                                 "/location",
                                 "/review/create",
                                 "/review/*/edit",
-                                "/review/*/delete").authenticated()
+                                "/review/*/delete","/admin/*", "/admin").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
                         .requestMatchers(
                                 "/",
                                 "/register",
                                 "/login",
-                                "/map").permitAll()
+                                "/map", "/admin/login").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )

@@ -52,9 +52,11 @@ public class ReviewController {
         return "redirect:/map";
     }
 
+
     @PostMapping("/review/{id}/delete")
     public String deleteReview(@PathVariable long id){
         reviewDao.deleteById(id);
         return "redirect:/map";
     }
+
 }
