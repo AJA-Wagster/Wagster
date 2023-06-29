@@ -23,13 +23,8 @@ public class Event {
     @Column(nullable = false)
     private String description;
 
-<<<<<<< HEAD
     @Column
     private String imageURL;
-=======
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Location location;
->>>>>>> dfeb108db103ce45bde1e11b6bdf3b9eb1a9ccf2
 
     @ManyToOne
     @JoinColumn(name = "user_id")

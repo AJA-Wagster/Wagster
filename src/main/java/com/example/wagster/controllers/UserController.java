@@ -30,24 +30,17 @@ public class UserController  {
     }
 
     @PostMapping("/register")
-<<<<<<< HEAD
     public String registerUser(@ModelAttribute("user") User user, @RequestParam(name = "url") String url) {
         // Perform registration logic here using userRepo
         // e.g., save the user to the database using userRepo.save(user)
 
-=======
-    public String registerUser(@ModelAttribute("user") User user) {
->>>>>>> dfeb108db103ce45bde1e11b6bdf3b9eb1a9ccf2
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
-<<<<<<< HEAD
         user.setImageURL(url);
-=======
 
         // Assign the "ROLE_ADMIN" authority to the user
         user.setAdmin(false);
 
->>>>>>> dfeb108db103ce45bde1e11b6bdf3b9eb1a9ccf2
         userDao.save(user);
 
         return "redirect:/";
