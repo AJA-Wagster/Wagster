@@ -71,7 +71,7 @@ public class AdminController {
         // Perform authorization check here to ensure admin rights
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         boolean isAdmin = authentication.getAuthorities().stream()
-                .anyMatch(auth -> auth.getAuthority().equals(true));
+                .anyMatch(auth -> auth.getAuthority().equals(false));
         if (!isAdmin) {
             // Redirect or show an error message indicating insufficient privileges
             return "redirect:/admin/users"; // Redirect to admin user list
