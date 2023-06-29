@@ -36,8 +36,10 @@ public class FeedController {
         List<Event> events = eventsDao.findAll();
 //        get the posts from the post service
         List<Post> posts = postDao.findAll();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 //        add events and posts to the feed
+        model.addAttribute("user", user);
         model.addAttribute("events", events);
         model.addAttribute("posts", posts);
 
