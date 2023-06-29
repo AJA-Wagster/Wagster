@@ -28,6 +28,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column
+    private String imageURL;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Friend> friends;
 
@@ -51,13 +54,15 @@ public class User {
         this.email = copy.email;
         this.username = copy.username;
         this.password = copy.password;
+        this.imageURL = copy.imageURL;
     }
     // Constructors
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, String imageURL) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.imageURL = imageURL;
     }
 
 //    private String role;

@@ -12,7 +12,10 @@
     <input th:field="*{title}">
     Description:
     <textarea th:field="*{description}"></textarea>
-    <button>Submit</button>
+    <button id="file">FILE</button>
+    <input id="url" name="url" type="radio" checked value="">
+    <button type="button">Submit</button>
 </form>
 </body>
+<script th:src="@{/js/uploadImages}"></script>
 </html>
