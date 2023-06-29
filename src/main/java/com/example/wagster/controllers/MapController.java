@@ -1,6 +1,7 @@
 package com.example.wagster.controllers;
 
 import com.example.wagster.models.Location;
+import com.example.wagster.models.Review;
 import com.example.wagster.models.User;
 import com.example.wagster.repos.LocationRepo;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
+    <form th:action="@{/review/create}" th:method="post">
+        <label for="comment">Comment</label>
+        <input id="comment" name="comment" type="text">
+        <label for="1-stars"><i class="fa-regular fa-star"></i></label>
+        <input type="radio" id="1-stars" name="rating" value="1">
+        <label for="2-stars"><i class="fa-regular fa-star"></i></label>
+        <input type="radio" id="2-stars" name="rating" value="2">
+        <label for="3-stars"><i class="fa-regular fa-star"></i></label>
+        <input type="radio" id="3-stars" name="rating" value="3">
+        <label for="4-stars"><i class="fa-regular fa-star"></i></label>
+        <input type="radio" id="4-stars" name="rating" value="4">
+        <label for="5-stars"><i class="fa-regular fa-star"></i></label>
+        <input type="radio" id="5-stars" name="rating" value="5">
+        <input type="hidden" th:value="${location}" name="location">
+        <button>Submit</button>
+    </form>
 </body>
 </html>
