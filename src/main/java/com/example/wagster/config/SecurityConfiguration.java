@@ -47,12 +47,30 @@ public class SecurityConfiguration{
                         requests
                         /* Pages that require authentication
                          * only authenticated users can create and edit ads */
-
-                        .requestMatchers("/posts/create", "/posts/{id}/edit", "/posts/*/delete", "/feed",  "/profile", "/profile/edit", "/profile/delete", "/events/create", "/events/*/edit", "/events/*/delete", "/location/create","/admin/*", "/admin").authenticated()
-
+                        .requestMatchers(
+                                "/posts/create",
+                                "/posts/*/edit",
+                                "/posts/*/update",
+                                "/posts/*/delete",
+                                "/feed",
+                                "/profile",
+                                "/profile/edit",
+                                "/profile/delete",
+                                "/events/create",
+                                "/events/*/edit",
+                                "/events/*/delete",
+                                "/location/create",
+                                "/location",
+                                "/review/create",
+                                "/review/*/edit",
+                                "/review/*/delete","/admin/*", "/admin").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
-                        .requestMatchers("/", "/register", "/login","/map", "/admin/login").permitAll()
+                        .requestMatchers(
+                                "/",
+                                "/register",
+                                "/login",
+                                "/map", "/admin/login").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 )
@@ -67,6 +85,7 @@ public class SecurityConfiguration{
                         logout
                                 .logoutSuccessUrl("/"))
                 .httpBasic(withDefaults());
+
 
         return http.build();
     }
