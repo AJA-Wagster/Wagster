@@ -72,7 +72,7 @@ public class SecurityConfiguration{
                                 "/login",
                                 "/map", "/admin/login").permitAll()
                         // allow loading of static resources
-                        .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/img/**", "/keys.js").permitAll()
                 )
                 /* Login configuration */
                 .formLogin((login) ->

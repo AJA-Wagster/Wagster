@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="text/javascript" th:src="@{/keys.js}"></script>
     <title>Title</title>
 </head>
 <body>
@@ -11,8 +12,6 @@
     <input th:field="*{title}"><br>
     Body:
     <textarea th:field="*{body}" cols="35" rows="5"></textarea><br>
-
-<!--    <input name="file" type="file">-->
     <button>Submit</button>
 </form>
 </body>
