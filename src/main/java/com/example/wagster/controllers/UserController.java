@@ -59,14 +59,16 @@ public class UserController  {
     User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     User userToEdit = userDao.findById(currentUser.getId()).orElse(null);
+
         model.addAttribute("user", userToEdit);
         return "users/editProfile";
 }
 
 @PostMapping("/profile/edit")
-    public String editProfileForm(@ModelAttribute("user") User updatedUser) {
+    public String editProfileForm(@ModelAttribute("user") User updatedUser, @RequestParam(name = "url") String url) {
 
     updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+    updatedUser.setImageURL(url);
 
     userDao.save(updatedUser);
 
