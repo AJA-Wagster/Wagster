@@ -9,11 +9,10 @@
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
+<img th:src="${user.getImageURL()}" style="border-radius: 50%; height: 200px; width: 200px; margin-top: 2%; margin-left: 2%">
+
 <h1 th:replace="~{partials/profilePartials :: profileBanner (${user.username})}"></h1>
 
-<h1 style="text-align: center">Profile page</h1>
-
-<img th:src="${user.getImageURL()}">
 <th:block>
     <div th:each="people : ${usersList}">
         <div th:each="friend : ${friends}">
@@ -29,7 +28,6 @@
         </div>
     </div>
 </th:block>
-<p>test</p>
 
 <button onclick="window.location.href='profile/edit'">Edit Profile</button>
 <button onclick="window.location.href='profile/delete'">Delete Profile</button>
