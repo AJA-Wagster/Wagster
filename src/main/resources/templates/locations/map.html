@@ -9,7 +9,7 @@
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet'/>
     <style>
         #map {
-            margin-top: 2%;
+            margin-top: 1%;
             height: 85vh;
             width: 66%;
             float: right;
@@ -61,7 +61,7 @@
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
-
+<input type="text" id="search-bar" class="search-bar" placeholder="Search locations...">
 <div id="cards-container">
     <div th:each="location : ${locations}" class="card">
         <h3 th:text="${location.name}"></h3>
@@ -163,6 +163,24 @@
 
     let nav = new mapboxgl.NavigationControl();
     map.addControl(nav, 'top-right');
+
+    const searchInput = document.getElementById('search-bar');
+    searchInput.addEventListener('input', function () {
+        const query = this.value.toLowerCase();
+        const cards = document.getElementsByClassName('card');
+
+        for (let i = 0; i < cards.length; i++) {
+            const card = cards[i];
+            const name = card.querySelector('h3').textContent.toLowerCase();
+            const address = card.querySelector('p').textContent.toLowerCase();
+
+            if (name.includes(query) || address.includes(query)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        }
+    });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
