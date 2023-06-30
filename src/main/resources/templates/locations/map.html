@@ -71,6 +71,15 @@
     </div>
 </div>
 
+<div th:each="location : ${locations}">
+    <form action="">
+        <input type="radio" th:value="${location.name}" hidden="hidden" class="locs">
+        <input type="radio" th:value="${location.latitude}" hidden="hidden" class="locsLat">
+        <input type="radio" th:value="${location.longitude}" hidden="hidden" class="locsLon">
+        <input type="radio" th:value="${location.description}" hidden="hidden" class="description">
+    </form>
+</div>
+
 <div id="map"></div>
 
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
@@ -83,6 +92,11 @@
         zoom: 10,
         center: [-96.80421034388885, 32.818180319333365]
     });
+
+    let locationNames = document.querySelectorAll('.locs')
+    let locationLat = document.querySelectorAll('.locsLat')
+    let locationLon = document.querySelectorAll('.locsLon')
+    let locationDes = document.querySelectorAll('.description')
 
     let locations = [
         {
@@ -111,18 +125,38 @@
         }
     ];
 
+    let locaN = locationNames[2].getAttribute('value')
+    let locaLa = locationLat[2].getAttribute('value')
+    let locaLo = locationLon[2].getAttribute('value')
+    let locaD = locationDes[2].getAttribute('value')
 
-    locations.forEach(function (location) {
-        let marker = new mapboxgl.Marker({color: "red"})
-            .setLngLat(location.coordinates)
-            .addTo(map);
+    let loca = {locaNa: locaN, coordi:[locaLa, locaLo], locaDe:locaD}
 
-        let popup = new mapboxgl.Popup()
-            .setHTML("<h3 style='color: black'>" + location.name + "</h3>" +
-                "<p style='color: black'>" + location.address + "</p>" +
-                "<p style='color: black'>" + location.description + "</p>");
-        marker.setPopup(popup)
-    });
+    let marker = new mapboxgl.Marker({color: "red"})
+        .setLngLat(loca.coordi)
+        .addTo(map);
+
+    let popup = new mapboxgl.Popup()
+        .setHTML("<h3 style='color: black'>" + location.name + "</h3>" +
+            "<p style='color: black'>" + location.address + "</p>" +
+            "<p style='color: black'>" + location.description + "</p>");
+    marker.setPopup(popup)
+
+
+    // loca.forEach(function (location) {
+    //     let marker = new mapboxgl.Marker({color: "red"})
+    //         .setLngLat(location.coordinates)
+    //         .addTo(map);
+    //
+    //
+    //     console.log(location.getAttribute('value'))
+    //
+    //     let popup = new mapboxgl.Popup()
+    //         .setHTML("<h3 style='color: black'>" + location.name + "</h3>" +
+    //             "<p style='color: black'>" + location.address + "</p>" +
+    //             "<p style='color: black'>" + location.description + "</p>");
+    //     marker.setPopup(popup)
+    // });
 
     const detailsButtons = document.getElementsByClassName("details-button");
     for (let i = 0; i < detailsButtons.length; i++) {
