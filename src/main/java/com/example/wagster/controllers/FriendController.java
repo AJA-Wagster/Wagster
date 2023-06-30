@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FriendController {
@@ -22,16 +23,20 @@ public class FriendController {
     }
 
     @PostMapping("/friend/add")
-    public void addFriend(){
+    public String addFriend(@RequestParam(name = "user") String username){
         Friend friend = new Friend();
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        friend.setUser(user);
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        friend.setUser(currentUser);
+        friend.setFriend(userDao.findByUsername(username));
+        System.out.println(friend.getFriend().getUsername() + friend.getUser().getUsername());
+        friendDao.save(friend);
+        return "redirect:/feed";
     }
 
-    @GetMapping("/friend/remove")
-    public void removeFriend(){
-        Friend friend = new Friend();
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        friend.setUser(user);
+    @PostMapping("/friend/remove")
+    public String removeFriend(@RequestParam(name = "friend") long id){
+        Friend friend = friendDao.findById(id).get();
+        friendDao.delete(friend);
+        return "redirect:/feed";
     }
 }
