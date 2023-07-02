@@ -8,6 +8,7 @@
 </head>
 <body>
 <h2>User Registration</h2>
+<p th:text="${errorMessage}"></p>
 <form th:action="@{/register}" th:method="post" th:object="${user}">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" placeholder="Enter Username" th:field="*{username}" required>

@@ -1,5 +1,6 @@
 package com.example.wagster.controllers;
 
+import com.example.wagster.config.PasswordPolicy;
 import com.example.wagster.models.User;
 import com.example.wagster.repos.UserRepo;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 // RegistrationController.java
 @Controller
@@ -26,22 +28,30 @@ public class UserController  {
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("error", (String) model.asMap().get("errorMessage"));
         return "registration";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user, @RequestParam(name = "url") String url) {
+    public String registerUser(@ModelAttribute("user") User user, @RequestParam(name = "url") String url, Model model, RedirectAttributes redirectAttributes) {
         // Perform registration logic here using userRepo
         // e.g., save the user to the database using userRepo.save(user)
 
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        user.setImageURL(url);
+        if (PasswordPolicy.isValid(user.getPassword())){
+            String hash = passwordEncoder.encode(user.getPassword());
+            user.setPassword(hash);
+            user.setImageURL(url);
 
-        // Assign the "ROLE_ADMIN" authority to the user
-        user.setAdmin(false);
+            // Assign the "ROLE_ADMIN" authority to the user
+            user.setAdmin(false);
 
-        userDao.save(user);
+            userDao.save(user);
+        }else {
+            String errorMessage = "Password does not meet the requirements. Passwords must meet all of the following, one lowercase letter, one uppercase letter, one special character(!@#&()–[{}]:;',?/*~$^+=<>), and must be between 8-16 characters.";
+            redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
+            return "redirect:/register";
+        }
+
 
         return "redirect:/";
     }
