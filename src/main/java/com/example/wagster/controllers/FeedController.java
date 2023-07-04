@@ -10,10 +10,7 @@ import com.example.wagster.models.Event;
 import com.example.wagster.repos.EventRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -95,9 +92,10 @@ public class FeedController {
     }
 
     @PostMapping("/events/create")
-    public String moveEventToDB(@ModelAttribute Event event){
+    public String moveEventToDB(@ModelAttribute Event event, @RequestParam(name = "url") String url){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         event.setUser(user);
+        event.setImageURL(url);
         eventsDao.save(event);
         return "redirect:/feed";
     }
@@ -110,10 +108,12 @@ public class FeedController {
     }
 
     @PostMapping("/events/{id}/edit")
-    public String updateEventDB(@ModelAttribute Event updatedEvent){
+    public String updateEventDB(@ModelAttribute Event updatedEvent, @RequestParam(name = "url") String url){
 //        Event event = eventsDao.findById(id).get();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         updatedEvent.setUser(user);
+        updatedEvent.setImageURL(url);
+
 //        if (event != null) {
 //            event.setTitle(updatedEvent.getTitle());
 //            event.setDescription(updatedEvent.getBody());
