@@ -14,20 +14,27 @@
     .card-container {
       padding: 20px;
     }
+    .card-content {
+      display: flex;
+      align-items: center;
+      text-align: left;
+    }
+    .profile-pic {
+      height: 80px;
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
 <h1 style="text-align: center">Feed page</h1>
 
-<button onclick="window.location.href='/posts/create'">Create Post</button>
-<button onclick="window.location.href='/events/create'">Create Event</button>
-
-<!-- Filter buttons -->
 <div style="text-align: center; margin-top: 20px;">
-  <button onclick="showPosts()">Show Posts</button>
-  <button onclick="showEvents()">Show Events</button>
-  <button onclick="showAll()">Show All</button>
+  <button onclick="window.location.href='/posts/create'" class="btn btn-light">Create Post</button>
+  <button onclick="window.location.href='/events/create'" class="btn btn-light">Create Event</button>
+  <button onclick="showPosts()" class="btn btn-light">Show Posts</button>
+  <button onclick="showEvents()" class="btn btn-light">Show Events</button>
+  <button onclick="showAll()" class="btn btn-light">Show All</button>
 </div>
 
 <br>
@@ -37,11 +44,14 @@
   <div th:each="post: ${posts}">
     <div class="card">
       <div class="card-container">
-        <img th:src="${post.user.imageURL}">
-        <p th:text="${post.user.username}"></p>
-        <h5 class="card-title" th:text="${post.title}"></h5>
-        <p class="card-text card-text-black" th:text="${post.body}"></p>
-        <p th:text="${user.isAdmin()}"></p>
+        <div class="card-content">
+          <img th:src="${post.user.imageURL}" class="profile-pic">
+          <div>
+            <p th:text="${post.user.username}"></p>
+            <h5 class="card-title" th:text="${post.title}"></h5>
+            <p class="card-text card-text-black" th:text="${post.body}"></p>
+          </div>
+        </div>
         <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
           <button type="submit" class="btn btn-primary" th:if="${user.username == post.user.username || user.isAdmin()}">Edit Post</button>
         </form>
@@ -57,10 +67,14 @@
   <div th:each="event: ${events}">
     <div class="card">
       <div class="card-container">
-        <img th:src="${event.user.imageURL}">
-        <p th:text="${event.user.username}"></p>
-        <h5 class="card-title" th:text="${event.title}"></h5>
-        <p class="card-text card-text-black" th:text="${event.description}"></p>
+        <div class="card-content">
+          <img th:src="${event.user.imageURL}" class="profile-pic">
+          <div>
+            <p th:text="${event.user.username}"></p>
+            <h5 class="card-title" th:text="${event.title}"></h5>
+            <p class="card-text card-text-black" th:text="${event.description}"></p>
+          </div>
+        </div>
         <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
           <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || user.isAdmin() }">Edit Event</button>
         </form>
