@@ -61,6 +61,7 @@ public class SecurityConfiguration{
                                 "/events/*/delete",
                                 "/location/create",
                                 "/location",
+                                "/location/*/edit",
                                 "/review/create",
                                 "/review/*/edit",
                                 "/review/*/delete","/admin/*", "/admin", "/friend/add", "friend/remove", "review/*").authenticated()
