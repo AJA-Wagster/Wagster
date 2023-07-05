@@ -80,6 +80,9 @@
         <input type="radio" th:value="${location.description}" hidden="hidden" class="description">
     </form>
 </div>
+<div th:each="review : ${reviews}">
+    <p th:text="${review.rating}"></p>
+</div>
 
 <div id="map"></div>
 
@@ -139,6 +142,7 @@
             "<p>" + location.description + "</p>" +
             "<button class='review-button' onclick='openReviewForm(" + location.id + ")'>Review</button>" +
             "<button class='close-button' onclick='closePopup()'>Close</button>";
+
 
         popupContainer.appendChild(popup);
         document.body.appendChild(popupContainer);
