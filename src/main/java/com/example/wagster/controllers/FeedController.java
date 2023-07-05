@@ -37,6 +37,7 @@ public class FeedController {
 
 //        add events and posts to the feed
         model.addAttribute("user", user);
+        model.addAttribute("userAdmin", user.isAdmin());
         model.addAttribute("events", events);
         model.addAttribute("posts", posts);
 

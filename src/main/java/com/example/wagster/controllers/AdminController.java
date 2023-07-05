@@ -1,6 +1,6 @@
 package com.example.wagster.controllers;
 
-import ch.qos.logback.classic.encoder.JsonEncoder;
+import com.example.wagster.config.PasswordPolicy;
 import com.example.wagster.models.Post;
 import com.example.wagster.models.User;
 import com.example.wagster.repos.PostRepo;
@@ -12,10 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AdminController {
@@ -25,30 +23,59 @@ public class AdminController {
 
     private PasswordEncoder passwordEncoder;
 
-    public AdminController(UserRepo userDao, PostRepo postDao) {
+    public AdminController(UserRepo userDao, PostRepo postDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.postDao = postDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/admin/register")
+    @GetMapping("/register/admin")
     public String showAdminRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
-        return "registration";
+        model.addAttribute("AdminUser", new User());
+        return "admin-registration";
     }
 
-    @PostMapping("/admin/register")
-    public String registerAdmin(@ModelAttribute("user") User user) {
+//    @PostMapping("/register/admin")
+//    public String registerAdmin(@ModelAttribute User user) {
+//
+//        System.out.println(user.getPassword());
+//
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
+//
+//        // Assign the "ROLE_ADMIN" authority to the user
+//        user.setAdmin(true);
+//
+//        userDao.save(user);
+//
+//        return "redirect:/";
+//    }
 
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
+    @PostMapping("/register/admin")
+    public String registerUser(@ModelAttribute User user, @RequestParam(name = "url") String url, RedirectAttributes redirectAttributes) {
+        // Perform registration logic here using userRepo
+        // e.g., save the user to the database using userRepo.save(user)
 
-        // Assign the "ROLE_ADMIN" authority to the user
-        user.setAdmin(true);
+        if (PasswordPolicy.isValid(user.getPassword())){
+            String hash = passwordEncoder.encode(user.getPassword());
+            user.setPassword(hash);
+            user.setImageURL(url);
 
-        userDao.save(user);
+            // Assign the "ROLE_ADMIN" authority to the user
+            user.setAdmin(true);
+
+            userDao.save(user);
+
+        }else {
+            String errorMessage = "Password does not meet the requirements. Passwords must meet all of the following, one lowercase letter, one uppercase letter, one special character(!@#&()–[{}]:;',?/*~$^+=<>), and must be between 8-16 characters.";
+            redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
+            return "redirect:/register/admin";
+        }
+
 
         return "redirect:/";
     }
+
 
 
 
