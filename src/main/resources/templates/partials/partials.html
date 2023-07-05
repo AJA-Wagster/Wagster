@@ -35,7 +35,8 @@
                     th:src="@{/img/login.png}" style="height: 30px">
             </a>
             <form th:action="@{/logout}" th:method="post">
-                <button sec:authorize="isAuthenticated()" class="btn btn-outline-danger">Logout</button>
+                <button sec:authorize="isAuthenticated()" style="all: unset"><img
+                        th:src="@{/img/Logout.png}" style="height: 30px"></button>
             </form>
         </div>
     </div>
