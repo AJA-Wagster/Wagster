@@ -12,9 +12,9 @@ public class AuthenticationController {
 
     }
 
-//    @GetMapping("/admin/register")
+//    @GetMapping("/admin/login")
 //    public String showAdminLoginForm(){
-//        return "registration";
+//        return "admin-login";
 //        }
     }
 

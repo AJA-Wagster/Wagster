@@ -19,7 +19,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfiguration{
 
-    //depenency that we inject, so that we can retrieve details about the user who is trying to log in
+    //dependency that we inject, so that we can retrieve details about the user who is trying to log in
     private UserDetailsLoader usersLoader;
 
     public SecurityConfiguration(UserDetailsLoader usersLoader) {
@@ -70,7 +70,9 @@ public class SecurityConfiguration{
                                 "/",
                                 "/register",
                                 "/login",
-                                "/map", "/admin/login").permitAll()
+                                "/map",
+//                                "/admin/login",
+                                "/register/admin").permitAll()
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**", "/keys.js").permitAll()
                 )
@@ -80,6 +82,12 @@ public class SecurityConfiguration{
                                 .loginPage("/login")
                                 .defaultSuccessUrl("/feed")
                 )
+
+//                .formLogin((login) ->
+//                        login
+//                                .loginPage("/admin/login")
+//                                .defaultSuccessUrl("/feed")
+//                )
                 /* Logout configuration */
                 .logout((logout) ->
                         logout
