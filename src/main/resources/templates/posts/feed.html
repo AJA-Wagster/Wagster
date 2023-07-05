@@ -41,12 +41,12 @@
         <p th:text="${post.user.username}"></p>
         <h5 class="card-title" th:text="${post.title}"></h5>
         <p class="card-text card-text-black" th:text="${post.body}"></p>
-        <p th:text="${user.isAdmin()}"></p>
+        <p th:text="${user.admin}"></p>
         <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
-          <button type="submit" class="btn btn-primary" th:if="${user.username == post.user.username || user.isAdmin()}">Edit Post</button>
+          <button type="submit" class="btn btn-primary" th:if="${user.username == post.user.username || userAdmin}">Edit Post</button>
         </form>
         <form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post">
-          <button type="submit" class="btn btn-danger" th:if="${user.username == post.user.username}">Delete Post</button>
+          <button type="submit" class="btn btn-danger" th:if="${user.username == post.user.username || userAdmin}">Delete Post</button>
         </form>
       </div>
     </div>
@@ -62,10 +62,10 @@
         <h5 class="card-title" th:text="${event.title}"></h5>
         <p class="card-text card-text-black" th:text="${event.description}"></p>
         <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
-          <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || user.isAdmin() }">Edit Event</button>
+          <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Edit Event</button>
         </form>
         <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
-          <button type="submit" class="btn btn-danger" th:if="${user.username == event.user.username}">Delete Event</button>
+          <button type="submit" class="btn btn-danger" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Delete Event</button>
         </form>
       </div>
     </div>
