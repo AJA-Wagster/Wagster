@@ -12,6 +12,9 @@
     <input type="text" name="title" id="title" th:field="*{title}">
     <label for="body">Description: </label>
     <textarea name="body" id="body" th:field="*{description}"></textarea>
+    <input type="hidden" th:field="*{id}" th:value="${event.id}">
+    <button id="file">Upload Image</button>
+    <input  id="url" name="url" type="radio" value="" checked="checked">
     <button type="submit">Update</button>
 </form>
 </body>
