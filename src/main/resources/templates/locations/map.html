@@ -74,6 +74,7 @@
 <div th:each="location : ${locations}">
     <form action="">
         <input type="radio" th:value="${location.name}" hidden="hidden" class="locs">
+        <input type="radio" th:value="${location.id}" hidden="hidden" class="id">
         <input type="radio" th:value="${location.latitude}" hidden="hidden" class="locsLat">
         <input type="radio" th:value="${location.longitude}" hidden="hidden" class="locsLon">
         <input type="radio" th:value="${location.description}" hidden="hidden" class="description">
@@ -85,6 +86,7 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
 <script th:src="@{/js/mapbox-geocoder.js}"></script>
 <script>
+    let locas = [];
     mapboxgl.accessToken = MAPBOX_TOKEN;
     var map = new mapboxgl.Map({
         container: 'map',
@@ -98,71 +100,30 @@
     let locationLon = document.querySelectorAll('.locsLon')
     let locationDes = document.querySelectorAll('.description')
 
-    let locations = [
-        {
-            name: "White Rock Lake Dog Park",
-            address: "8000 E Mockingbird Ln, Dallas, TX 75218",
-            coordinates: [-96.72531899221305, 32.855239666696974],
-            description: "Lakeside 3-acre dog park with sections for big & small breeds, fountains, shelter & washing areas."
-        },
-        {
-            name: "Central Commons Community Dog Park",
-            address: "4711 Westside Dr, Dallas, TX 75209",
-            coordinates: [-96.82121854144604, 32.829087721559894],
-            description: "The church requests that you keep your dogs on leash until they are entering the park. There are many individuals who are on church property on a daily basis, and letting dogs roam outside of the park creates a liability for the church."
-        },
-        {
-            name: "Bark Park Central",
-            address: "2530 Commerce St, Dallas, TX 75226",
-            coordinates: [-96.80101501638853, 32.779559431139184],
-            description: "Fenced 1.2-acre canine park shaded by highway bridges with shower & drinking bowls provided."
-        },
-        {
-            name: "My Best Friend's Park",
-            address: "Klyde Warren Park, 2012, Woodall Rodgers Fwy, Dallas, TX 75201",
-            coordinates: [-96.80018604601987, 32.790629504399575],
-            description: "If your best friend is a pooch, bring him or her to My Best Friend’s Park, which has moved to a larger and shadier space at the southwest corner of Pearl Street and Woodall Rodgers Freeway!"
-        }
-    ];
+    for (let i = 0; i < locationNames.length; i++){
+        locas[i] = {
+            name: locationNames[i].getAttribute('value'),
+            coordinates:[parseFloat(locationLat[i].getAttribute('value')), parseFloat(locationLon[i].getAttribute('value'))],
+            description: locationDes[i].getAttribute('value')}
+    }
 
-    let locaN = locationNames[2].getAttribute('value')
-    let locaLa = locationLat[2].getAttribute('value')
-    let locaLo = locationLon[2].getAttribute('value')
-    let locaD = locationDes[2].getAttribute('value')
+    locas.forEach((loca) => {
+        let marker = new mapboxgl.Marker({color: "red"})
+            .setLngLat(loca.coordinates)
+            .addTo(map);
 
-    let loca = {locaNa: locaN, coordi:[locaLa, locaLo], locaDe:locaD}
-
-    let marker = new mapboxgl.Marker({color: "red"})
-        .setLngLat(loca.coordi)
-        .addTo(map);
-
-    let popup = new mapboxgl.Popup()
-        .setHTML("<h3 style='color: black'>" + location.name + "</h3>" +
-            "<p style='color: black'>" + location.address + "</p>" +
-            "<p style='color: black'>" + location.description + "</p>");
-    marker.setPopup(popup)
-
-
-    // loca.forEach(function (location) {
-    //     let marker = new mapboxgl.Marker({color: "red"})
-    //         .setLngLat(location.coordinates)
-    //         .addTo(map);
-    //
-    //
-    //     console.log(location.getAttribute('value'))
-    //
-    //     let popup = new mapboxgl.Popup()
-    //         .setHTML("<h3 style='color: black'>" + location.name + "</h3>" +
-    //             "<p style='color: black'>" + location.address + "</p>" +
-    //             "<p style='color: black'>" + location.description + "</p>");
-    //     marker.setPopup(popup)
-    // });
+        let popup = new mapboxgl.Popup()
+            .setHTML("<h3 style='color: black'>" + loca.name + "</h3>" +
+                "<p style='color: black'>" + loca.address + "</p>" +
+                "<p style='color: black'>" + loca.description + "</p>");
+        marker.setPopup(popup)
+    });
 
     const detailsButtons = document.getElementsByClassName("details-button");
     for (let i = 0; i < detailsButtons.length; i++) {
         detailsButtons[i].addEventListener("click", function () {
             const name = this.dataset.name;
-            const location = locations.find(loc => loc.name === name);
+            const location = locas.find(loc => loc.name === name);
             openPopup(location);
         });
     }
