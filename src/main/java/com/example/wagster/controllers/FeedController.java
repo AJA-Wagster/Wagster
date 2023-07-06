@@ -2,9 +2,8 @@ package com.example.wagster.controllers;
 
 import com.example.wagster.models.Post;
 import com.example.wagster.models.User;
+import com.example.wagster.repos.FriendRepo;
 import com.example.wagster.repos.PostRepo;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.wagster.models.Event;
 import com.example.wagster.repos.EventRepo;
@@ -19,11 +18,13 @@ public class FeedController {
 
     private final EventRepo eventsDao;
     private final PostRepo postDao;
+    private final FriendRepo friendDao;
 
 
-    public FeedController(EventRepo eventsDao, PostRepo postsDao) {
+    public FeedController(EventRepo eventsDao, PostRepo postsDao, FriendRepo friendDao) {
         this.eventsDao = eventsDao;
         this.postDao = postsDao;
+        this.friendDao = friendDao;
     }
 
     @GetMapping("/feed")
@@ -40,6 +41,9 @@ public class FeedController {
         model.addAttribute("userAdmin", user.isAdmin());
         model.addAttribute("events", events);
         model.addAttribute("posts", posts);
+        model.addAttribute("friends", friendDao.findAllByUserId(user.getId()));
+
+        System.out.println(friendDao.findAllByUserId(user.getId()));
 
 
         return "posts/feed";
