@@ -7,12 +7,26 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link th:href="@{/css/main.css}" rel="stylesheet">
   <style>
-    .card {
-      margin: 0 50px 20px 50px;
-      color: black;
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
     }
-    .card-container {
-      padding: 20px;
+    .card {
+      margin: .5em 18em; /* Add horizontal margins */
+      color: black;
+      position: relative;
+      z-index: 1;
+      /*border-radius: 1%;*/
+      border: 3px solid transparent;
+      box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);
+      border-top-color: rgba(225, 225, 225, 0.5);
+      border-left-color: rgba(225, 225, 225, 0.5);
+      border-bottom-color: rgba(225, 225, 225, 0.1);
+      border-right-color: rgba(225, 225, 225, 0.1);
+      background: linear-gradient(to right bottom, rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0.3));
     }
     .card-content {
       display: flex;
@@ -23,13 +37,21 @@
       height: 80px;
       margin-right: 10px;
     }
+    #feedNav {
+      color: #ffe66d;
+    }
+    .logo-container {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
   </style>
+
 </head>
 <body>
-<nav th:replace="~{partials/partials :: navbar}"></nav>
-<h1 style="text-align: center">Feed page</h1>
+<nav th:replace="~{partials/partials :: navbar}" class="navbar"></nav>
 
-<div style="text-align: center; margin-top: 20px;">
+<div style="text-align: center; margin-top: 30px;">
   <button onclick="window.location.href='/posts/create'" class="btn btn-light">Create Post</button>
   <button onclick="window.location.href='/events/create'" class="btn btn-light">Create Event</button>
   <button onclick="showPosts()" class="btn btn-light">Show Posts</button>
@@ -43,23 +65,21 @@
 <div id="postsContainer">
   <div th:each="post: ${posts}">
     <div class="card">
-      <div class="card-container">
-        <div class="card-content">
-          <img th:src="${post.user.imageURL}" class="profile-pic">
-          <div>
-            <p th:text="${post.user.username}"></p>
-            <h5 class="card-title" th:text="${post.title}"></h5>
-            <p class="card-text card-text-black" th:text="${post.body}"></p>
-          </div>
+      <div class="card-content">
+        <img th:src="${post.user.imageURL}" class="profile-pic">
+        <div>
+          <p th:text="${post.user.username}"></p>
+          <h5 class="card-title" th:text="${post.title}"></h5>
+          <p class="card-text card-text-black" th:text="${post.body}"></p>
         </div>
-
-        <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
-          <button type="submit" class="btn btn-primary" th:if="${user.username == post.user.username || userAdmin}">Edit Post</button>
-        </form>
-        <form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post">
-          <button type="submit" class="btn btn-danger" th:if="${user.username == post.user.username || userAdmin}">Delete Post</button>
-        </form>
       </div>
+
+      <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
+        <button type="submit" class="btn btn-primary" th:if="${user.username == post.user.username || userAdmin}">Edit Post</button>
+      </form>
+      <form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post">
+        <button type="submit" class="btn btn-danger" th:if="${user.username == post.user.username || userAdmin}">Delete Post</button>
+      </form>
     </div>
   </div>
 </div>
@@ -67,26 +87,26 @@
 <div id="eventsContainer">
   <div th:each="event: ${events}">
     <div class="card">
-      <div class="card-container">
-        <div class="card-content">
-          <img th:src="${event.user.imageURL}" class="profile-pic">
-          <div>
-            <p th:text="${event.user.username}"></p>
-            <h5 class="card-title" th:text="${event.title}"></h5>
-            <p class="card-text card-text-black" th:text="${event.description}"></p>
-          </div>
+      <div class="card-content">
+        <img th:src="${event.user.imageURL}" class="profile-pic">
+        <div>
+          <p th:text="${event.user.username}"></p>
+          <h5 class="card-title" th:text="${event.title}"></h5>
+          <p class="card-text card-text-black" th:text="${event.description}"></p>
         </div>
-        <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
-          <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Edit Event</button>
-        </form>
-        <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
-          <button type="submit" class="btn btn-danger" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Delete Event</button>
-        </form>
       </div>
+      <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
+        <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Edit Event</button>
+      </form>
+      <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
+        <button type="submit" class="btn btn-danger" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Delete Event</button>
+      </form>
     </div>
   </div>
 </div>
-
+<div class="logo-container">
+  <img th:src="@{/img/logoName.png}" alt="logo" style="width: 80%; height: auto;">
+</div>
 <script>
   function showPosts() {
     document.getElementById("postsContainer").style.display = "block";

@@ -6,8 +6,16 @@
 body {
     background-color: #242423;
     color: #ffffff;
+    padding-top: 80px;
+    position: relative;
+    z-index: 1;
+
 }
 .navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     border-radius: 1%;
     border: 1px solid transparent;
     /*box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);*/
@@ -42,6 +50,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 
 
 
