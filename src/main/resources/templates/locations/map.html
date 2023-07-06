@@ -94,8 +94,37 @@
             width: 10em;
             cursor: pointer;
             background-color: #ffe66d;
+            border-radius: 20px;
         }
-        .details-button::before {
+
+        .close-button {
+            color: #000;
+            font-weight: bolder;
+            transition: all 0.5s;
+            position: relative;
+            line-height: 50px;
+            height: 50px;
+            text-align: center;
+            width: 10em;
+            cursor: pointer;
+            background-color: red;
+            border-radius: 20px;
+        }
+
+        .review-button {
+            color: #000;
+            font-weight: bolder;
+            transition: all 0.5s;
+            position: relative;
+            line-height: 50px;
+            height: 50px;
+            text-align: center;
+            width: 10em;
+            cursor: pointer;
+            background-color: white;
+            border-radius: 20px;
+        }
+        .details-button .review-button .close-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -105,12 +134,16 @@
             z-index: 1;
             background-color: rgba(255,255,255,0.1);
             transition: all 0.3s;
+            border-radius: 20px;
+
         }
-        .details-button:hover::before {
+        .details-button .review-button .close-button:hover::before {
             opacity: 0 ;
             transform: scale(0.5,0.5);
+            border-radius: 20px;
+
         }
-        .details-button::after {
+        .details-button .review-button .close-button::after {
             content: '';
             position: absolute;
             top: 0;
@@ -122,11 +155,15 @@
             transition: all 0.3s;
             border: 1px solid rgba(255,255,255,0.5);
             transform: scale(1.2,1.2);
+            border-radius: 20px;
+
         }
-        .details-button:hover::after {
+        .details-button .review-button .close-button:hover::after {
             opacity: 1;
             transform: scale(1,1);
+            border-radius: 20px;
         }
+
     </style>
     <script type="text/javascript" th:src="@{/keys.js}"></script>
 </head>
