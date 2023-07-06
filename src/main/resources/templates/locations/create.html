@@ -6,7 +6,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form th:action="@{/location/create}" th:method="post" th:object="${location}">
+    <form th:action="@{/location/{id}/edit(id=${id})}" th:method="post" th:object="${location}">
         Name:
         <input th:field="*{name}" type="text">
         Address:

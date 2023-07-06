@@ -208,9 +208,11 @@
     let locationLat = document.querySelectorAll('.locsLat')
     let locationLon = document.querySelectorAll('.locsLon')
     let locationDes = document.querySelectorAll('.description')
+    let locationId = document.querySelectorAll('.id')
 
     for (let i = 0; i < locationNames.length; i++){
         locas[i] = {
+            id: locationId[i].getAttribute('value'),
             name: locationNames[i].getAttribute('value'),
             coordinates:[parseFloat(locationLat[i].getAttribute('value')), parseFloat(locationLon[i].getAttribute('value'))],
             description: locationDes[i].getAttribute('value')}
@@ -243,11 +245,24 @@
 
         const popup = document.createElement("div");
         popup.className = "popup";
+        console.log(location)
         popup.innerHTML = "<h3>" + location.name + "</h3>" +
             "<p>" + location.address + "</p>" +
             "<p>" + location.description + "</p>" +
             "<button class='review-button' onclick='openReviewForm(" + location.id + ")'>Review</button>" +
             "<button class='close-button' onclick='closePopup()'>Close</button>";
+            fetch(`http://localhost:8080/review/${location.id}`)
+                .then(resp => resp.json())
+                .then(data => {
+                    data.forEach((review) => {
+                        popup.innerHTML +=  '<div>' +
+                            '<p>' + review.comment + '</p>' +
+                            '<p>' + review.rating + '</p>' +
+                            '</div>'
+                    })
+                    console.log(data)
+                })
+                .catch(error => console.error(error))
 
         popupContainer.appendChild(popup);
         document.body.appendChild(popupContainer);

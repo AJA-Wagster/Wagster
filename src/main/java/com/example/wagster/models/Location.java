@@ -1,5 +1,6 @@
 package com.example.wagster.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +32,7 @@ public class Location {
 
     @ManyToOne
     @JoinColumn( name = "user_id")
+    @JsonBackReference
     private User user;
 
     @Column(nullable = false)
