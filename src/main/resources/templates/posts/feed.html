@@ -69,6 +69,7 @@
         <img th:src="${post.user.imageURL}" class="profile-pic">
         <div>
           <p th:text="${post.user.username}"></p>
+          <img th:src="${post.imageURL}" class="">
           <h5 class="card-title" th:text="${post.title}"></h5>
           <p class="card-text card-text-black" th:text="${post.body}"></p>
           <div>
@@ -97,6 +98,7 @@
         <img th:src="${event.user.imageURL}" class="profile-pic">
         <div>
           <p th:text="${event.user.username}"></p>
+          <img th:src="${event.imageURL}" class="profile-pic">
           <h5 class="card-title" th:text="${event.title}"></h5>
           <p class="card-text card-text-black" th:text="${event.description}"></p>
         </div>

@@ -55,9 +55,10 @@ public class FeedController {
 
 
     @PostMapping("/posts/create")
-    public String moveToDB(@ModelAttribute Post post){
+    public String moveToDB(@ModelAttribute Post post, @RequestParam(name = "url") String url){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
+        post.setImageURL(url);
         postDao.save(post);
         return "redirect:/feed";
     }
