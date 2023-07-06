@@ -26,9 +26,9 @@ public class FriendController {
     public String addFriend(@RequestParam(name = "user") String username){
         Friend friend = new Friend();
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        friend.setUser(currentUser);
-//        friend.setFriend(userDao.findByUsername(username));
-//        System.out.println(friend.getFriend().getUsername() + friend.getUser().getUsername());
+        friend.setUser(currentUser);
+        friend.setFriend(userDao.findByUsername(username));
+        System.out.println(friend.getFriend().getUsername() + friend.getUser().getUsername());
         friendDao.save(friend);
         return "redirect:/feed";
     }
