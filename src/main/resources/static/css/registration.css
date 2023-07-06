@@ -2,15 +2,16 @@ body {
     background-color: #242423;
 }
 
-.container {
-    text-align: center;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+/*.container {*/
+/*    text-align: center;*/
+/*    background-color: #f9f9f9;*/
+/*    padding: 20px;*/
+/*    border-radius: 5px;*/
+/*    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
+/*}*/
 
-.login-box {
+.registration-form {
+    margin: 0 auto;
     margin-top: 10%;
     max-width: 400px;
     border: 1px solid transparent;
@@ -22,44 +23,41 @@ body {
     background: linear-gradient(to right bottom, rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0.3));
 }
 
-.login-box label,
-.login-box input,
-.login-box button,
-.login-box p {
+.registration-form label,
+.registration-form input,
+.registration-form button,
+.registration-form p {
     margin-bottom: 10px;
 }
 
-.login-box input[type="text"],
-.login-box input[type="password"] {
+.registration-form input[type="text"],
+.registration-form input[type="email"],
+.registration-form input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
 
-.loginBtn[type="submit"] {
-    color: #000;
-    font-weight: bolder;
-    transition: all 0.5s;
-    position: relative;
-    line-height: 50px;
-    height: 50px;
-    text-align: center;
+.registration-form button[type="submit"] {
     width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #4caf50;
+    color: #fff;
     cursor: pointer;
-    background-color: #ffe66d;
-    border-radius: 20px;
 }
 
-.login-box button[type="submit"]:hover {
+.registration-form button[type="submit"]:hover {
     background-color: #45a049;
 }
 
-.login-box p {
+.registration-form p {
     margin: 0;
 }
 
-.login-box a {
+.registration-form a {
     color: #007bff;
     text-decoration: none;
 }
