@@ -62,7 +62,7 @@ public class AdminController {
             user.setImageURL(url);
 
             // Assign the "ROLE_ADMIN" authority to the user
-            user.setAdmin(true);
+            user.setAdmin((byte) 1);
 
             userDao.save(user);
 

@@ -53,8 +53,8 @@ public class User {
     @JsonIgnore
     private List<Event> events;
 
-    @Column(nullable = false)
-    private boolean admin;
+    @Column(nullable = false, columnDefinition = "TINYINT(1)")
+    private byte admin;
 
     public User(User copy) {
         this.id = copy.id;
@@ -84,10 +84,10 @@ public class User {
     // Getter and setter for the 'admin' property
 
     public boolean isAdmin() {
-        return admin;
+        return admin !=0;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(byte admin) {
         this.admin = admin;
     }
 
