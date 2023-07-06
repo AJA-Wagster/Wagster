@@ -38,18 +38,7 @@ body {
 #mapNav:hover {
     color: #ffe66d
 }
-.registration-form{
-    display: flex;
-    margin: 0 auto;
-    width: 45%;
-    background-color: #454447;
-    border: 3px solid #313333;
-    padding: 2rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+
 
 
 
