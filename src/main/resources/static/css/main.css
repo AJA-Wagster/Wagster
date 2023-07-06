@@ -1,6 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
     background-color: #242423;
     color: #ffffff;
+    padding-top: 80px;
+    position: relative;
+    z-index: 1;
+
+}
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 1%;
+    border: 1px solid transparent;
+    /*box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);*/
+    border-top-color: rgba(225, 225, 225, 0.5);
+    border-left-color: rgba(225, 225, 225, 0.5);
+    border-bottom-color: rgba(225, 225, 225, 0.1);
+    border-right-color: rgba(225, 225, 225, 0.1);
+    background: linear-gradient(to right bottom, rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0.3));
+    max-height: 3em;
 }
 
 #profileNav:hover {
@@ -14,3 +38,19 @@ body {
 #mapNav:hover {
     color: #ffe66d
 }
+.registration-form{
+    display: flex;
+    margin: 0 auto;
+    width: 45%;
+    background-color: #454447;
+    border: 3px solid #313333;
+    padding: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+

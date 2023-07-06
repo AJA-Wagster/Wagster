@@ -13,10 +13,12 @@
     <input th:field="*{title}">
     Description:
     <textarea th:field="*{description}"></textarea>
-    <button type="button" id="file">FILE</button>
-    <input id="url" name="url" type="radio" checked value="">
+    <input type="hidden" th:field="*{id}" th:value="${event.id}">
+    <button id="file">Upload Image</button>
+    <input  id="url" name="url" type="radio" value="" checked="checked">
     <button>Submit</button>
 </form>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:src="@{/js/uploadFile.js}"></script>
 </body>
 </html>
