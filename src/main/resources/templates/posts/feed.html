@@ -87,6 +87,17 @@
 <div id="eventsContainer">
   <div th:each="event: ${events}">
     <div class="card">
+<<<<<<< HEAD
+      <div class="card-container">
+        <h5 class="card-title" th:text="${event.title}"></h5>
+        <p class="card-text card-text-black" th:text="${event.description}"></p>
+        <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
+          <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || userAdmin}">Edit Event</button>
+        </form>
+        <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
+          <button type="submit" class="btn btn-danger" th:if="${user.username == event.user.username || userAdmin}">Delete Event</button>
+        </form>
+
       <div class="card-content">
         <img th:src="${event.user.imageURL}" class="profile-pic">
         <div>
@@ -94,14 +105,15 @@
           <h5 class="card-title" th:text="${event.title}"></h5>
           <p class="card-text card-text-black" th:text="${event.description}"></p>
         </div>
-      </div>
-      <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
-        <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Edit Event</button>
-      </form>
-      <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
-        <button type="submit" class="btn btn-danger" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Delete Event</button>
-      </form>
-    </div>
+
+<!--      </div>-->
+<!--      <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">-->
+<!--        <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Edit Event</button>-->
+<!--      </form>-->
+<!--      <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post">-->
+<!--        <button type="submit" class="btn btn-danger" th:if="${user.username == event.user.username || event.getUser().isAdmin()}">Delete Event</button>-->
+<!--      </form>-->
+<!--    </div>-->
   </div>
 </div>
 <div class="logo-container">
