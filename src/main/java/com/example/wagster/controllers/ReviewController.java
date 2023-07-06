@@ -33,7 +33,7 @@ public class ReviewController {
         review.setComment(comment);
         review.setRating(rating);
         review.setUser(user);
-        Location location = locationDao.findById(3l).get();
+        Location location = locationDao.findById(2l).get();
         review.setLocation(location);
 
         reviewDao.save(review);
@@ -58,5 +58,6 @@ public class ReviewController {
         reviewDao.deleteById(id);
         return "redirect:/map";
     }
+
 
 }
