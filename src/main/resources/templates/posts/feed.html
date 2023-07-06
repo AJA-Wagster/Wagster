@@ -39,7 +39,7 @@
       <div class="card-container">
         <h5 class="card-title" th:text="${post.title}"></h5>
         <p class="card-text card-text-black" th:text="${post.body}"></p>
-        <p th:text="${user.admin}"></p>
+        <p th:text="${userAdmin}"></p>
         <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
           <button type="submit" class="btn btn-primary" th:if="${user.username == post.user.username || userAdmin}">Edit Post</button>
         </form>

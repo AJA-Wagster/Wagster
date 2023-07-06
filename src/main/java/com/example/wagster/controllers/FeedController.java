@@ -3,8 +3,7 @@ package com.example.wagster.controllers;
 import com.example.wagster.models.Post;
 import com.example.wagster.models.User;
 import com.example.wagster.repos.PostRepo;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.security.core.Authentication;
+import com.example.wagster.repos.UserRepo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.wagster.models.Event;
 import com.example.wagster.repos.EventRepo;
@@ -22,11 +21,13 @@ public class FeedController {
 
     private final EventRepo eventsDao;
     private final PostRepo postDao;
+    private final UserRepo userDao;
 
 
-    public FeedController(EventRepo eventsDao, PostRepo postsDao) {
+    public FeedController(EventRepo eventsDao, PostRepo postsDao, UserRepo userDao) {
         this.eventsDao = eventsDao;
         this.postDao = postsDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/feed")
@@ -40,7 +41,7 @@ public class FeedController {
 
 //        add events and posts to the feed
         model.addAttribute("user", user);
-        model.addAttribute("userAdmin", user.isAdmin());
+        model.addAttribute("userAdmin", userDao.findById(user.getId()).get().isAdmin());
         model.addAttribute("events", events);
         model.addAttribute("posts", posts);
 
