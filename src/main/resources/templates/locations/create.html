@@ -6,7 +6,8 @@
     <title>Title</title>
 </head>
 <body>
-    <form th:action="@{/location/{id}/edit(id=${id})}" th:method="post" th:object="${location}">
+<nav th:replace="~{partials/partials :: navbar}"></nav>
+    <form th:action="@{/location/create}" th:method="post" th:object="${location}">
         Name:
         <input th:field="*{name}" type="text">
         Address:
@@ -14,9 +15,9 @@
         Description
         <textarea th:field="*{description}"></textarea>
         Rating:
-        <input th:field="*{rating}" type="text">
+        <input th:field="*{rating}" type="number" step="any">
         Latitude:
-        <input th:field="*{latitude}" type="text">
+        <input th:field="*{latitude}" type="number" step="any">
         Longitude:
         <input th:field="*{longitude}" type="text">
         <button>Submit</button>

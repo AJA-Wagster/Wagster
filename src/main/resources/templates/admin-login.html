@@ -5,6 +5,7 @@
     <title>Admin Log In</title>
 </head>
 <body>
+<nav th:replace="~{partials/partials :: navbar}"></nav>
 <h1>Admin Log In</h1>
 <div th:if="${param.error}">
     Invalid Username and Password.

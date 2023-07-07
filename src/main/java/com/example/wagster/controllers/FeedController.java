@@ -38,7 +38,7 @@ public class FeedController {
 
 //        add events and posts to the feed
         model.addAttribute("user", user);
-        model.addAttribute("userAdmin", user.isAdmin());
+        model.addAttribute("userAdmin", userDao.findById(user.getId()).get().isAdmin());
         model.addAttribute("events", events);
         model.addAttribute("posts", posts);
         model.addAttribute("friends", friendDao.findAllByUserId(user.getId()));
@@ -58,9 +58,10 @@ public class FeedController {
 
 
     @PostMapping("/posts/create")
-    public String moveToDB(@ModelAttribute Post post){
+    public String moveToDB(@ModelAttribute Post post, @RequestParam(name = "url") String url){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
+        post.setImageURL(url);
         postDao.save(post);
         return "redirect:/feed";
     }
