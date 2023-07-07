@@ -7,6 +7,7 @@
   <script type="text/javascript" th:src="@{/keys.js}"></script>
 </head>
 <body>
+<nav th:replace="~{partials/partials :: navbar}"></nav>
 <h2>User Registration</h2>
 <p th:text="${errorMessage}"></p>
 <form th:action="@{/register/admin}" th:method="post" th:object="${AdminUser}">

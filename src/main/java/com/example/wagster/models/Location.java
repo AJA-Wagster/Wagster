@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -41,5 +43,6 @@ public class Location {
     @Column(nullable = false)
     private double longitude;
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    private List<Review> reviews;
 }

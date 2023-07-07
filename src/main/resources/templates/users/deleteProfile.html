@@ -5,6 +5,7 @@
     <title>Delete Profile</title>
 </head>
 <body>
+<nav th:replace="~{partials/partials :: navbar}"></nav>
 <h2>Delete Profile</h2>
 <form th:action="@{/profile/delete}" method="post" th:object="${user}">
     <label for="username">Username:</label>
