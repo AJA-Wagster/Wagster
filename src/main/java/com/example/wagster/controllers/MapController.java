@@ -62,7 +62,6 @@ public class MapController {
 
     @PostMapping("/location/{id}/delete")
     public String deleteLocation(@PathVariable(name = "id") Long id){
-        reviewDao.deleteAllByLocationId(id);
         locationDao.deleteById(id);
         return "redirect:/map";
     }

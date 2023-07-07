@@ -28,7 +28,7 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "locaton_id")
     private Location location;
 }

@@ -1,6 +1,7 @@
 package com.example.wagster.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,5 +45,6 @@ public class Location {
     private double longitude;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    @JsonIgnore
     private List<Review> reviews;
 }

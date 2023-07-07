@@ -7,7 +7,7 @@
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
-    <form th:action="@{/location/{id}/edit(id=${id})}" th:method="post" th:object="${location}">
+    <form th:action="@{/location/create}" th:method="post" th:object="${location}">
         Name:
         <input th:field="*{name}" type="text">
         Address:
