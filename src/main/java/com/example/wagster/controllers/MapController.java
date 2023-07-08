@@ -1,10 +1,10 @@
 package com.example.wagster.controllers;
 
 import com.example.wagster.models.Location;
-import com.example.wagster.models.Review;
 import com.example.wagster.models.User;
 import com.example.wagster.repos.LocationRepo;
 import com.example.wagster.repos.ReviewRepo;
+import com.example.wagster.repos.UserRepo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,18 +20,23 @@ import java.util.List;
 public class MapController {
     private final LocationRepo locationDao;
     private final ReviewRepo reviewDao;
+    private final UserRepo userDao;
 
-    public MapController(LocationRepo locationDao, ReviewRepo reviewDao) {
+    public MapController(LocationRepo locationDao, ReviewRepo reviewDao, UserRepo userDao) {
         this.locationDao = locationDao;
         this.reviewDao = reviewDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/map")
     public String showMap(Model model) {
         List<Location> locations = locationDao.findAll();
-        List<Review> reviews = reviewDao.findReviewsByLocationId(3L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("locations", locations);
-        model.addAttribute("reviews", reviews);
+        if(user != null){
+            System.out.println(user.isAdmin());
+            model.addAttribute("userAdmin", userDao.findById(user.getId()).get());
+        }
         return "locations/map";
     }
 

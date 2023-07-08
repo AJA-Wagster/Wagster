@@ -169,6 +169,7 @@
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
+<button th:if="${userAdmin}" onclick="window.location.href='/location/create'">Add Location</button>
 <input type="text" id="search-bar" class="search-bar" placeholder="Search locations...">
 <div id="cards-container">
     <div th:each="location : ${locations}" class="card">
@@ -176,6 +177,7 @@
         <p th:text="${location.address}"></p>
         <div class="button-container">
             <button class="details-button" th:data-name="${location.name}">Details</button>
+            <form th:action="@{/location/{id}/edit(id = ${location.id})}"><button class="details-button">Edit Location</button></form>
         </div>
     </div>
 </div>
