@@ -1,0 +1,81 @@
+body {
+    background-color: #242423;
+}
+
+.container {
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-box {
+    color: black;
+    text-align: left;
+    margin-top: .5%;
+    max-width: 400px;
+    border: 1px solid transparent;
+    box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);
+    border-top-color: rgba(225, 225, 225, 0.5);
+    border-left-color: rgba(225, 225, 225, 0.5);
+    border-bottom-color: rgba(225, 225, 225, 0.1);
+    border-right-color: rgba(225, 225, 225, 0.1);
+    background: linear-gradient(to right bottom, rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0.3));
+}
+h1{
+    text-align: center;
+}
+
+form label,
+form input,
+form textarea,
+form button {
+    margin-bottom: 10px;
+}
+
+form input[type="text"],
+form input[type="number"],
+    /*form input[type="email"],*/
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.submit{
+    color: #000;
+    font-weight: bolder;
+    transition: all 0.5s;
+    position: relative;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    background-color: #ffe66d;
+    border-radius: 20px;
+}
+
+.logo-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+/*.navbar {*/
+/*    border-radius: 1%;*/
+/*    border: 1px solid transparent;*/
+/*    border-top-color: rgba(225, 225, 225, 0.5);*/
+/*    border-left-color: rgba(225, 225, 225, 0.5);*/
+/*    border-bottom-color: rgba(225, 225, 225, 0.1);*/
+/*    border-right-color: rgba(225, 225, 225, 0.1);*/
+/*    background: linear-gradient(to right bottom, rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0.3));*/
+/*    max-height: 3em;*/
+/*}*/
+
+/*#profileNav:hover,*/
+/*#feedNav:hover,*/
+/*#mapNav:hover {*/
+/*    color: #ffe66d;*/
+/*}*/
