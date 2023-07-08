@@ -40,7 +40,9 @@ public class UserController  {
         if (PasswordPolicy.isValid(user.getPassword())){
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
-            user.setImageURL(url);
+            if (url.length() < 3) {
+                user.setImageURL("https://img.freepik.com/premium-photo/golden-retriever-lying-panting-isolated-white_191971-16974.jpg");
+            }
 
             // Assign the "ROLE_ADMIN" authority to the user
             user.setAdmin((byte) 0);

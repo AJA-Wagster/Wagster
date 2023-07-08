@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="~{partials/partials :: navbar}"></nav>
+<form th:action="@{/location/{id}/edit(id=${location.id})}" th:method="post" th:object="${location}">
+  Name:
+  <input th:field="*{name}" type="text">
+  Address:
+  <input th:field="*{address}" type="text">
+  Description
+  <textarea th:field="*{description}"></textarea>
+  Rating:
+  <input th:field="*{rating}" type="number" step="any">
+  Latitude:
+  <input th:field="*{latitude}" type="number" step="any">
+  Longitude:
+  <input th:field="*{longitude}" type="text">
+  <button>Submit</button>
+</form>
+<form th:action="@{/location/{id}/delete(id=${location.id})}" th:method="post">
+  <button>Delete</button>
+</form>
+</body>
+</html>

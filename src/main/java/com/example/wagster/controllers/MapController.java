@@ -50,13 +50,19 @@ public class MapController {
     }
     @GetMapping("location/{id}/edit")
     public String sr(Model model, @PathVariable(name = "id") Long id){
-        model.addAttribute("location", locationDao.findById(id));
-        return "locations/create";
+        model.addAttribute("location", locationDao.findById(id).get());
+        return "locations/locationEdit";
     }
 
     @PostMapping("location/{id}/edit")
     public String tr(@ModelAttribute Location location){
         locationDao.save(location);
+        return "redirect:/map";
+    }
+
+    @PostMapping("/location/{id}/delete")
+    public String deleteLocation(@PathVariable(name = "id") Long id){
+        locationDao.deleteById(id);
         return "redirect:/map";
     }
 }
