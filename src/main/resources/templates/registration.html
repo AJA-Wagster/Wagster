@@ -37,6 +37,11 @@
             flex: 1;
         }
 
+        .logo-container {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
     </style>
 </head>
 
@@ -70,6 +75,10 @@
             </div>
         </form>
     </div>
+</div>
+
+<div class="logo-container">
+    <img th:src="@{/img/logoName.png}" alt="logo" style="width: 80%; height: auto;">
 </div>
 
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
