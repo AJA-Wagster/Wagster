@@ -42,6 +42,12 @@
       height: 80px;
       margin-right: 10px;
     }
+
+    .event-pic{
+      width: 90%;
+      border-radius: 20px;
+    }
+
     #feedNav {
       color: #ffe66d;
     }
@@ -90,6 +96,24 @@
       background-color: #ffe66d;
       border-radius: 20px;
     }
+
+    /*.addBtn {*/
+    /*  color: #000;*/
+    /*  font-weight: bolder;*/
+    /*  transition: all 0.5s;*/
+    /*  position: relative;*/
+    /*  line-height: 50px;*/
+    /*  height: 50px;*/
+    /*  text-align: center;*/
+    /*  width: calc(100% / 2); !* Divide the width equally among 2 buttons *!*/
+    /*  cursor: pointer;*/
+    /*  background-color: #ffe66d;*/
+    /*  border-radius: 20px;*/
+    /*}*/
+
+    input[type="radio"]:checked{
+      visibility:hidden;
+    }
   </style>
 </head>
 <body>
@@ -115,13 +139,13 @@
         <img th:src="${post.user.imageURL}" class="profile-pic">
         <div>
           <p th:text="${post.user.username}"></p>
-          <img th:src="${post.imageURL}" class="">
+          <img th:src="${post.imageURL}" class="event-pic">
           <h5 class="card-title" th:text="${post.title}"></h5>
           <p class="card-text card-text-black" th:text="${post.body}"></p>
           <div>
               <form th:action="@{/friend/add}" th:method="POST">
                   <input th:value="${post.user.username}" name="user" type="radio" checked>
-                  <button>Add Friend</button>
+                  <button class="addBtn">Add Friend</button>
               </form>
           </div>
         </div>
@@ -144,7 +168,7 @@
         <img th:src="${event.user.imageURL}" class="profile-pic">
         <div>
           <p th:text="${event.user.username}"></p>
-          <img th:src="${event.imageURL}" class="profile-pic">
+          <img th:src="${event.imageURL}" class="event-pic">
           <h5 class="card-title" th:text="${event.title}"></h5>
           <p class="card-text card-text-black" th:text="${event.description}"></p>
         </div>
@@ -158,9 +182,9 @@
     </div>
   </div>
 </div>
-<div class="logo-container">
-  <img th:src="@{/img/logoName.png}" alt="logo" style="width: 80%; height: auto;">
-</div>
+<!--<div class="logo-container">-->
+<!--  <img th:src="@{/img/logoName.png}" alt="logo" style="width: 80%; height: auto;">-->
+<!--</div>-->
 <script>
   function showPosts() {
     document.getElementById("postsContainer").style.display = "block";
