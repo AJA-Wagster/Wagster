@@ -78,12 +78,12 @@
           <img th:src="${post.imageURL}" class="">
           <h5 class="card-title" th:text="${post.title}"></h5>
           <p class="card-text card-text-black" th:text="${post.body}"></p>
-          <div>
-              <form th:action="@{/friend/add}" th:method="POST">
-                  <input th:value="${post.user.username}" name="user" type="radio" checked>
-                  <button>Add Friend</button>
-              </form>
-          </div>
+<!--          <div>-->
+<!--              <form th:action="@{/friend/add}" th:method="POST">-->
+<!--                  <input th:value="${post.user.username}" name="user" type="radio" checked>-->
+<!--                  <button>Add Friend</button>-->
+<!--              </form>-->
+<!--          </div>-->
         </div>
       </div>
 
