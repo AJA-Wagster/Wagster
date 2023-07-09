@@ -57,8 +57,11 @@ form textarea {
     background-color: #ffe66d;
     border-radius: 20px;
 }
+input[type="radio"]:checked{
+    visibility:hidden;
+}
 
-.delete{
+#file{
     color: #000;
     font-weight: bolder;
     transition: all 0.5s;

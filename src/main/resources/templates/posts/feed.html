@@ -42,6 +42,12 @@
       height: 80px;
       margin-right: 10px;
     }
+
+    .event-pic{
+      width: 90%;
+      border-radius: 20px;
+    }
+
     #feedNav {
       color: #ffe66d;
     }
@@ -50,19 +56,77 @@
       bottom: 20px;
       right: 20px;
     }
+
+    .filterBtns {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .createBtns {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .feedBtn {
+      color: #000;
+      font-weight: bolder;
+      transition: all 0.5s;
+      position: relative;
+      line-height: 50px;
+      height: 50px;
+      text-align: center;
+      width: calc(100% / 3); /* Divide the width equally among 3 buttons */
+      cursor: pointer;
+      background-color: #ffe66d;
+      border-radius: 20px;
+    }
+
+    .createBtn {
+      color: #000;
+      font-weight: bolder;
+      transition: all 0.5s;
+      position: relative;
+      line-height: 50px;
+      height: 50px;
+      text-align: center;
+      width: calc(100% / 2); /* Divide the width equally among 2 buttons */
+      cursor: pointer;
+      background-color: #ffe66d;
+      border-radius: 20px;
+    }
+
+    /*.addBtn {*/
+    /*  color: #000;*/
+    /*  font-weight: bolder;*/
+    /*  transition: all 0.5s;*/
+    /*  position: relative;*/
+    /*  line-height: 50px;*/
+    /*  height: 50px;*/
+    /*  text-align: center;*/
+    /*  width: calc(100% / 2); !* Divide the width equally among 2 buttons *!*/
+    /*  cursor: pointer;*/
+    /*  background-color: #ffe66d;*/
+    /*  border-radius: 20px;*/
+    /*}*/
+
+    input[type="radio"]:checked{
+      visibility:hidden;
+    }
   </style>
-
-
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}" class="navbar"></nav>
+<div class="filterBtns">
+  <button onclick="showPosts()" class="feedBtn">Show Posts</button>
+  <button onclick="showEvents()" class="feedBtn">Show Events</button>
+  <button onclick="showAll()" class="feedBtn">Show All</button>
+</div>
 
-<div style="text-align: center; margin-top: 30px;">
-  <button onclick="window.location.href='/posts/create'" class="btn btn-light">Create Post</button>
-  <button onclick="window.location.href='/events/create'" class="btn btn-light">Create Event</button>
-  <button onclick="showPosts()" class="btn btn-light">Show Posts</button>
-  <button onclick="showEvents()" class="btn btn-light">Show Events</button>
-  <button onclick="showAll()" class="btn btn-light">Show All</button>
+<div class="createBtns">
+  <button onclick="window.location.href='/posts/create'" class="createBtn">Create Post</button>
+  <button onclick="window.location.href='/events/create'" class="createBtn">Create Event</button>
 </div>
 
 <br>
@@ -75,7 +139,7 @@
         <img th:src="${post.user.imageURL}" class="profile-pic">
         <div>
           <p th:text="${post.user.username}"></p>
-          <img th:src="${post.imageURL}" class="">
+          <img th:src="${post.imageURL}" class="event-pic">
           <h5 class="card-title" th:text="${post.title}"></h5>
           <p class="card-text card-text-black" th:text="${post.body}"></p>
 <!--          <div>-->
@@ -84,6 +148,7 @@
 <!--                  <button>Add Friend</button>-->
 <!--              </form>-->
 <!--          </div>-->
+
         </div>
       </div>
 
@@ -104,7 +169,7 @@
         <img th:src="${event.user.imageURL}" class="profile-pic">
         <div>
           <p th:text="${event.user.username}"></p>
-          <img th:src="${event.imageURL}" class="profile-pic">
+          <img th:src="${event.imageURL}" class="event-pic">
           <h5 class="card-title" th:text="${event.title}"></h5>
           <p class="card-text card-text-black" th:text="${event.description}"></p>
         </div>
@@ -118,9 +183,9 @@
     </div>
   </div>
 </div>
-<div class="logo-container">
-  <img th:src="@{/img/logoName.png}" alt="logo" style="width: 80%; height: auto;">
-</div>
+<!--<div class="logo-container">-->
+<!--  <img th:src="@{/img/logoName.png}" alt="logo" style="width: 80%; height: auto;">-->
+<!--</div>-->
 <script>
   function showPosts() {
     document.getElementById("postsContainer").style.display = "block";
