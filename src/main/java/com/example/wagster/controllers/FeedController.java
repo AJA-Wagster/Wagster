@@ -115,17 +115,10 @@ public class FeedController {
 
     @PostMapping("/events/{id}/edit")
     public String updateEventDB(@ModelAttribute Event updatedEvent, @RequestParam(name = "url") String url){
-//        Event event = eventsDao.findById(id).get();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         updatedEvent.setUser(user);
         updatedEvent.setImageURL(url);
-
-//        if (event != null) {
-//            event.setTitle(updatedEvent.getTitle());
-//            event.setDescription(updatedEvent.getBody());
-        // Update other properties as needed
         eventsDao.save(updatedEvent);
-//        }
         return "redirect:/feed";
     }
 

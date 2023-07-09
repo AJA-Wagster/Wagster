@@ -30,7 +30,8 @@ body {
 }
 
 .login-box input[type="text"],
-.login-box input[type="password"] {
+.login-box input[type="password"],
+.login-box input[type="email"]{
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -51,18 +52,43 @@ body {
     border-radius: 20px;
 }
 
-.login-box button[type="submit"]:hover {
-    background-color: #45a049;
+.imgBtn {
+    color: #000;
+    font-weight: bolder;
+    transition: all 0.5s;
+    position: relative;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    background-color: #ffe66d;
+    border-radius: 20px;
 }
 
-.login-box p {
-    margin: 0;
+.registerBtn[type="submit"] {
+    color: #000;
+    font-weight: bolder;
+    transition: all 0.5s;
+    position: relative;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    background-color: #ffe66d;
+    border-radius: 20px;
 }
 
-.login-box a {
-    color: #007bff;
-    text-decoration: none;
-}
+
+/*.login-box p {*/
+/*    margin: 0;*/
+/*}*/
+
+/*.login-box a {*/
+/*    color: #007bff;*/
+/*    text-decoration: none;*/
+/*}*/
 
 .navbar{
     border-radius: 1%;
