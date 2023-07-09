@@ -2,6 +2,7 @@ package com.example.wagster.controllers;
 
 import com.example.wagster.models.Post;
 import com.example.wagster.models.User;
+import com.example.wagster.repos.FriendRepo;
 import com.example.wagster.repos.PostRepo;
 import com.example.wagster.repos.UserRepo;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,12 +20,14 @@ public class FeedController {
     private final EventRepo eventsDao;
     private final PostRepo postDao;
     private final UserRepo userDao;
+    private final FriendRepo friendDao;
 
 
-    public FeedController(EventRepo eventsDao, PostRepo postsDao, UserRepo userDao) {
+    public FeedController(EventRepo eventsDao, PostRepo postsDao, UserRepo userDao, FriendRepo friendDao) {
         this.eventsDao = eventsDao;
         this.postDao = postsDao;
         this.userDao = userDao;
+        this.friendDao = friendDao;
     }
 
     @GetMapping("/feed")
@@ -41,7 +44,7 @@ public class FeedController {
         model.addAttribute("userAdmin", userDao.findById(user.getId()).get().isAdmin());
         model.addAttribute("events", events);
         model.addAttribute("posts", posts);
-
+//        model.addAttribute("friends", friendDao.findAllByUserId(user.getId()));
 
         return "posts/feed";
     }
@@ -125,4 +128,3 @@ public class FeedController {
         return "redirect:/feed";
     }
 }
-

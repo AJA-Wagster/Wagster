@@ -31,11 +31,11 @@ public class MapController {
     @GetMapping("/map")
     public String showMap(Model model) {
         List<Location> locations = locationDao.findAll();
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("locations", locations);
-        if(user != null){
-            System.out.println(user.isAdmin());
-            model.addAttribute("userAdmin", userDao.findById(user.getId()).get());
+        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser"){
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            System.out.println(user.getId());
+            model.addAttribute("userAdmin", userDao.findById(user.getId()).get().isAdmin());
         }
         return "locations/map";
     }

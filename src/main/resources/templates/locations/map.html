@@ -183,7 +183,7 @@
         <p th:text="${location.address}"></p>
         <div class="button-container">
             <button class="details-button" th:data-name="${location.name}">Details</button>
-            <form th:action="@{/location/{id}/edit(id = ${location.id})}"><button class="details-button">Edit Location</button></form>
+            <form th:action="@{/location/{id}/edit(id = ${location.id})}" th:if="${userAdmin}"><button class="details-button">Edit Location</button></form>
         </div>
     </div>
 </div>
@@ -192,6 +192,7 @@
     <form action="">
         <input type="radio" th:value="${location.name}" hidden="hidden" class="locs">
         <input type="radio" th:value="${location.id}" hidden="hidden" class="id">
+        <input type="radio" th:value="${location.address}" hidden="hidden" class="address">
         <input type="radio" th:value="${location.latitude}" hidden="hidden" class="locsLat">
         <input type="radio" th:value="${location.longitude}" hidden="hidden" class="locsLon">
         <input type="radio" th:value="${location.description}" hidden="hidden" class="description">
@@ -217,13 +218,16 @@
     let locationLon = document.querySelectorAll('.locsLon')
     let locationDes = document.querySelectorAll('.description')
     let locationId = document.querySelectorAll('.id')
+    let locationAddress = document.querySelectorAll('.address')
 
     for (let i = 0; i < locationNames.length; i++){
         locas[i] = {
             id: locationId[i].getAttribute('value'),
             name: locationNames[i].getAttribute('value'),
             coordinates:[parseFloat(locationLat[i].getAttribute('value')), parseFloat(locationLon[i].getAttribute('value'))],
-            description: locationDes[i].getAttribute('value')}
+            description: locationDes[i].getAttribute('value'),
+            address: locationAddress[i].getAttribute('value')}
+
     }
 
     locas.forEach((loca) => {
@@ -259,7 +263,8 @@
             "<p>" + location.description + "</p>" +
             "<button class='review-button' onclick='openReviewForm(" + location.id + ")'>Review</button>" +
             "<button class='close-button' onclick='closePopup()'>Close</button>";
-            fetch(`https://wagster.site/review/${location.id}`)
+            // fetch(`https://wagster.site/review/${location.id}`)
+            fetch(`https://localhost:8080/review/${location.id}`)
                 .then(resp => resp.json())
                 .then(data => {
                     data.forEach((review) => {
