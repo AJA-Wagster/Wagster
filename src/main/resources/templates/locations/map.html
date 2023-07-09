@@ -174,7 +174,7 @@
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
-<button th:if="${userAdmin}" onclick="window.location.href='/location/create'">Add Location</button>
+<button th:if="${userAdmin}" onclick="window.location.href='/location/create'" class="details-button" style="margin-left: 5%">Add Location</button>
 <input type="text" id="search-bar" class="search-bar" placeholder="Search locations...">
 <div id="cards-container">
     <div th:each="location : ${locations}" class="card">
