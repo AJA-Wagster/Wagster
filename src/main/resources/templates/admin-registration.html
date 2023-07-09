@@ -2,35 +2,79 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Wagster | Admin Registration</title>
-  <script type="text/javascript" th:src="@{/keys.js}"></script>
-  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/apple-touch-icon.png}">
-  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon-32x32.png}">
-  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <title>Wagster | Admin Registration</title>
+    <script type="text/javascript" th:src="@{/keys.js}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--    <link th:href="@{/css/main.css}" rel="stylesheet">-->
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <style>
+    .error-message {
+      background-color: red;
+      color: white;
+      padding: 10px;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .form-group label {
+      flex: 0 0 100px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="password"] {
+      flex: 1;
+    }
+
+    .logo-container {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+  </style>
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
-<h2>User Registration</h2>
-<p th:text="${errorMessage}"></p>
-<form th:action="@{/register/admin}" th:method="post" th:object="${AdminUser}">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username" placeholder="Enter Username" th:field="*{username}" required>
-  <br>
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" placeholder="Enter Email" th:field="*{email}" required>
-  <br>
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" placeholder="Enter Password" th:field="*{password}" required>
-  <br>
-<!--  <input type="hidden" id="admin" name="admin" th:value="true" th:field="*{admin}">-->
-  <br>
-  <button id="file">FILE</button>
-  <input  id="url" name="url" type="radio" value="" checked="checked">
-  <input type="submit" value="Register">
-</form>
+<div class="container login-box">
+    <div class="registration-form">
+        <h2>Admin Registration</h2>
+        <p th:text="${errorMessage}" th:classappend="${errorMessage != null} ? 'error-message' : ''"></p>
+        <form th:action="@{/register/admin}" th:method="post" th:object="${AdminUser}">
+            <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"  th:field="*{username}"
+                   required>
+            </div>
+            <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email"  th:field="*{email}" required>
+            </div>
+            <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"  th:field="*{password}" required>
+            </div>
+            <!--  <input type="hidden" id="admin" name="admin" th:value="true" th:field="*{admin}">-->
+            <div class="form-group">
+            <button id="file">Upload Image</button>
+<!--            <input id="url" name="url" type="radio" value="" checked="checked">-->
+            </div>
+            <div class="form-group">
+            <input class="submit" type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
 <script th:src="@{/js/uploadFile.js}"></script>
