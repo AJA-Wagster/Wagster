@@ -50,19 +50,59 @@
       bottom: 20px;
       right: 20px;
     }
+
+    .filterBtns {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .createBtns {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .feedBtn {
+      color: #000;
+      font-weight: bolder;
+      transition: all 0.5s;
+      position: relative;
+      line-height: 50px;
+      height: 50px;
+      text-align: center;
+      width: calc(100% / 3); /* Divide the width equally among 3 buttons */
+      cursor: pointer;
+      background-color: #ffe66d;
+      border-radius: 20px;
+    }
+
+    .createBtn {
+      color: #000;
+      font-weight: bolder;
+      transition: all 0.5s;
+      position: relative;
+      line-height: 50px;
+      height: 50px;
+      text-align: center;
+      width: calc(100% / 2); /* Divide the width equally among 2 buttons */
+      cursor: pointer;
+      background-color: #ffe66d;
+      border-radius: 20px;
+    }
   </style>
-
-
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}" class="navbar"></nav>
+<div class="filterBtns">
+  <button onclick="showPosts()" class="feedBtn">Show Posts</button>
+  <button onclick="showEvents()" class="feedBtn">Show Events</button>
+  <button onclick="showAll()" class="feedBtn">Show All</button>
+</div>
 
-<div style="text-align: center; margin-top: 30px;">
-  <button onclick="window.location.href='/posts/create'" class="btn btn-light">Create Post</button>
-  <button onclick="window.location.href='/events/create'" class="btn btn-light">Create Event</button>
-  <button onclick="showPosts()" class="btn btn-light">Show Posts</button>
-  <button onclick="showEvents()" class="btn btn-light">Show Events</button>
-  <button onclick="showAll()" class="btn btn-light">Show All</button>
+<div class="createBtns">
+  <button onclick="window.location.href='/posts/create'" class="createBtn">Create Post</button>
+  <button onclick="window.location.href='/events/create'" class="createBtn">Create Event</button>
 </div>
 
 <br>
