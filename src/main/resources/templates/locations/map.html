@@ -182,7 +182,7 @@
         <p th:text="${location.address}"></p>
         <div class="button-container">
             <button class="details-button" th:data-name="${location.name}">Details</button>
-            <form th:action="@{/location/{id}/edit(id = ${location.id})}"><button class="details-button">Edit Location</button></form>
+            <form th:action="@{/location/{id}/edit(id = ${location.id})}" th:if="${userAdmin}"><button class="details-button">Edit Location</button></form>
         </div>
     </div>
 </div>
@@ -258,7 +258,8 @@
             "<p>" + location.description + "</p>" +
             "<button class='review-button' onclick='openReviewForm(" + location.id + ")'>Review</button>" +
             "<button class='close-button' onclick='closePopup()'>Close</button>";
-            fetch(`https://wagster.site/review/${location.id}`)
+            // fetch(`https://wagster.site/review/${location.id}`)
+            fetch(`https://localhost:8080/review/${location.id}`)
                 .then(resp => resp.json())
                 .then(data => {
                     data.forEach((review) => {
