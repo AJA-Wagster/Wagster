@@ -44,6 +44,14 @@
             bottom: 20px;
             right: 20px;
         }
+
+        .error-message {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 2%;
+        }
     </style>
 </head>
 <body>
@@ -51,10 +59,10 @@
 
 <div class="container login-box">
     <h1>Log In</h1>
-    <div th:if="${param.error}">
+    <div class="error-message" th:if="${param.error}">
         Invalid Username and Password.
     </div>
-    <div th:if="${param.logout}">
+    <div class="error-message" th:if="${param.logout}">
         You have been logged out.
     </div>
 
