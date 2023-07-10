@@ -42,7 +42,12 @@ public class ProfileController {
 
     @GetMapping("/profile/{userId}")
     public String userProfile(Model model, @PathVariable(name = "userId") Long id){
-        model.addAttribute("user", userDao.findById(id).get());
-        return "users/profile";
+        User user = userDao.findById(id).get();
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
+        model.addAttribute("currentUser", userDao.findById(currentUser.getId()).get());
+        model.addAttribute("posts", postDao.findAllByUserId(user.getId()));
+        model.addAttribute("events", eventDao.findAllByUserId(user.getId()));
+        return "users/userProfile";
     }
 }

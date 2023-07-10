@@ -102,12 +102,16 @@ public String deleteProfile(@ModelAttribute("user") User userToDelete, HttpServl
 
     // Invalidate the current session
     HttpSession session = request.getSession(false);
-    if (session != null) {
-        session.invalidate();
-    }
+        if (session != null) {
+            session.invalidate();
+        }
     return "redirect:/";
-    }
+}
 
-
+@PostMapping("profile/delete/{userId}")
+public String deleteUser(@PathVariable(name = "userId") Long id){
+    userDao.deleteById(id);
+    return "redirect:/feed";
+}
 
 }
