@@ -13,6 +13,14 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet">
     <link th:href="@{/css/location.css}" rel="stylesheet">
+    <style>
+        .fa-solid{
+            font-size: 30px;
+        }
+        .fa-star{
+            font-size: 30px;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
@@ -21,16 +29,16 @@
     <form class="create-form" th:action="@{/review/create}" th:method="post">
         <label for="comment">Comment</label>
         <input id="comment" name="comment" type="text">
-        <label for="1-stars"><i class="fa-regular fa-star"></i></label>
-        <input type="radio" id="1-stars" name="rating" value="1">
-        <label for="2-stars"><i class="fa-regular fa-star"></i></label>
-        <input type="radio" id="2-stars" name="rating" value="2">
-        <label for="3-stars"><i class="fa-regular fa-star"></i></label>
-        <input type="radio" id="3-stars" name="rating" value="3">
-        <label for="4-stars"><i class="fa-regular fa-star"></i></label>
-        <input type="radio" id="4-stars" name="rating" value="4">
-        <label for="5-stars"><i class="fa-regular fa-star"></i></label>
-        <input type="radio" id="5-stars" name="rating" value="5">
+        <label for="1-stars"><i class="fa-solid fa-paw"></i></label>
+        <input type="radio" id="1-stars" name="rating" value="1" hidden>
+        <label for="2-stars"><i class="fa-solid fa-paw"></i></label>
+        <input type="radio" id="2-stars" name="rating" value="2" hidden>
+        <label for="3-stars"><i class="fa-solid fa-paw"></i></label>
+        <input type="radio" id="3-stars" name="rating" value="3" hidden>
+        <label for="4-stars"><i class="fa-solid fa-paw"></i></label>
+        <input type="radio" id="4-stars" name="rating" value="4" hidden>
+        <label for="5-stars"><i class="fa-solid fa-paw"></i></label>
+        <input type="radio" id="5-stars" name="rating" value="5" hidden>
         <input type="hidden" th:value="${locationId}" name="location">
         <button class="submit">Submit</button>
     </form>

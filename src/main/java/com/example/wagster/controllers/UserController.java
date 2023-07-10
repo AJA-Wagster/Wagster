@@ -49,7 +49,7 @@ public class UserController  {
 
             userDao.save(user);
         }else {
-            String errorMessage = "Password does not meet the requirements. Passwords must meet all of the following, one lowercase letter, one uppercase letter, one special character(!@#&()–[{}]:;',?/*~$^+=<>), and must be between 8-16 characters.";
+            String errorMessage = "Password does not meet the requirements. Passwords must meet all of the following, one lowercase letter, one uppercase letter, one special character ( ?=.*[!@#&()–[{}]:;',?/*~$^+=<>]) , and must be between 8-16 characters.";
             redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
             return "redirect:/register";
         }
