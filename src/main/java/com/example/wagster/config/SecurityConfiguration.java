@@ -65,7 +65,7 @@ public class SecurityConfiguration{
                                 "location/*/delete",
                                 "/review/create",
                                 "/review/*/edit",
-                                "/review/*/delete","/admin/*", "/admin", "/friend/add", "friend/remove").authenticated()
+                                "/review/*/delete","/admin/*", "/admin", "/friend/add", "friend/remove", "/profile/*").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
                         .requestMatchers(
