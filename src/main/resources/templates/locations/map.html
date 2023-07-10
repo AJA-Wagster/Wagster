@@ -264,11 +264,13 @@
             "<button class='review-button' onclick='openReviewForm(" + location.id + ")'>Review</button>" +
             "<button class='close-button' onclick='closePopup()'>Close</button>";
             // fetch(`https://wagster.site/review/${location.id}`)
-            fetch(`https://localhost:8080/review/${location.id}`)
+            fetch(`http://localhost:8080/review/${location.id}`)
                 .then(resp => resp.json())
                 .then(data => {
                     data.forEach((review) => {
                         popup.innerHTML +=  '<div>' +
+                            `<img src="${review.user.imageURL}">` +
+                            `<h3>${review.user.username}</h3>` +
                             '<p>' + review.comment + '</p>' +
                             '<p>' + review.rating + '</p>' +
                             '</div>'
