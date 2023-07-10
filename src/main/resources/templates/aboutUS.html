@@ -13,22 +13,8 @@
     *{
       background-color: #242423;
     }
-    .bootstrap {
-      margin: .5em 18em; /* Add horizontal margins */
-      color: black;
-      position: relative;
-      z-index: 1;
-      /*border-radius: 1%;*/
-      border: 3px solid transparent;
-      box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);
-      border-top-color: rgba(225, 225, 225, 0.5);
-      border-left-color: rgba(225, 225, 225, 0.5);
-      border-bottom-color: rgba(225, 225, 225, 0.1);
-      border-right-color: rgba(225, 225, 225, 0.1);
-      background: linear-gradient(to right bottom, rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0.3));
-    }
+
     p {
-      display: flex;
       align-items: center;
       text-align: left;
       color: red;
@@ -51,7 +37,7 @@
 </head>
 <body>
 <!--<nav th:replace="~{partials/partials :: navbar}"></nav>-->
-<div class="container">
+<div>
     <h1>All about Wagster</h1>
 <p> Woof Woof !</p> <br>
   <p>Wagster is <em>THE</em> social app for all dog lovers.</p>
@@ -69,11 +55,11 @@
 
   <img th:src="@{/img/auriel.jpg}" alt="alex" style="width: 80%; height: auto;">
 
-
+</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
-</div>
+
 </body>
 </html>
