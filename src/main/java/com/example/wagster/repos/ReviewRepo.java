@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReviewRepo extends JpaRepository<Review, Long> {
-    List<Review> findReviewsByLocationId(Long id);
-    void deleteAllByLocationId(Long id);
+    List<Review> findAllByLocationId(Long id);
+
 }

@@ -15,6 +15,6 @@ public class ReviewService {
     }
 
     public List<Review> reviewsByLocation(Long id){
-        return reviewDao.findReviewsByLocationId(id);
+        return reviewDao.findAllByLocationId(id);
     }
 }
