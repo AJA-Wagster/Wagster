@@ -44,8 +44,6 @@ public class FeedController {
         model.addAttribute("userAdmin", userDao.findById(user.getId()).get().isAdmin());
         model.addAttribute("events", events);
         model.addAttribute("posts", posts);
-//        model.addAttribute("friends", friendDao.findAllByUserId(user.getId()));
-
         return "posts/feed";
     }
 
