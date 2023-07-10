@@ -21,11 +21,16 @@
     <form class="create-form" th:action="@{/review/{id}/edit}" th:method="post" th:object="${review}">
     <input th:field="*{id}" type="checkbox" th:value="*{id}" checked hidden="hidden">
     <input th:field="*{comment}">
-    <input th:field="*{rating}" type="radio" th:value="1">
-    <input th:field="*{rating}" type="radio" th:value="2">
-    <input th:field="*{rating}" type="radio" th:value="3">
-    <input th:field="*{rating}" type="radio" th:value="4">
-    <input th:field="*{rating}" type="radio" th:value="5">
+    <label for="1-stars"><i class="fa-solid fa-paw"></i></label>
+    <input th:field="*{rating}" type="radio" th:value="1" id="1-stars">
+    <label for="2-stars"><i class="fa-solid fa-paw"></i></label>
+    <input th:field="*{rating}" type="radio" th:value="2" id="2-stars">
+    <label for="3-stars"><i class="fa-solid fa-paw"></i></label>
+    <input th:field="*{rating}" type="radio" th:value="3" id="3-stars">
+    <label for="4-stars"><i class="fa-solid fa-paw"></i></label>
+    <input th:field="*{rating}" type="radio" th:value="4" id="4-stars">
+    <label for="5-stars"><i class="fa-solid fa-paw"></i></label>
+    <input th:field="*{rating}" type="radio" th:value="5" id="5-stars">
     <button class="submit">Submit</button>
 </form>
 <form th:action="@{/review/{id}/delete(id=${review.id})}" th:method="post">
