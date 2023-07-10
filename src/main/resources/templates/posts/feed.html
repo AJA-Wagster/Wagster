@@ -38,7 +38,9 @@
   <div th:each="post: ${posts}">
     <div class="card">
       <div class="card-content">
-        <img th:src="${post.user.imageURL}" class="profile-pic">
+        <form th:action="@{/profile/{userId}(userId = ${post.user.id})}" >
+            <button style="all: unset; cursor: pointer"><img th:src="${post.user.imageURL}" class="profile-pic"></button>
+        </form>
         <div>
           <p th:text="${post.user.username}"></p>
           <img th:src="${post.imageURL}" class="event-pic">

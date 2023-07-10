@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -31,15 +32,17 @@ public class ProfileController {
     public String profile(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User loggedIn = userDao.findById(user.getId()).get();
-//        System.out.println(loggedIn.getImageURL());
-//        if (loggedIn.getImageURL() == null) {
-//            loggedIn.setImageURL("j");
-//        }
         List<User> userList = userDao.findAll();
         model.addAttribute("user", loggedIn);
         model.addAttribute("usersList", userList);
         model.addAttribute("posts", postDao.findAllByUserId(user.getId()));
         model.addAttribute("events", eventDao.findAllByUserId(user.getId()));
+        return "users/profile";
+    }
+
+    @GetMapping("/profile/{userId}")
+    public String userProfile(Model model, @PathVariable(name = "userId") Long id){
+        model.addAttribute("user", userDao.findById(id).get());
         return "users/profile";
     }
 }
