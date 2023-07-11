@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class ReviewController {
 
@@ -22,19 +24,29 @@ public class ReviewController {
     }
 
     @GetMapping("/review/create")
-    public String tha(){
+    public String tha(@RequestParam(required = false, name = "locationId") Long id, Model model){
+        System.out.println(id);
+        model.addAttribute("locationId", id);
         return "locations/location";
     }
 
     @PostMapping("/review/create")
-    public String reviewToDB(@RequestParam(name = "comment") String comment, @RequestParam(name = "rating") short rating){
+    public String reviewToDB(@RequestParam(name = "comment") String comment, @RequestParam(name = "rating") short rating, @RequestParam(name = "location") Long id){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Review review = new Review();
         review.setComment(comment);
         review.setRating(rating);
         review.setUser(user);
-        Location location = locationDao.findById(2l).get();
+        Location location = locationDao.findById(id).get();
         review.setLocation(location);
+
+//        List<Review> reviewList = reviewDao.findAllByLocationId(id);
+//        int total = 0;
+//        for (int i = 0; i < reviewList.size();i++){
+//            total += reviewList.get(i).getRating();
+//        }
+//        short average = (short) Math.round((float) total / reviewList.size());
+//        System.out.println(average);
 
         reviewDao.save(review);
         return "redirect:/map";

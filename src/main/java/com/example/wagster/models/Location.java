@@ -1,11 +1,14 @@
 package com.example.wagster.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,5 +44,7 @@ public class Location {
     @Column(nullable = false)
     private double longitude;
 
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
+    @JsonIgnore
+    private List<Review> reviews;
 }

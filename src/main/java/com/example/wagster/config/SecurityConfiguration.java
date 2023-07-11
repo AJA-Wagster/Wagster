@@ -62,9 +62,10 @@ public class SecurityConfiguration{
                                 "/location/create",
                                 "/location",
                                 "/location/*/edit",
+                                "location/*/delete",
                                 "/review/create",
                                 "/review/*/edit",
-                                "/review/*/delete","/admin/*", "/admin", "/friend/add", "friend/remove", "review/*").authenticated()
+                                "/review/*/delete","/admin/*", "/admin", "/friend/add", "friend/remove", "/profile/*", "profile/delete/*").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
                         .requestMatchers(
@@ -72,9 +73,14 @@ public class SecurityConfiguration{
                                 "/register",
                                 "/login",
                                 "/map",
+
                                 "/aboutus",
-//                                "/admin/login",
+                               "/admin/login",
                                 "/register/admin").permitAll()
+
+                               
+                                "review/*").permitAll()
+
                         // allow loading of static resources
                         .requestMatchers("/css/**", "/js/**", "/img/**", "/keys.js").permitAll()
                 )

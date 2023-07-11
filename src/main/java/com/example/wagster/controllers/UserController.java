@@ -40,14 +40,16 @@ public class UserController  {
         if (PasswordPolicy.isValid(user.getPassword())){
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
-            user.setImageURL(url);
+            if (url.length() < 3) {
+                user.setImageURL("https://img.freepik.com/premium-photo/golden-retriever-lying-panting-isolated-white_191971-16974.jpg");
+            }
 
             // Assign the "ROLE_ADMIN" authority to the user
             user.setAdmin((byte) 0);
 
             userDao.save(user);
         }else {
-            String errorMessage = "Password does not meet the requirements. Passwords must meet all of the following, one lowercase letter, one uppercase letter, one special character(!@#&()–[{}]:;',?/*~$^+=<>), and must be between 8-16 characters.";
+            String errorMessage = "Password does not meet the requirements. Passwords must meet all of the following, one lowercase letter, one uppercase letter, one special character ( ?=.*[!@#&()–[{}]:;',?/*~$^+=<>]) , and must be between 8-16 characters.";
             redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
             return "redirect:/register";
         }
@@ -100,12 +102,16 @@ public String deleteProfile(@ModelAttribute("user") User userToDelete, HttpServl
 
     // Invalidate the current session
     HttpSession session = request.getSession(false);
-    if (session != null) {
-        session.invalidate();
-    }
+        if (session != null) {
+            session.invalidate();
+        }
     return "redirect:/";
-    }
+}
 
-
+@PostMapping("profile/delete/{userId}")
+public String deleteUser(@PathVariable(name = "userId") Long id){
+    userDao.deleteById(id);
+    return "redirect:/feed";
+}
 
 }

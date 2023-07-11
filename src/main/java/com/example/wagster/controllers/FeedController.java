@@ -2,6 +2,7 @@ package com.example.wagster.controllers;
 
 import com.example.wagster.models.Post;
 import com.example.wagster.models.User;
+import com.example.wagster.repos.FriendRepo;
 import com.example.wagster.repos.PostRepo;
 import com.example.wagster.repos.UserRepo;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,12 +20,14 @@ public class FeedController {
     private final EventRepo eventsDao;
     private final PostRepo postDao;
     private final UserRepo userDao;
+    private final FriendRepo friendDao;
 
 
-    public FeedController(EventRepo eventsDao, PostRepo postsDao, UserRepo userDao) {
+    public FeedController(EventRepo eventsDao, PostRepo postsDao, UserRepo userDao, FriendRepo friendDao) {
         this.eventsDao = eventsDao;
         this.postDao = postsDao;
         this.userDao = userDao;
+        this.friendDao = friendDao;
     }
 
     @GetMapping("/feed")
@@ -41,8 +44,6 @@ public class FeedController {
         model.addAttribute("userAdmin", userDao.findById(user.getId()).get().isAdmin());
         model.addAttribute("events", events);
         model.addAttribute("posts", posts);
-
-
         return "posts/feed";
     }
 
@@ -55,9 +56,10 @@ public class FeedController {
 
 
     @PostMapping("/posts/create")
-    public String moveToDB(@ModelAttribute Post post){
+    public String moveToDB(@ModelAttribute Post post, @RequestParam(name = "url") String url){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
+        post.setImageURL(url);
         postDao.save(post);
         return "redirect:/feed";
     }
@@ -111,17 +113,10 @@ public class FeedController {
 
     @PostMapping("/events/{id}/edit")
     public String updateEventDB(@ModelAttribute Event updatedEvent, @RequestParam(name = "url") String url){
-//        Event event = eventsDao.findById(id).get();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         updatedEvent.setUser(user);
         updatedEvent.setImageURL(url);
-
-//        if (event != null) {
-//            event.setTitle(updatedEvent.getTitle());
-//            event.setDescription(updatedEvent.getBody());
-            // Update other properties as needed
-            eventsDao.save(updatedEvent);
-//        }
+        eventsDao.save(updatedEvent);
         return "redirect:/feed";
     }
 
@@ -131,4 +126,3 @@ public class FeedController {
         return "redirect:/feed";
     }
 }
-
