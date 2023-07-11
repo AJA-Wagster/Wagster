@@ -65,7 +65,13 @@ public class SecurityConfiguration{
                                 "location/*/delete",
                                 "/review/create",
                                 "/review/*/edit",
-                                "/review/*/delete","/admin/*", "/admin", "/friend/add", "friend/remove", "/profile/*", "profile/delete/*").authenticated()
+                                "/review/*/delete",
+                                "/admin/*",
+                                "/admin",
+                                "/friend/add",
+                                "friend/remove",
+                                "/profile/*",
+                                "profile/delete/*").authenticated()
                         /* Pages that do not require authentication
                          * anyone can visit the home page, register, login, and view ads */
                         .requestMatchers(
@@ -79,7 +85,11 @@ public class SecurityConfiguration{
                                 "review/*").permitAll()
 
                         // allow loading of static resources
-                        .requestMatchers("/css/**", "/js/**", "/img/**", "/keys.js").permitAll()
+                        .requestMatchers(
+                                "/css/**",
+                                "/js/**",
+                                "/img/**",
+                                "/keys.js").permitAll()
                 )
                 /* Login configuration */
                 .formLogin((login) ->
