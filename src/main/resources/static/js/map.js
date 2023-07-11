@@ -57,8 +57,8 @@
     "<p>" + location.description + "</p>" +
     "<button class='review-button' onclick='openReviewForm(" + location.id + ")'>Review</button>" +
     "<button class='close-button' onclick='closePopup()'>Close</button>";
-    fetch(`https://wagster.site/review/${location.id}`)
-    // fetch(`http://localhost:8080/review/${location.id}`)
+    // fetch(`https://wagster.site/review/${location.id}`)
+    fetch(`http://localhost:8080/review/${location.id}`)
     .then(resp => resp.json())
     .then(data => {
     data.forEach((review) => {
