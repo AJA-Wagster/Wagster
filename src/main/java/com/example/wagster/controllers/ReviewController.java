@@ -40,13 +40,13 @@ public class ReviewController {
         Location location = locationDao.findById(id).get();
         review.setLocation(location);
 
-        List<Review> reviewList = reviewDao.findAllByLocationId(id);
-        int total = 0;
-        for (int i = 0; i < reviewList.size();i++){
-            total += reviewList.get(i).getRating();
-        }
-        total /= reviewList.size();
-        System.out.println(total);
+//        List<Review> reviewList = reviewDao.findAllByLocationId(id);
+//        int total = 0;
+//        for (int i = 0; i < reviewList.size();i++){
+//            total += reviewList.get(i).getRating();
+//        }
+//        short average = (short) Math.round((float) total / reviewList.size());
+//        System.out.println(average);
 
         reviewDao.save(review);
         return "redirect:/map";
