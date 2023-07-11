@@ -73,12 +73,9 @@ public class SecurityConfiguration{
                                 "/register",
                                 "/login",
                                 "/map",
-
+                                "/register/notreallyanadminbutkinda",
                                 "/aboutus",
-                               "/admin/login",
-                                "/register/admin").permitAll()
-
-                               
+                                "/admin/login",
                                 "review/*").permitAll()
 
                         // allow loading of static resources
