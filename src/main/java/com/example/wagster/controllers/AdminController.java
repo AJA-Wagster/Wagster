@@ -29,7 +29,7 @@ public class AdminController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/register/admin")
+    @GetMapping("/register/notreallyanadminbutkinda")
     public String showAdminRegistrationForm(Model model) {
         model.addAttribute("AdminUser", new User());
         return "admin-registration";
@@ -51,7 +51,7 @@ public class AdminController {
 //        return "redirect:/";
 //    }
 
-    @PostMapping("/register/admin")
+    @PostMapping("/register/notreallyanadminbutkinda")
     public String registerUser(@ModelAttribute User user, @RequestParam(name = "url") String url, RedirectAttributes redirectAttributes) {
         // Perform registration logic here using userRepo
         // e.g., save the user to the database using userRepo.save(user)
@@ -70,7 +70,7 @@ public class AdminController {
             //This the error message that get sent back to the registration page
             String errorMessage = "Password does not meet the requirements. Passwords must meet all of the following, one lowercase letter, one uppercase letter, one special character(!@#&()–[{}]:;',?/*~$^+=<>), and must be between 8-16 characters.";
             redirectAttributes.addFlashAttribute("errorMessage", errorMessage);
-            return "redirect:/register/admin";
+            return "redirect:/register/notreallyanadminbutkinda";
         }
 
 
