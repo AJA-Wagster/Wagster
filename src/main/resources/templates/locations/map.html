@@ -37,6 +37,7 @@
 <div th:each="location : ${locations}">
     <form action="">
         <input type="radio" th:value="${location.name}" hidden="hidden" class="locs">
+        <input type="radio" th:value="${location.rating}" hidden="hidden" class="rating">
         <input type="radio" th:value="${location.id}" hidden="hidden" class="id">
         <input type="radio" th:value="${location.address}" hidden="hidden" class="address">
         <input type="radio" th:value="${location.latitude}" hidden="hidden" class="locsLat">
