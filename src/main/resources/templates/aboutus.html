@@ -18,8 +18,15 @@
 
 
   <style>
-    *{
-      background-color: #242423;
+
+    body{
+      background-image: url('/img/logoWallpaper.png');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    #aboutNav{
+      color: #FFE66D;
     }
 
     p {
@@ -27,15 +34,27 @@
       text-align: center;
       color: darkgray;
 
+      font-size: 20px;
+      margin: 0 auto;
+      width: 70%;
+
     }
 
     /*img {*/
     /*  height: 80%;*/
     /*  margin-right: 10px;*/
     /*}*/
-    h2, h1 {
+     h1 {
       color: #ffe66d;
       text-align: center;
+       font-size: 60px;
+    }
+    h2 {
+      color: #ffe66d;
+      text-align: center;
+      font-size: 45px;
+
+
     }
   img{
     color: #ffe66d;
@@ -60,8 +79,10 @@
     }
 
     img {
-      width: 150px; /* Adjust the width of the images as needed */
-      height: auto;
+
+      width: 250px; /* Adjust the width of the images as needed */
+      height: 350px;
+
     }
 
   </style>
@@ -80,7 +101,9 @@
 
   Since Wagster connects dog lovers you'll always have access to find events where your furry friend is always welcome. If you find that place that just speaks to your soul, favorite them, that simple! Your profile will have your events and posts all in one easy location and the map will show your favs!<br>
 
-  We hope you're just as excited about finding Wagster as we were to develop Wagster, the social app that connects dog lovers.
+
+  We hope you're just as excited about finding Wagster as we were to develop Wagster, the social app that connects dog lovers.</p>
+
 
   <h2>Meet the Developers</h2>
 
@@ -98,22 +121,14 @@
       </div>
     </div>
 
-    <div class="profile">
-      <img th:src="@{/img/auriel.jpg}" alt="jaylen">
-      <h3>Jaylen Harris</h3>
-      <div class="links">
-        <a href="https://github.com/JaylenJHarris22">
-          <i class="fa-brands fa-github " style="color: #f5e966; font-size: 35px;"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/jaylen-j-harris/">
-          <i class="fa-brands fa-linkedin" style="color: #f9f353; font-size: 35px;"></i>
-        </a>
-      </div>
-    </div>
+
 
     <div class="profile">
+    <img th:src="@{/img/alex.jpg}" alt="alex">
+   
 
-      <img th:src="@{/img/alex.jpeg}" alt="alex" style="width: 150px; height: auto;">
+     
+
       <h3>Alex Perez</h3>
       <div class="links">
 
@@ -125,9 +140,27 @@
           <i class="fa-brands fa-linkedin" style="color: #f9f353; font-size: 35px;"></i>
         </a>
 
-
       </div>
     </div>
+
+    <div class="profile">
+      <img th:src="@{/img/Jaylen.jpg}" alt="jaylen">
+      <h3>Jaylen Harris</h3>
+      <div class="links">
+        <a href="https://github.com/JaylenJHarris22">
+          <i class="fa-brands fa-github " style="color: #f5e966; font-size: 35px;"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/jaylen-j-harris/">
+          <i class="fa-brands fa-linkedin" style="color: #f9f353; font-size: 35px;"></i>
+        </a>
+      </div>
+    </div>
+
+
+
+
+
+
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
