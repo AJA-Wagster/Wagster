@@ -19,10 +19,10 @@
 <div class="container create-box">
     <h1> Edit your post!</h1>
     <form class="create-form" th:action="@{/posts/{id}/edit(id=${post.id})}" th:object="${post}" th:method="post">
-    <label for="title">Title: </label>
-    <input type="text" name="title" id="title" th:field="*{title}">
-    <label for="body">Body: </label>
-    <textarea name="body" id="body" th:field="*{body}"></textarea>
+    <label for="title" style="font-weight: bolder">Title: </label>
+    <input type="text" name="title" id="title" th:field="*{title}" >
+    <label for="body" style="font-weight: bolder">Body: </label>
+    <textarea name="body" id="body" th:field="*{body}" style="height: 250px; resize: vertical;"></textarea>
     <button class="submit" type="submit">Update Post</button>
 </form>
 </div>
