@@ -16,6 +16,7 @@
     let locationDes = document.querySelectorAll('.description')
     let locationId = document.querySelectorAll('.id')
     let locationAddress = document.querySelectorAll('.address')
+    let locationRating = document.querySelectorAll('.rating')
 
     for (let i = 0; i < locationNames.length; i++){
     locas[i] = {
@@ -23,8 +24,9 @@
         name: locationNames[i].getAttribute('value'),
         coordinates:[parseFloat(locationLat[i].getAttribute('value')), parseFloat(locationLon[i].getAttribute('value'))],
         description: locationDes[i].getAttribute('value'),
-        address: locationAddress[i].getAttribute('value')}
-
+        address: locationAddress[i].getAttribute('value'),
+        rating: locationRating[i].getAttribute('value')
+    }
     }
 
 
