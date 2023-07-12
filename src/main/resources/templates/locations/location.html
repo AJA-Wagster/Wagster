@@ -52,6 +52,7 @@
 <div class="container create-box">
     <h1 style="font-size: 45px">Create a Review</h1>
     <form class="create-form" th:action="@{/review/create}" th:method="post">
+        <input type="checkbox" th:value="${username}" checked hidden="hidden" name="user">
         <p style="margin-right: 10px; font-size: 30px">Comment:</p>
         <textarea id="comment" name="comment" type="text" style="height: 250px; resize: vertical;"></textarea>
         <div style="display: flex; justify-content: flex-start; align-items: center;">

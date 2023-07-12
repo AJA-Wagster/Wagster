@@ -1,3 +1,6 @@
+
+
+
     let locas = [];
     mapboxgl.accessToken = MAPBOX_TOKEN;
     var map = new mapboxgl.Map({
@@ -5,7 +8,7 @@
     style: 'mapbox://styles/mapbox/streets-v11',
     zoom: 10,
     center: [-96.80421034388885, 32.818180319333365]
-});
+    });
 
     let locationNames = document.querySelectorAll('.locs')
     let locationLat = document.querySelectorAll('.locsLat')
@@ -22,7 +25,8 @@
         description: locationDes[i].getAttribute('value'),
         address: locationAddress[i].getAttribute('value')}
 
-}
+    }
+
 
     locas.forEach((loca) => {
     let marker = new mapboxgl.Marker({color: "red"})
@@ -34,7 +38,7 @@
     "<p style='color: black'>" + loca.address + "</p>" +
     "<p style='color: black'>" + loca.description + "</p>");
     marker.setPopup(popup)
-});
+    });
 
     const detailsButtons = document.getElementsByClassName("details-button");
     for (let i = 0; i < detailsButtons.length; i++) {
@@ -43,7 +47,7 @@
         const location = locas.find(loc => loc.name === name);
         openPopup(location);
     });
-}
+    }
 
     function openPopup(location) {
     const popupContainer = document.createElement("div");
@@ -55,18 +59,21 @@
     popup.innerHTML = "<h3>" + location.name + "</h3>" +
     "<p>" + location.address + "</p>" +
     "<p>" + location.description + "</p>" +
-    "<button class='review-button' onclick='openReviewForm(" + location.id + ")'>Review</button>" +
+    `<button class='review-button' onclick='openReviewForm(${location.id})'>Review</button>` +
     "<button class='close-button' onclick='closePopup()'>Close</button>";
     // fetch(`https://wagster.site/review/${location.id}`)
     fetch(`http://localhost:8080/review/${location.id}`)
     .then(resp => resp.json())
     .then(data => {
-    data.forEach((review) => {
+    data.forEach((review, index) => {
+        let user = document.querySelector('#user');
+        let userAdmin = document.querySelector('#userAdmin')
         popup.innerHTML +=  '<div>' +
             `<img class="profile-pic" src="${review.user.imageURL}">` +
             `<h3 class="username">${review.user.username}</h3>` +
             '<p class="review">' + review.comment + '</p>' +
             '<p class="comment">' + review.rating + '</p>' +
+            `${checkUser(user.getAttribute('value'), review.user.username, userAdmin.getAttribute('value'), review.id)}` +
             '<hr>' +
             '</div>'
     })
@@ -79,8 +86,9 @@
 }
 
     function openReviewForm(locationId) {
+        let user = document.querySelector('#user');
     // Assuming you have a route for the review form, update the URL below accordingly
-    const reviewFormUrl = "/review/create?locationId=" + locationId;
+    const reviewFormUrl = `/review/create/${locationId}?username=${user.getAttribute('value')}`;
     window.location.href = reviewFormUrl;
 }
 
@@ -110,3 +118,16 @@
 }
 }
 });
+
+    function checkUser(user, reviewUser, userAdmin, review){
+        if(user === reviewUser || userAdmin === 'true') {
+            console.log(user)
+            console.log(reviewUser)
+            console.log(userAdmin)
+            console.log(review)
+            return `<form action="/review/${review}/edit"><button>Edit Review</button></form>`
+        } else {
+            return ''
+        }
+
+    }

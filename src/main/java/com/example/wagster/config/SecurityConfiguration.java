@@ -63,7 +63,7 @@ public class SecurityConfiguration{
                                 "/location",
                                 "/location/*/edit",
                                 "location/*/delete",
-                                "/review/create",
+                                "/review/create/*",
                                 "/review/*/edit",
                                 "/review/*/delete",
                                 "/admin/*",
