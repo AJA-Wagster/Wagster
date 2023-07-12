@@ -1,5 +1,8 @@
-body {
-    background-color: #242423;
+body{
+    background-image: url('/img/logoWallpaper.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .container {
@@ -135,3 +138,4 @@ input[type="radio"]:checked{
 #mapNav:hover {
     color: #ffe66d
 }
+
