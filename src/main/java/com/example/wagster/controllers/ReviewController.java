@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class ReviewController {
 
@@ -42,6 +44,12 @@ public class ReviewController {
         review.setUser(userDao.findByUsername(username));
         Location location = locationDao.findById(id).get();
         review.setLocation(location);
+
+//        List<Review> reviews = reviewDao.findAllByLocationId(id);
+//        int total
+//        for (int i = 0; i < reviews.size(); i++){
+//
+//        }
         reviewDao.save(review);
         return "redirect:/map";
     }
