@@ -94,9 +94,85 @@
             transition: background-color 0.3s;
         }
 
-        /*#settingsMenu button:hover {*/
-        /*    background-color: #ffd700;*/
-        /*}*/
+        body {
+            background-image: url('/static/img/logoWallpaper.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-top: 10px;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .username {
+            font-weight: bolder;
+            font-size: 1.7rem;
+            margin-top: 46px;
+        }
+
+        h5{
+            margin-top: 20px;
+            margin-left: 80px;
+        }
+
+        .card-text{
+            margin-left: 80px;
+        }
+
+        .event-pic {
+            max-width: 800px;
+            max-height: 800px;
+            border-radius: 20px;
+            margin: 0 auto;
+            display: block;
+            margin-top: auto;
+            margin-bottom: 10px;
+        }
+
+        .edit-delete-btns {
+            display: none;
+        }
+
+        .toggle-icon:hover + .edit-delete-btns,
+        .edit-delete-btns:hover {
+            display: flex;
+        }
+
+        .toggle-icon {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .edit-delete-btns {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .card {
+            position: relative;
+        }
+
+        body{
+            background-image: url('/img/logoWallpaper.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
     </style>
 </head>
 <body>
@@ -117,31 +193,28 @@
     </div>
 </div>
 
-<div id="postsContainer" style="margin-top: 5%">
+<div id="postsContainer">
     <div th:each="post: ${posts}">
         <div class="card">
             <div class="card-content">
-<!--                <img th:src="${post.user.imageURL}" class="profile-pic">-->
-                <div>
-<!--                    <p th:text="${post.user.username}"></p>-->
-<!--                    <img th:src="${post.imageURL}" class="">-->
-                    <h5 class="card-title" th:text="${post.title}"></h5>
-                    <p class="card-text card-text-black" th:text="${post.body}"></p>
-                    <!--          <div>-->
-                    <!--              <form th:action="@{/friend/add}" th:method="POST">-->
-                    <!--                  <input th:value="${post.user.username}" name="user" type="radio" checked>-->
-                    <!--                  <button>Add Friend</button>-->
-                    <!--              </form>-->
-                    <!--          </div>-->
-                </div>
+                <img th:src="${post.user.imageURL}" class="profile-pic">
+                <p th:text="${post.user.username}" class="username"></p>
             </div>
-
-            <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
-                <button type="submit" class="btn editBtn" th:if="${user.username == post.user.username || userAdmin}">Edit Post</button>
-            </form>
-            <form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post">
-                <button type="submit" class="btn deleteBtn" th:if="${user.username == post.user.username || userAdmin}">Delete Post</button>
-            </form>
+            <h5 class="card-title" th:text="${post.title}"></h5>
+            <p class="card-text card-text-black" th:text="${post.body}"></p>
+            <div>
+                <img th:src="${post.imageURL}" class="event-pic">
+            </div>
+            <div class="toggle-icon" onclick="toggleEditDeleteButtons('post_${post.id}')">
+                <i class="fas fa-cog" style="color: #ffe66d"></i>
+            </div>
+            <div class="edit-delete-btns" id="post_${post.id}">
+                <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
+                    <button type="submit" class="btn btn-primary edit-btn"
+                            th:if="${user.username == post.user.username || userAdmin}">Edit
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -150,20 +223,24 @@
     <div th:each="event: ${events}">
         <div class="card">
             <div class="card-content">
-<!--                <img th:src="${event.user.imageURL}" class="profile-pic">-->
-                <div>
-<!--                    <p th:text="${event.user.username}"></p>-->
-<!--                    <img th:src="${event.imageURL}" class="profile-pic">-->
-                    <h5 class="card-title" th:text="${event.title}"></h5>
-                    <p class="card-text card-text-black" th:text="${event.description}"></p>
-                </div>
+                <img th:src="${event.user.imageURL}" class="profile-pic">
+                <p th:text="${event.user.username}" class="username"></p>
             </div>
-            <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
-                <button type="submit" class="btn editBtn" th:if="${user.username == event.user.username || userAdmin}">Edit Event</button>
-            </form>
-            <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
-                <button type="submit" class="btn deleteBtn" th:if="${user.username == event.user.username || userAdmin}">Delete Event</button>
-            </form>
+            <h5 class="card-title" th:text="${event.title}"></h5>
+            <p class="card-text card-text-black" th:text="${event.description}"></p>
+            <div>
+                <img th:src="${event.imageURL}" class="event-pic">
+            </div>
+            <div class="toggle-icon" onclick="toggleEditDeleteButtons('event_${event.id}')">
+                <i class="fas fa-cog" style="color: #ffe66d"></i>
+            </div>
+            <div class="edit-delete-btns" id="event_${event.id}">
+                <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
+                    <button type="submit" class="btn btn-primary edit-btn"
+                            th:if="${user.username == event.user.username || userAdmin}" style="margin-right: 40%;">Edit
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -178,6 +255,30 @@
         } else {
             settingsMenu.style.display = "none";
             settingsToggle.style.transform = "rotate(0deg)";
+        }
+    }
+
+    function showPosts() {
+        document.getElementById("postsContainer").style.display = "block";
+        document.getElementById("eventsContainer").style.display = "none";
+    }
+
+    function showEvents() {
+        document.getElementById("postsContainer").style.display = "none";
+        document.getElementById("eventsContainer").style.display = "block";
+    }
+
+    function showAll() {
+        document.getElementById("postsContainer").style.display = "block";
+        document.getElementById("eventsContainer").style.display = "block";
+    }
+
+    function toggleEditDeleteButtons(id) {
+        const buttons = document.getElementById(id);
+        if (window.getComputedStyle(buttons).display === 'none') {
+            buttons.style.display = 'flex';
+        } else {
+            buttons.style.display = 'none';
         }
     }
 </script>
