@@ -17,6 +17,10 @@
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
+<form>
+    <input id="user" type="radio" checked hidden th:value="${user}">
+    <input id="userAdmin" type="radio" checked hidden th:value="${userAdmin}">
+</form>
 <button th:if="${userAdmin}" onclick="window.location.href='/location/create'" class="details-button" style="margin-left: 5%">Add Location</button>
 <input type="text" id="search-bar" class="search-bar" placeholder="Search locations...">
 <div id="cards-container">

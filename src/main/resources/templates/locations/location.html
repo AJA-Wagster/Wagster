@@ -29,6 +29,7 @@
     <form class="create-form" th:action="@{/review/create}" th:method="post">
         <label for="comment">Comment</label>
         <input id="comment" name="comment" type="text">
+        <input type="checkbox" th:value="${username}" checked hidden="hidden" name="user">
         <label for="1-stars"><i class="fa-solid fa-paw"></i></label>
         <input type="radio" id="1-stars" name="rating" value="1" hidden>
         <label for="2-stars"><i class="fa-solid fa-paw"></i></label>

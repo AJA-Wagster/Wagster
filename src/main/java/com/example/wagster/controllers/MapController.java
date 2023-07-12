@@ -34,7 +34,7 @@ public class MapController {
         model.addAttribute("locations", locations);
         if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser"){
             User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            System.out.println(user.getId());
+            model.addAttribute("user", userDao.findById(user.getId()).get().getUsername());
             model.addAttribute("userAdmin", userDao.findById(user.getId()).get().isAdmin());
         }
         return "locations/map";
