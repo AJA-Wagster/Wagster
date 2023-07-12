@@ -124,7 +124,7 @@
         <input th:field="*{rating}" type="radio" th:value="5" id="5-stars" style="display: none;">
         <button class="submit">Submit</button>
     </form>
-    <form th:action="@{/review/{id}/delete(id=${review.id})}" th:method="post">
+    <form id="delete-review" th:action="@{/review/{id}/delete(id=${review.id})}" th:method="post">
         <button class="delete" onclick="showConfirmation(event)">Delete</button>
     </form>
 </div>
@@ -156,7 +156,7 @@
 
         confirmButton.addEventListener('click', function() {
             confirmationDialog.style.display = 'none';
-            document.querySelector('.create-form').submit();
+            document.querySelector('#delete-review').submit();
         });
 
         cancelButton.addEventListener('click', function() {
