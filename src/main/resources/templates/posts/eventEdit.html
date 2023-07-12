@@ -30,7 +30,7 @@
     <button class="submit" type="submit">Update</button>
     </form>
     <form id="delete-form" th:class="delete-form${event.id}" th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
-        <button class="btn btn-danger" onclick="showConfirmation(event)">Delete Event</button>
+        <button class="deleteBtn" onclick="showConfirmation(event)">Delete Event</button>
     </form>
 </div>
 <div class="confirmation-dialog">
