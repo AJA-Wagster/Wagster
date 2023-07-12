@@ -1,0 +1,81 @@
+#header{
+    text-align: center;
+}
+.wavy {
+    position: relative;
+}
+.wavy span {
+    position: relative;
+    display: inline-block;
+    animation: flip 2s infinite;
+    animation-delay: calc(.2s * var(--i))
+}
+.welcome {
+    font-size: 70px;
+    color: white;
+}
+.wagster {
+    font-size: 80px;
+    color: #ffe66c;
+}
+#home-text{
+    font-size: 3rem;
+    text-align: center
+}
+#home-logo{
+    display: none;
+}
+@keyframes flip {
+    0%, 80% {
+        transform: rotateY(360deg)
+    }
+}
+.content-container {
+    display: flex;
+    align-items: center;
+}
+.content-container img {
+    height: 35em;
+    border-radius: 5%;
+    margin-right: 2%;
+    margin-left: 4%;
+    margin-top: 1%;
+}
+.content-container p {
+    flex: 1;
+    margin-right: 3%;
+}
+
+@media screen and (max-width: 1024px){
+    .navbar{
+        width: 100%;
+    }
+    #header{
+        display: block;
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: 3.5rem;
+    }
+    .welcome{
+        font-size: 2.3rem;
+    }
+    .wagster{
+        font-size: 2.6rem;
+    }
+    .content-container{
+        display: flex;
+        flex-direction: column;
+    }
+    #home-image{
+        display: none;
+    }
+    #home-text{
+        width: 85%;
+        margin: 0 auto;
+        font-size: 2.3rem;
+    }
+    #home-logo{
+        display: flex;
+        justify-content: center;
+    }
+}
