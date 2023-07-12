@@ -51,7 +51,7 @@ public class MapController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         location.setUser(user);
         locationDao.save(location);
-        return "redirect:/feed";
+        return "redirect:/map";
     }
     @GetMapping("location/{id}/edit")
     public String sr(Model model, @PathVariable(name = "id") Long id){

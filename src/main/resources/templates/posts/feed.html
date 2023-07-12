@@ -91,6 +91,13 @@
         .card {
             position: relative;
         }
+
+        body{
+            background-image: url('/img/logoWallpaper.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
     </style>
 
 </head>
@@ -123,12 +130,12 @@
                 <img th:src="${post.imageURL}" class="event-pic">
             </div>
             <div class="toggle-icon" onclick="toggleEditDeleteButtons('post_${post.id}')">
-                <i class="fas fa-cog"></i>
+                <i class="fas fa-cog" style="color: #ffe66d"></i>
             </div>
             <div class="edit-delete-btns" id="post_${post.id}">
                 <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
                     <button type="submit" class="btn btn-primary edit-btn"
-                            th:if="${user.username == post.user.username || userAdmin}">Edit Post
+                            th:if="${user.username == post.user.username || userAdmin}">Edit
                     </button>
                 </form>
             </div>
@@ -149,12 +156,12 @@
                 <img th:src="${event.imageURL}" class="event-pic">
             </div>
             <div class="toggle-icon" onclick="toggleEditDeleteButtons('event_${event.id}')">
-                <i class="fas fa-cog"></i>
+                <i class="fas fa-cog" style="color: #ffe66d"></i>
             </div>
             <div class="edit-delete-btns" id="event_${event.id}">
                 <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
                     <button type="submit" class="btn btn-primary edit-btn"
-                            th:if="${user.username == event.user.username || userAdmin}">Edit Event
+                            th:if="${user.username == event.user.username || userAdmin}" style="margin-right: 40%;">Edit
                     </button>
                 </form>
             </div>
