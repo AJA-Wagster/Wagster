@@ -13,18 +13,30 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet">
     <link th:href="@{/css/post-event.css}" rel="stylesheet">
+    <link th:href="@{/css/Edit.css}" rel="stylesheet">
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
 <div class="container create-box">
     <h1> Edit your post!</h1>
-    <form class="create-form" th:action="@{/posts/{id}/edit(id=${post.id})}" th:object="${post}" th:method="post">
-    <label for="title">Title: </label>
-    <input type="text" name="title" id="title" th:field="*{title}">
-    <label for="body">Body: </label>
-    <textarea name="body" id="body" th:field="*{body}"></textarea>
-    <button class="submit" type="submit">Update Post</button>
-</form>
+        <form class="create-form" th:action="@{/posts/{id}/edit(id=${post.id})}" th:object="${post}" th:method="post">
+        <label for="title">Title: </label>
+        <input type="text" name="title" id="title" th:field="*{title}">
+        <label for="body">Body: </label>
+        <textarea name="body" id="body" th:field="*{body}"></textarea>
+        <button class="submit" type="submit">Update Post</button>
+    </form>
+    <form id="delete-form" th:action="@{/posts/{id}/delete(id=${post.id})}" method="post">
+        <button type="submit" class="btn btn-danger" onclick="showConfirmation(event)">Delete Post</button>
+    </form>
+</div>
+<div class="confirmation-dialog">
+    <h3>Confirm Deletion</h3>
+    <p>Are you sure you want to delete?</p>
+    <div class="buttons">
+        <button class="cancel-button">Cancel</button>
+        <button class="confirm-button">Delete</button>
+    </div>
 </div>
 <div class="logo-container">
     <img th:src="@{/img/logoName.png}" alt="logo" style="width: 80%; height: auto;">
@@ -33,5 +45,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
+<script th:src="@{/js/delete.js}"></script>
 </body>
 </html>

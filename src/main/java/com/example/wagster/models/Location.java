@@ -31,7 +31,7 @@ public class Location {
     private String description;
 
     @Column(nullable = false)
-    private short rating;
+    private float rating;
 
     @ManyToOne
     @JoinColumn( name = "user_id")

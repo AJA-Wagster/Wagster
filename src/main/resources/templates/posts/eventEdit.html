@@ -13,21 +13,33 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet">
     <link th:href="@{/css/post-event.css}" rel="stylesheet">
+    <link th:href="@{/css/Edit.css}" rel="stylesheet">
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
 <div class="container create-box">
     <h1> Edit your Event!</h1>
     <form class="create-form" th:action="@{'/events/' + ${event.getId()} + '/edit'}" th:object="${event}" th:method="post">
-    <label for="title">Title: </label>
-    <input type="text" name="title" id="title" th:field="*{title}">
-    <label for="body">Description: </label>
-    <textarea name="body" id="body" th:field="*{description}"></textarea>
-    <input type="hidden" th:field="*{id}" th:value="${event.id}">
-    <button id="file">Upload Image</button>
-    <input  id="url" name="url" type="radio" value="" checked="checked">
+        <label for="title">Title: </label>
+        <input type="text" name="title" id="title" th:field="*{title}">
+        <label for="body">Description: </label>
+        <textarea name="body" id="body" th:field="*{description}"></textarea>
+        <input type="hidden" th:field="*{id}" th:value="${event.id}">
+        <button id="file">Upload Image</button>
+        <input  id="url" name="url" type="radio" value="" checked="checked">
     <button class="submit" type="submit">Update</button>
-</form>
+    </form>
+    <form id="delete-form" th:class="delete-form${event.id}" th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
+        <button class="btn btn-danger" onclick="showConfirmation(event)">Delete Event</button>
+    </form>
+</div>
+<div class="confirmation-dialog">
+    <h3>Confirm Deletion</h3>
+    <p>Are you sure you want to delete?</p>
+    <div class="buttons">
+        <button class="cancel-button">Cancel</button>
+        <button class="confirm-button">Delete</button>
+    </div>
 </div>
 <div class="logo-container">
     <img th:src="@{/img/logoName.png}" alt="logo" style="width: 80%; height: auto;">
@@ -36,5 +48,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
+<script th:src="@{/js/delete.js}"></script>
 </body>
 </html>
