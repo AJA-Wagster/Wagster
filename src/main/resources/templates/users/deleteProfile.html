@@ -11,12 +11,12 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link th:href="@{/css/main.css}" rel="stylesheet">
-
+    <link th:href="@{/css/Edit.css}" rel="stylesheet">
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
 <h2>Delete Profile</h2>
-<form th:action="@{/profile/delete}" method="post" th:object="${user}">
+<form id="delete-form" th:action="@{/profile/delete}" method="post" th:object="${user}">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" placeholder="Enter Username" th:field="*{username}" required>
     <br>
@@ -28,16 +28,16 @@
     <br>
     <input type="hidden" th:field="*{id}" th:value="${user.id}">
     <!--    here we are hard coding our id field as hidden. without this, whenever a user edits their profile, since we are not referencing the id, upon submission a new ID is generated creating a new user instead of updating the current user-->
-    <button type="button" onclick="confirmDelete()">Delete Profile</button>
+    <button type="button" onclick="showConfirmation(event)">Delete Profile</button>
 </form>
-
-<script>
-    function confirmDelete() {
-        let confirmed = confirm("Are you sure you want to delete your profile?");
-        if (confirmed) {
-            document.forms[0].submit();
-        }
-    }
-</script>
+<div class="confirmation-dialog">
+    <h3>Confirm Deletion</h3>
+    <p>Are you sure you want to delete?</p>
+    <div class="buttons">
+        <button class="cancel-button">Cancel</button>
+        <button class="confirm-button">Delete</button>
+    </div>
+</div>
+<script th:src="@{/js/delete.js}"></script>
 </body>
 </html>

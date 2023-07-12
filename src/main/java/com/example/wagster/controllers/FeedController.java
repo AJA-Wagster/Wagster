@@ -34,9 +34,9 @@ public class FeedController {
     public String showFeed(Model model) {
 
 //        get the events from the event service
-        List<Event> events = eventsDao.findAll();
+        List<Event> events = eventsDao.findAllByOrderByIdDesc();
 //        get the posts from the post service
-        List<Post> posts = postDao.findAll();
+        List<Post> posts = postDao.findByOrderByIdDesc();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 //        add events and posts to the feed
@@ -66,8 +66,10 @@ public class FeedController {
 
     @GetMapping("/posts/{id}/edit")
     public String showPostEditForm(@PathVariable("id") Long id, Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Post post = postDao.findById(id).orElse(null);
         model.addAttribute("post", post);
+        model.addAttribute("user", user);
         return "posts/postEdit";
     }
 
@@ -106,8 +108,10 @@ public class FeedController {
 
     @GetMapping("/events/{id}/edit")
     public String showEventEditForm(@PathVariable Long id, Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        Event event = eventsDao.findById(id).get();
         model.addAttribute("event", eventsDao.findById(id).get());
+        model.addAttribute("user", user);
         return "posts/eventEdit";
     }
 
