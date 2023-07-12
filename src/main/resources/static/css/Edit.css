@@ -82,3 +82,17 @@ input[type="radio"] {
     background-color: white;
     border-radius: 20px;
 }
+
+.deleteBtn{
+    color: #000;
+    font-weight: bolder;
+    transition: all 0.5s;
+    position: relative;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    background-color: red;
+    border-radius: 20px;
+}

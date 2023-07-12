@@ -11,7 +11,91 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link th:href="@{/css/main.css}" rel="stylesheet">
-    <link th:href="@{/css/Edit.css}" rel="stylesheet">
+    <link th:href="@{/css/login.css}" rel="stylesheet">
+    <style>
+        .container {
+            color: black;
+            text-align: center;
+            background-color: #f9f9f9;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);
+            border-top-color: rgba(225, 225, 225, 0.5);
+            border-left-color: rgba(225, 225, 225, 0.5);
+            border-bottom-color: rgba(225, 225, 225, 0.1);
+            border-right-color: rgba(225, 225, 225, 0.1);
+            background: linear-gradient(to right bottom, rgba(225, 225, 225, 0.5), rgba(225, 225, 225, 0.3));        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image {
+            border-radius: 50%;
+            height: 200px;
+            width: 200px;
+            margin: 2% auto;
+            display: block;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+        }
+
+        label {
+            font-weight: bold;
+            flex: 0 0 100px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            flex: 1;
+        }
+
+        input[type="submit"] {
+            color: #000;
+            font-weight: bolder;
+            transition: all 0.5s;
+            position: relative;
+            line-height: 50px;
+            height: 50px;
+            text-align: center;
+            width: 100%;
+            cursor: pointer;
+            background-color: #ffe66d;
+            border-radius: 20px;
+            margin-top: 2%;
+        }
+
+        .imgBtn {
+            color: #000;
+            font-weight: bolder;
+            transition: all 0.5s;
+            position: relative;
+            line-height: 50px;
+            height: 50px;
+            text-align: center;
+            width: 100%;
+            cursor: pointer;
+            background-color: #ffe66d;
+            border-radius: 20px;
+            margin-top: 2%;
+        }
+
+        input[type="radio"]:checked{
+            visibility:hidden;
+        }
+    </style>
+    <style th:href="@{/css/Edit.j}"></style>
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
