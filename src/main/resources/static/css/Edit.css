@@ -1,0 +1,84 @@
+input[type="radio"] {
+    visibility: hidden;
+}
+
+.fa-paw.highlight {
+    color: #ffe66d;
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-form label {
+    margin-bottom: 0.5rem;
+}
+
+.create-form label i {
+    margin-right: 0.2rem;
+}
+
+.fa-solid{
+    font-size: 30px;
+}
+.fa-star{
+    font-size: 30px;
+}
+.confirmation-dialog {
+    font-size: 20px;
+    color: black;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    padding: 20px;
+    background-color: #ffe66d;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.confirmation-dialog h3 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.confirmation-dialog .buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.confirmation-dialog .buttons button {
+    margin-left: 10px;
+}
+
+.confirm-button{
+    color: #000;
+    font-weight: bolder;
+    transition: all 0.5s;
+    position: relative;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    background-color: red;
+    border-radius: 20px;
+}
+
+.cancel-button{
+    color: #000;
+    font-weight: bolder;
+    transition: all 0.5s;
+    position: relative;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 20px;
+}

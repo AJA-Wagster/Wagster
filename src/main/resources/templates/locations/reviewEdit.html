@@ -13,99 +13,16 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet">
     <link th:href="@{/css/location.css}" rel="stylesheet">
-    <style>
-        input[type="radio"] {
-            visibility: hidden;
-        }
-
-        .fa-paw.highlight {
-            color: #ffe66d;
-        }
-
-        .create-form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .create-form label {
-            margin-bottom: 0.5rem;
-        }
-
-        .create-form label i {
-            margin-right: 0.2rem;
-        }
-
-        .fa-solid{
-            font-size: 30px;
-        }
-        .fa-star{
-            font-size: 30px;
-        }
-        .confirmation-dialog {
-            font-size: 20px;
-            color: black;
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px;
-            padding: 20px;
-            background-color: #ffe66d;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 9999;
-        }
-
-        .confirmation-dialog h3 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .confirmation-dialog .buttons {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .confirmation-dialog .buttons button {
-            margin-left: 10px;
-        }
-
-        .confirm-button{
-            color: #000;
-            font-weight: bolder;
-            transition: all 0.5s;
-            position: relative;
-            line-height: 50px;
-            height: 50px;
-            text-align: center;
-            width: 100%;
-            cursor: pointer;
-            background-color: red;
-            border-radius: 20px;
-        }
-
-        .cancel-button{
-            color: #000;
-            font-weight: bolder;
-            transition: all 0.5s;
-            position: relative;
-            line-height: 50px;
-            height: 50px;
-            text-align: center;
-            width: 100%;
-            cursor: pointer;
-            background-color: white;
-            border-radius: 20px;
-        }
-    </style>
+    <link th:href="@{/css/Edit.css}" rel="stylesheet">
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
 <div class="container create-box">
     <h1 style="font-size: 45px">Edit Review</h1>
-    <form class="create-form" th:action="@{/review/{id}/edit}" th:method="post" th:object="${review}">
+    <form class="create-form" th:action="@{/review/{id}/edit(id = ${review.id})}" th:method="post" th:object="${review}">
         <input th:field="*{id}" type="checkbox" th:value="*{id}" checked hidden="hidden">
+        <input th:field="*{location}" type="checkbox" th:value="*{location.id}" checked hidden="hidden">
+        <input th:field="*{user}" type="checkbox" th:value="*{user.id}" checked hidden="hidden">
         <p style="margin-right: 10px; font-size: 30px">Comment:</p>
         <textarea th:field="*{comment}" style="height: 250px; resize: vertical;"></textarea>
         <div style="display: flex; justify-content: flex-start; align-items: center;">
@@ -124,6 +41,12 @@
         <input th:field="*{rating}" type="radio" th:value="5" id="5-stars" style="display: none;">
         <button class="submit">Submit</button>
     </form>
+    <form id="delete-form" th:action="@{/review/{id}/delete(id=${review.id})}" th:method="post">
+        <button class="delete" onclick="showConfirmation(event)">Delete</button>
+    </form>
+</div>
+<div class="logo-container">
+    <img th:src="@{/img/logoName.png}" alt="logo" style="width: 80%; height: auto;">
 </div>
 <div class="confirmation-dialog">
     <h3>Confirm Deletion</h3>

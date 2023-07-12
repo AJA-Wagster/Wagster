@@ -92,6 +92,7 @@
             position: relative;
         }
     </style>
+
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}" class="navbar"></nav>
@@ -137,6 +138,11 @@
                 </form>
             </div>
         </div>
+      </div>
+
+      <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
+        <button type="submit" class="btn btn-primary" th:if="${user.username == post.user.username || userAdmin}">Edit Post</button>
+      </form>
     </div>
 </div>
 
@@ -168,6 +174,10 @@
                 </form>
             </div>
         </div>
+      </div>
+        <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
+          <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || userAdmin}">Edit Event</button>
+        </form>
     </div>
 </div>
 
@@ -201,5 +211,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
+<script th:src="@{/js/delete.js}"></script>
 </body>
 </html>
