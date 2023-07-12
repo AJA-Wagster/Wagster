@@ -5,11 +5,13 @@ import com.example.wagster.models.Review;
 import com.example.wagster.models.User;
 import com.example.wagster.repos.LocationRepo;
 import com.example.wagster.repos.ReviewRepo;
+import com.example.wagster.repos.UserRepo;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Controller
@@ -17,38 +19,44 @@ public class ReviewController {
 
     private final ReviewRepo reviewDao;
     private final LocationRepo locationDao;
+    private final UserRepo userDao;
 
-    public ReviewController(ReviewRepo reviewDao, LocationRepo locationDao) {
+    public ReviewController(ReviewRepo reviewDao, LocationRepo locationDao, UserRepo userDao) {
         this.reviewDao = reviewDao;
         this.locationDao = locationDao;
+        this.userDao = userDao;
     }
 
-    @GetMapping("/review/create")
-    public String tha(@RequestParam(required = false, name = "locationId") Long id, Model model){
-        System.out.println(id);
+    @GetMapping("/review/create/{id}")
+    public String tha(Model model, @PathVariable(name = "id") Long id, @RequestParam(name = "username", required = false) String username){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(username);
         model.addAttribute("locationId", id);
+        model.addAttribute("username", username);
         return "locations/location";
     }
 
     @PostMapping("/review/create")
-    public String reviewToDB(@RequestParam(name = "comment") String comment, @RequestParam(name = "rating") short rating, @RequestParam(name = "location") Long id){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public String reviewToDB(@RequestParam(name = "comment") String comment, @RequestParam(name = "rating") short rating, @RequestParam(name = "location") Long id, @RequestParam(name = "user") String username){
         Review review = new Review();
+        System.out.println(username);
         review.setComment(comment);
         review.setRating(rating);
-        review.setUser(user);
+        review.setUser(userDao.findByUsername(username));
         Location location = locationDao.findById(id).get();
         review.setLocation(location);
-
-//        List<Review> reviewList = reviewDao.findAllByLocationId(id);
-//        int total = 0;
-//        for (int i = 0; i < reviewList.size();i++){
-//            total += reviewList.get(i).getRating();
-//        }
-//        short average = (short) Math.round((float) total / reviewList.size());
-//        System.out.println(average);
-
         reviewDao.save(review);
+
+        List<Review> reviews = reviewDao.findAllByLocationId(id);
+        int total = 0;
+        for (int i = 0; i < reviews.size(); i++){
+            total += reviews.get(i).getRating();
+        }
+        float average = (float) total / reviews.size();
+        average = (float) (Math.round(average * 100.0) / 100);
+        System.out.println(average);
+        location.setRating(average);
+        locationDao.save(location);
         return "redirect:/map";
     }
 

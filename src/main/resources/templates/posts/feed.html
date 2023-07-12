@@ -7,6 +7,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link th:href="@{/css/main.css}" rel="stylesheet">
   <link th:href="@{/css/feed.css}" rel="stylesheet">
+  <link th:href="@{/css/Edit.css}" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/apple-touch-icon.png}">
   <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon-32x32.png}">
   <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}">
@@ -38,9 +39,7 @@
   <div th:each="post: ${posts}">
     <div class="card">
       <div class="card-content">
-        <form th:action="@{/profile/{userId}(userId = ${post.user.id})}" >
-            <button style="all: unset; cursor: pointer"><img th:src="${post.user.imageURL}" class="profile-pic"></button>
-        </form>
+        <img th:src="${post.user.imageURL}" class="profile-pic">
         <div>
           <p th:text="${post.user.username}"></p>
           <img th:src="${post.imageURL}" class="event-pic">
@@ -52,9 +51,6 @@
       <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
         <button type="submit" class="btn btn-primary" th:if="${user.username == post.user.username || userAdmin}">Edit Post</button>
       </form>
-      <form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post">
-        <button type="submit" class="btn btn-danger" th:if="${user.username == post.user.username || userAdmin}">Delete Post</button>
-      </form>
     </div>
   </div>
 </div>
@@ -63,9 +59,7 @@
   <div th:each="event: ${events}">
     <div class="card">
       <div class="card-content">
-        <form th:action="@{/profile/{userId}(userId = ${event.user.id})}">
-          <button style="all: unset; cursor: pointer"><img th:src="${event.user.imageURL}" class="profile-pic"></button>
-        </form>
+        <img th:src="${event.user.imageURL}" class="profile-pic">
         <div>
           <p th:text="${event.user.username}"></p>
           <img th:src="${event.imageURL}" class="event-pic">
@@ -75,9 +69,6 @@
       </div>
         <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
           <button type="submit" class="btn btn-primary" th:if="${user.username == event.user.username || userAdmin}">Edit Event</button>
-        </form>
-        <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
-          <button type="submit" class="btn btn-danger" th:if="${user.username == event.user.username || userAdmin}">Delete Event</button>
         </form>
     </div>
   </div>
@@ -106,5 +97,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
+<script th:src="@{/js/delete.js}"></script>
 </body>
 </html>
