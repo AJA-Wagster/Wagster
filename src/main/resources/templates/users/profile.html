@@ -68,7 +68,6 @@
             position: absolute;
             top: 100%;
             right: 0;
-            z-index: 1;
             background-color: #fff;
             border: 1px solid transparent;
             border-top-color: rgba(225, 225, 225, 0.5);
@@ -80,6 +79,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
             width: 300px;
             border-radius: 10px;
+            z-index: 2; /* Add this line to bring the toggle popup to the front */
         }
 
         #settingsMenu button {
