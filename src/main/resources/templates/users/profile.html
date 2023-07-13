@@ -22,7 +22,7 @@
         <img th:src="${user.getImageURL()}" style="border-radius: 50%; height: 200px; width: 200px; margin-top: 2%; margin-left: 20%">
         <h1 th:replace="~{partials/profilePartials :: profileBanner (${user.username})}"></h1>
         <div style="position: relative; margin-left: 50px;">
-            <div id="settingsToggle" onclick="toggleSettingsMenu()" style="font-size:3em; color: #ffe66d">
+            <div id="settingsToggle" onclick="toggleSettingsMenu()" style="font-size:4em; color: #ffe66d">
                 <i class="fas fa-cog"></i>
             </div>
             <div id="settingsMenu" style="display: none; position: absolute; top: 100%; right: 0;">
@@ -46,11 +46,11 @@
                 <img th:src="${post.imageURL}" class="event-pic">
             </div>
             <div class="toggle-icon" onclick="toggleEditDeleteButtons('post_${post.id}')">
-                <i class="fas fa-cog" style="color: #ffe66d"></i>
+                <i class="fas fa-cog" style="color: #ffe66d;font-size:2em"></i>
             </div>
             <div class="edit-delete-btns" id="post_${post.id}">
                 <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
-                    <button type="submit" class="btn btn-primary edit-btn"
+                    <button type="submit" class="btn edit-btn" style="width 20px"
                             th:if="${user.username == post.user.username || userAdmin}">Edit
                     </button>
                 </form>
@@ -72,11 +72,11 @@
                 <img th:src="${event.imageURL}" class="event-pic">
             </div>
             <div class="toggle-icon" onclick="toggleEditDeleteButtons('event_${event.id}')">
-                <i class="fas fa-cog" style="color: #ffe66d"></i>
+                <i class="fas fa-cog" style="color: #ffe66d;font-size:2em"></i>
             </div>
             <div class="edit-delete-btns" id="event_${event.id}">
                 <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
-                    <button type="submit" class="btn btn-primary edit-btn"
+                    <button type="submit" class="btn edit-btn"
                             th:if="${user.username == event.user.username || userAdmin}" style="margin-right: 40%;">Edit
                     </button>
                 </form>
