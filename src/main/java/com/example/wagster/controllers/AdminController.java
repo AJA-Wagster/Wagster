@@ -63,6 +63,7 @@ public class AdminController {
 
             // Assign the "ROLE_ADMIN" authority to the user
             user.setAdmin((byte) 1);
+            System.out.println(user.getAdmin());
 
             userDao.save(user);
 
