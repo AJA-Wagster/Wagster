@@ -29,7 +29,7 @@
         <input  id="url" name="url" type="radio" value="" checked="checked">
     <button class="submit" type="submit">Update</button>
     </form>
-    <form id="delete-form" th:class="delete-form${event.id}" th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
+    <form id="delete-form" th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
         <button class="deleteBtn" onclick="showConfirmation(event)">Delete Event</button>
     </form>
 </div>

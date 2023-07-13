@@ -56,7 +56,7 @@
     <div class="registration-form">
         <h2>Admin Registration</h2>
         <p th:text="${errorMessage}" th:classappend="${errorMessage != null} ? 'error-message' : ''"></p>
-        <form th:action="@{/register/admin}" th:method="post" th:object="${AdminUser}">
+        <form th:action="@{/register/notreallyanadminbutkinda}" th:method="post" th:object="${AdminUser}">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" th:field="*{username}" required

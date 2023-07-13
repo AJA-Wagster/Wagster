@@ -61,38 +61,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
-<script>
-
-    function showConfirmation(event) {
-        event.preventDefault(); // Prevent form submission
-
-        const confirmationDialog = document.querySelector('.confirmation-dialog');
-        const confirmButton = confirmationDialog.querySelector('.confirm-button');
-        const cancelButton = confirmationDialog.querySelector('.cancel-button');
-
-        confirmButton.addEventListener('click', function() {
-            confirmationDialog.style.display = 'none';
-            document.querySelector('#delete-review').submit();
-        });
-
-        cancelButton.addEventListener('click', function() {
-            confirmationDialog.style.display = 'none';
-        });
-
-        confirmationDialog.style.display = 'block';
-    }
-
-    function highlightPaws(rating) {
-        const pawIcons = document.querySelectorAll('.fa-paw');
-        pawIcons.forEach((pawIcon, index) => {
-            if (index < rating) {
-                pawIcon.classList.add('highlight');
-            } else {
-                pawIcon.classList.remove('highlight');
-            }
-        });
-    }
-</script>
+<script th:src="@{/js/delete.js}"></script>
 
 </body>
 </html>
