@@ -75,7 +75,7 @@
             `<img class="profile-pic" src="${review.user.imageURL}">` +
             `<h3 class="username">${review.user.username}</h3>` +
             '<p class="review">' + review.comment + '</p>' +
-            '<p class="comment">' + 'Rating: ' + showPaws(review.rating) + '</p>' +
+            '<p class="comment"><span style="font-size: 100px">Average Rating:</span> ' + showPaws(review.rating) + '</p>' +
             `${checkUser(user.getAttribute('value'), review.user.username, userAdmin.getAttribute('value'), review.id)}` +
             '<hr>' +
             '</div>'

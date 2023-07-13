@@ -127,7 +127,7 @@
         popup.innerHTML = "<h3>" + location.name + "</h3>" +
             "<p>" + location.address + "</p>" +
             "<p>" + location.description + "</p>" +
-            `<p>Rating: ${location.rating} <i class="fa-solid fa-paw"></i></p>` +
+            `<p><span style='font-weight: bold'>Average Rating: </span>${location.rating} <i class="fa-solid fa-paw"></i></p>` +
             `<button class='review-button' onclick='openReviewForm(${location.id})'>Review</button>` +
             "<button class='close-button' onclick='closePopup()'>Close</button>";
         fetch(`https://wagster.site/review/${location.id}`)
@@ -143,7 +143,7 @@
                         '</div>' +
                         '<div>' +
                         '<p class="review">' + review.comment + '</p>' +
-                        '<p class="comment">' + 'Rating: ' + showPaws(review.rating) + '</p>' +
+                        '<p class="comment"> Rating: ' + showPaws(review.rating) + '</p>' +
                         `${checkUser(user.getAttribute('value'), review.user.username, userAdmin.getAttribute('value'), review.id)}` +
                         '<hr>' +
                         '</div>'
