@@ -108,6 +108,13 @@ public String deleteProfile(@ModelAttribute("user") User userToDelete, HttpServl
     return "redirect:/";
 }
 
+@GetMapping("/profile/delete/{userId}")
+public String showUserForm(@PathVariable(name = "userId") Long id, Model model){
+        User user = userDao.findById(id).get();
+        model.addAttribute("user", user);
+        return "users/deleteProfile";
+}
+
 @PostMapping("profile/delete/{userId}")
 public String deleteUser(@PathVariable(name = "userId") Long id){
     userDao.deleteById(id);

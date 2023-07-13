@@ -27,7 +27,7 @@
                 <i class="fas fa-cog"></i>
             </div>
             <div id="settingsMenu" style="display: none; position: absolute; top: 100%; right: 0;">
-                <button class="deleteBtn" onclick="window.location.href='/delete'">Delete Profile</button>
+                <form th:action="@{/profile/delete/{userid}(userid=${user.id})}"><button class="deleteBtn">Delete Profile</button> </form>
             </div>
         </div>
     </div>
