@@ -14,48 +14,46 @@
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        #profileNav{
-            color: #ffe66d;
-        }
-        .profileBtn {
-            color: #000;
-            font-weight: bolder;
-            transition: all 0.5s;
-            position: relative;
-            line-height: 50px;
-            height: 50px;
-            text-align: center;
-            width: 100%;
-            cursor: pointer;
-            background-color: #ffe66d;
-            border-radius: 20px;
-        }
-    </style>
+    <link th:href="@{/css/profile.css}" rel="stylesheet">
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
-<img th:src="${user.getImageURL()}" style="border-radius: 50%; height: 200px; width: 200px; margin-top: 2%; margin-left: 2%">
-
-<form th:action="@{/profile/delete/{userId}(userId =${user.id})}" th:if="${user.username == currentUser.username || currentUser.isAdmin()}" th:method="post">
-    <button class="profileBtn">Delete Profile</button>
-</form>
+<div>
+    <div style="display: flex; align-items: center;">
+        <img th:src="${user.getImageURL()}" style="border-radius: 50%; height: 200px; width: 200px; margin-top: 2%; margin-left: 20%">
+        <h1 th:replace="~{partials/profilePartials :: profileBanner (${user.username})}"></h1>
+        <div style="position: relative; margin-left: 50px;">
+            <div id="settingsToggle" onclick="toggleSettingsMenu()" style="font-size:3em; color: #ffe66d">
+                <i class="fas fa-cog"></i>
+            </div>
+            <div id="settingsMenu" style="display: none; position: absolute; top: 100%; right: 0;">
+                <button class="deleteBtn" onclick="window.location.href='/delete'">Delete Profile</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="postsContainer">
     <div th:each="post: ${posts}">
         <div class="card">
             <div class="card-content">
-                <div>
-                    <h5 class="card-title" th:text="${post.title}"></h5>
-                    <p class="card-text card-text-black" th:text="${post.body}"></p>
-                </div>
+                <img th:src="${post.user.imageURL}" class="profile-pic">
+                <p th:text="${post.user.username}" class="username"></p>
             </div>
-
-            <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
-                <button type="submit" class="btn btn-primary" th:if="${currentUser.username == post.user.username || userAdmin}">Edit Post</button>
-            </form>
-            <form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post">
-                <button type="submit" class="btn btn-danger" th:if="${currentUser.username == post.user.username || userAdmin}">Delete Post</button>
-            </form>
+            <h5 class="card-title" th:text="${post.title}"></h5>
+            <p class="card-text card-text-black" th:text="${post.body}"></p>
+            <div>
+                <img th:src="${post.imageURL}" class="event-pic">
+            </div>
+            <div class="toggle-icon" onclick="toggleEditDeleteButtons('post_${post.id}')">
+                <i class="fas fa-cog" style="color: #ffe66d"></i>
+            </div>
+            <div class="edit-delete-btns" id="post_${post.id}">
+                <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
+                    <button type="submit" class="btn btn-primary edit-btn"
+                            th:if="${currentUser.username == post.user.username || currentUser.isAdmin()}">Edit
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -64,23 +62,32 @@
     <div th:each="event: ${events}">
         <div class="card">
             <div class="card-content">
-                <div>
-                    <h5 class="card-title" th:text="${event.title}"></h5>
-                    <p class="card-text card-text-black" th:text="${event.description}"></p>
-                </div>
+                <img th:src="${event.user.imageURL}" class="profile-pic">
+                <p th:text="${event.user.username}" class="username"></p>
             </div>
-            <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
-                <button type="submit" class="btn btn-primary" th:if="${currentUser.username == event.user.username || currentUser.isAdmin()}">Edit Event</button>
-            </form>
-            <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
-                <button type="submit" class="btn btn-danger" th:if="${currentUser.username == event.user.username || currentUser.isAdmin()}">Delete Event</button>
-            </form>
+            <h5 class="card-title" th:text="${event.title}"></h5>
+            <p class="card-text card-text-black" th:text="${event.description}"></p>
+            <div>
+                <img th:src="${event.imageURL}" class="event-pic">
+            </div>
+            <div class="toggle-icon" onclick="toggleEditDeleteButtons('event_${event.id}')">
+                <i class="fas fa-cog" style="color: #ffe66d"></i>
+            </div>
+            <div class="edit-delete-btns" id="event_${event.id}">
+                <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
+                    <button type="submit" class="btn btn-primary edit-btn"
+                            th:if="${currentUser.username == event.user.username || currentUser.isAdmin()}" style="margin-right: 40%;">Edit
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
 </script>
+<script th:src="@{/js/profile.js}"></script>
 </body>
 </html>
