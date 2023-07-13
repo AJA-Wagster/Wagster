@@ -14,21 +14,29 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet">
     <link th:href="@{/css/post-event.css}" rel="stylesheet">
+    <style>
+        #url {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
 <div class="container create-box">
-    <h1> Create a Event!</h1>
+    <h1> Create an Event!</h1>
     <form class="create-form" th:action="@{/events/create}" th:method="post" th:object="${event}">
-    Title:
-    <input th:field="*{title}">
-    Description:
-    <textarea th:field="*{description}"></textarea>
-    <input type="hidden" th:field="*{id}" th:value="${event.id}">
-    <button id="file">Upload Image</button>
-    <input  id="url" name="url" type="radio" value="" checked="checked">
-    <button class="submit">Submit</button>
-</form>
+        <label for="title">Title</label>
+        <br>
+        <input id="title" th:field="*{title}" style="width: 100%">
+        <br>
+        <label for="description">Description</label>
+        <textarea id="description" th:field="*{description}" style="height: 250px; resize: vertical;"></textarea>
+        <input type="hidden" th:field="*{id}" th:value="${event.id}">
+        <input id="url" name="url" type="radio" value="" checked="checked">
+        <button id="file">Upload Image</button>
+        <button class="submit">Submit</button>
+
+    </form>
 </div>
 
 <script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>

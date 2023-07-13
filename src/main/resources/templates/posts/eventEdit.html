@@ -20,14 +20,15 @@
 <div class="container create-box">
     <h1> Edit your Event!</h1>
     <form class="create-form" th:action="@{'/events/' + ${event.getId()} + '/edit'}" th:object="${event}" th:method="post">
-        <label for="title">Title: </label>
+        <label for="title">Title </label>
         <input type="text" name="title" id="title" th:field="*{title}">
-        <label for="body">Description: </label>
-        <textarea name="body" id="body" th:field="*{description}"></textarea>
+        <label for="body">Description </label>
+        <textarea name="body" id="body" th:field="*{description}" style="height: 250px; resize: vertical;"></textarea>
         <input type="hidden" th:field="*{id}" th:value="${event.id}">
         <button id="file">Upload Image</button>
+        <button class="submit" type="submit">Update</button>
         <input  id="url" name="url" type="radio" value="" checked="checked">
-    <button class="submit" type="submit">Update</button>
+
     </form>
     <form id="delete-form" th:action="@{/events/{id}/delete(id=${event.id})}" method="post">
         <button class="deleteBtn" onclick="showConfirmation(event)">Delete Event</button>
