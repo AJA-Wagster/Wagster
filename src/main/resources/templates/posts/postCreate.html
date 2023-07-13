@@ -14,7 +14,11 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet">
     <link th:href="@{/css/post-event.css}" rel="stylesheet">
-
+    <style>
+        #url {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}"></nav>
@@ -22,9 +26,9 @@
     <h1> Create a Post!</h1>
 <form class="create-form" th:action="@{/posts/create}" th:method="post" th:object="${post}">
     Title
-    <input th:field="*{title}"><br>
+    <input th:field="*{title}" style="width: 100%"><br>
     Body
-    <textarea th:field="*{body}" cols="35" rows="5"></textarea><br>
+    <textarea th:field="*{body}" style="height: 250px; resize: vertical;"></textarea><br>
     <button id="file">Upload Image</button>
     <input  id="url" name="url" type="radio" value="" checked="checked">
     <button class="submit" >Submit</button>
