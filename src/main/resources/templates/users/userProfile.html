@@ -49,7 +49,7 @@
             </div>
             <div class="edit-delete-btns" id="post_${post.id}">
                 <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
-                    <button type="submit" class="btn btn-primary edit-btn"
+                    <button type="submit" class="btn edit-btn" style="width 20px"
                             th:if="${currentUser.username == post.user.username || currentUser.isAdmin()}">Edit
                     </button>
                 </form>
@@ -75,7 +75,7 @@
             </div>
             <div class="edit-delete-btns" id="event_${event.id}">
                 <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
-                    <button type="submit" class="btn btn-primary edit-btn"
+                    <button type="submit" class="btn edit-btn"
                             th:if="${currentUser.username == event.user.username || currentUser.isAdmin()}" style="margin-right: 40%;">Edit
                     </button>
                 </form>

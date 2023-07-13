@@ -83,7 +83,7 @@
 
         .edit-delete-btns {
             display: none;
-            position: fixed;
+            position: absolute;
             top: 10px;
             right: 10px;
         }
@@ -156,6 +156,20 @@
             color: red;
             font-size: 20px; /* Increase the font size to make the "x" bigger */
         }
+
+        .edit-btn {
+            color: #000;
+            font-weight: bold;
+            transition: all 0.5s;
+            position: relative;
+            line-height: 50px;
+            height: 50px;
+            text-align: center;
+            width: 100px;
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 20px;
+        }
     </style>
 </head>
 <body>
@@ -199,7 +213,7 @@
             </div>
             <div class="edit-delete-btns" id="post_${post.id}">
                 <form th:action="@{/posts/{id}/edit(id=${post.id})}" method="get">
-                    <button type="submit" class="btn btn-primary edit-btn"
+                    <button type="submit" class="btn edit-btn"
                             th:if="${user.username == post.user.username || userAdmin}">Edit
                     </button>
                 </form>
@@ -228,7 +242,7 @@
             </div>
             <div class="edit-delete-btns" id="event_${event.id}">
                 <form th:action="@{/events/{id}/edit(id=${event.id})}" method="get">
-                    <button type="submit" class="btn btn-primary edit-btn"
+                    <button type="submit" class="btn edit-btn"
                             th:if="${user.username == event.user.username || userAdmin}" style="margin-right: 40%;">Edit
                     </button>
                 </form>
