@@ -120,7 +120,9 @@
     <div th:each="post: ${posts}">
         <div class="card">
             <div class="card-content">
-                <img th:src="${post.user.imageURL}" class="profile-pic">
+                <form th:action="@{/profile/{userId}(userId = ${post.user.id})}">
+                    <button style="all: unset; cursor: pointer"><img th:src="${post.user.imageURL}" class="profile-pic"></button>
+                </form>
                 <p th:text="${post.user.username}" class="username"></p>
             </div>
             <h5 class="card-title" th:text="${post.title}"></h5>
@@ -146,7 +148,9 @@
     <div th:each="event: ${events}">
         <div class="card">
             <div class="card-content">
-                <img th:src="${event.user.imageURL}" class="profile-pic">
+                <form th:action="@{/profile/{userId}(userId = ${event.user.id})}">
+                    <button style="all: unset; cursor: pointer"><img th:src="${event.user.imageURL}" class="profile-pic"></button>
+                </form>
                 <p th:text="${event.user.username}" class="username"></p>
             </div>
             <h5 class="card-title" th:text="${event.title}"></h5>
