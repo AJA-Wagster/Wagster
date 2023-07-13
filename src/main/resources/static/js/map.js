@@ -128,7 +128,7 @@
             console.log(reviewUser)
             console.log(userAdmin)
             console.log(review)
-            return `<form action="/review/${review}/edit"><button>Edit Review</button></form>`
+            return `<form action="/review/${review}/edit"><button class="edit-btn">Edit Review</button></form>`
         } else {
             return ''
         }

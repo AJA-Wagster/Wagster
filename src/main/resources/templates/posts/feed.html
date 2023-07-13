@@ -46,12 +46,12 @@
             margin-top: 46px;
         }
 
-        h5{
+        h5 {
             margin-top: 20px;
             margin-left: 80px;
         }
 
-        .card-text{
+        .card-text {
             margin-left: 80px;
         }
 
@@ -83,7 +83,7 @@
 
         .edit-delete-btns {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 10px;
             right: 10px;
         }
@@ -92,37 +92,99 @@
             position: relative;
         }
 
-        body{
+        body {
             background-image: url('/img/logoWallpaper.png');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
         }
+
+        .filter-icon {
+            cursor: pointer;
+            position: fixed;
+            top: 20%;
+            right: 17%;
+            z-index: 999;
+            font-size: 1.5em;
+        }
+
+        .fa-cog{
+            font-size: 30px;
+        }
+
+        .filter-btns {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            top: 20%;
+            right: 20%;
+            background-color: #ffe66d;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 980; /* Ensure the filter icon appears above other elements */
+            width: 200px;
+        }
+
+        .filter-btns button {
+            width: 100%;
+            margin-bottom: 10px;
+            background-color: #fff;
+
+        }
+
+        .createBtns {
+            /*margin-top: 30px;*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: -15px;
+        }
+
+        .createBtns button {
+            width: 150px;
+            /*height: 40px;*/
+            margin: 10px;
+            font-size: 14px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            color: red;
+            font-size: 20px; /* Increase the font size to make the "x" bigger */
+        }
     </style>
 </head>
 <body>
 <nav th:replace="~{partials/partials :: navbar}" class="navbar"></nav>
-<div class="filterBtns">
+
+<!-- Filter icon and buttons -->
+<div class="filter-icon" onclick="toggleFilterButtons()">
+    <i class="fas fa-filter" style="color: #fff"></i>
+</div>
+
+<div class="filter-btns" id="filterBtns">
+    <span class="close-btn" onclick="toggleFilterButtons()">&times;</span>
     <button onclick="showPosts()" class="feedBtn">Show Posts</button>
     <button onclick="showEvents()" class="feedBtn">Show Events</button>
     <button onclick="showAll()" class="feedBtn">Show All</button>
 </div>
 
+<!-- Create buttons -->
 <div class="createBtns">
     <button onclick="window.location.href='/posts/create'" class="createBtn">Create Post</button>
     <button onclick="window.location.href='/events/create'" class="createBtn">Create Event</button>
 </div>
 
-<br>
-<br>
-
+<!-- Posts container -->
 <div id="postsContainer">
     <div th:each="post: ${posts}">
         <div class="card">
             <div class="card-content">
-                <form th:action="@{/profile/{userId}(userId = ${post.user.id})}">
-                    <button style="all: unset; cursor: pointer"><img th:src="${post.user.imageURL}" class="profile-pic"></button>
-                </form>
+                <img th:src="${post.user.imageURL}" class="profile-pic">
                 <p th:text="${post.user.username}" class="username"></p>
             </div>
             <h5 class="card-title" th:text="${post.title}"></h5>
@@ -144,13 +206,12 @@
     </div>
 </div>
 
+<!-- Events container -->
 <div id="eventsContainer">
     <div th:each="event: ${events}">
         <div class="card">
             <div class="card-content">
-                <form th:action="@{/profile/{userId}(userId = ${event.user.id})}">
-                    <button style="all: unset; cursor: pointer"><img th:src="${event.user.imageURL}" class="profile-pic"></button>
-                </form>
+                <img th:src="${event.user.imageURL}" class="profile-pic">
                 <p th:text="${event.user.username}" class="username"></p>
             </div>
             <h5 class="card-title" th:text="${event.title}"></h5>
@@ -171,20 +232,25 @@
         </div>
     </div>
 </div>
+
+<!-- JavaScript code -->
 <script>
     function showPosts() {
         document.getElementById("postsContainer").style.display = "block";
         document.getElementById("eventsContainer").style.display = "none";
+        toggleFilterButtons();
     }
 
     function showEvents() {
         document.getElementById("postsContainer").style.display = "none";
         document.getElementById("eventsContainer").style.display = "block";
+        toggleFilterButtons();
     }
 
     function showAll() {
         document.getElementById("postsContainer").style.display = "block";
         document.getElementById("eventsContainer").style.display = "block";
+        toggleFilterButtons();
     }
 
     function toggleEditDeleteButtons(id) {
@@ -193,6 +259,15 @@
             buttons.style.display = 'flex';
         } else {
             buttons.style.display = 'none';
+        }
+    }
+
+    function toggleFilterButtons() {
+        const filterBtns = document.getElementById("filterBtns");
+        if (window.getComputedStyle(filterBtns).display === 'none') {
+            filterBtns.style.display = 'flex';
+        } else {
+            filterBtns.style.display = 'none';
         }
     }
 </script>
