@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,6 +107,13 @@ public String deleteProfile(@ModelAttribute("user") User userToDelete, HttpServl
             session.invalidate();
         }
     return "redirect:/";
+}
+
+@GetMapping("/profile/delete/{userId}")
+public String show(@PathVariable(name = "userId") Long id, Model model){
+        User user = userDao.findById(id).get();
+        model.addAttribute("user", user);
+        return "users/deleteProfile";
 }
 
 @PostMapping("profile/delete/{userId}")
