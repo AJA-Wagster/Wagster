@@ -16,6 +16,7 @@
     let locationDes = document.querySelectorAll('.description')
     let locationId = document.querySelectorAll('.id')
     let locationAddress = document.querySelectorAll('.address')
+    let locationRating = document.querySelectorAll('.rating')
 
     for (let i = 0; i < locationNames.length; i++){
     locas[i] = {
@@ -23,8 +24,9 @@
         name: locationNames[i].getAttribute('value'),
         coordinates:[parseFloat(locationLat[i].getAttribute('value')), parseFloat(locationLon[i].getAttribute('value'))],
         description: locationDes[i].getAttribute('value'),
-        address: locationAddress[i].getAttribute('value')}
-
+        address: locationAddress[i].getAttribute('value'),
+        rating: locationRating[i].getAttribute('value')
+    }
     }
 
 
@@ -59,6 +61,7 @@
     popup.innerHTML = "<h3>" + location.name + "</h3>" +
     "<p>" + location.address + "</p>" +
     "<p>" + location.description + "</p>" +
+    `<p>Rating: ${location.rating} <i class="fa-solid fa-paw"></i></p>` +
     `<button class='review-button' onclick='openReviewForm(${location.id})'>Review</button>` +
     "<button class='close-button' onclick='closePopup()'>Close</button>";
     fetch(`https://wagster.site/review/${location.id}`)
@@ -72,7 +75,7 @@
             `<img class="profile-pic" src="${review.user.imageURL}">` +
             `<h3 class="username">${review.user.username}</h3>` +
             '<p class="review">' + review.comment + '</p>' +
-            '<p class="comment">' + review.rating + '</p>' +
+            '<p class="comment">' + 'Rating: ' + showPaws(review.rating) + '</p>' +
             `${checkUser(user.getAttribute('value'), review.user.username, userAdmin.getAttribute('value'), review.id)}` +
             '<hr>' +
             '</div>'
@@ -130,4 +133,12 @@
             return ''
         }
 
+    }
+
+    function showPaws(amount){
+        let paws = '';
+        for (let i = 0; i < amount; i++){
+            paws += '<i class="fa-solid fa-paw"></i>';
+        }
+        return paws;
     }
